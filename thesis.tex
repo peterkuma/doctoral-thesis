@@ -8,8 +8,16 @@
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage{pdfpages}
-\setmainfont{EB Garamond}
-\setsansfont{Public Sans}
+\usepackage{microtype}
+%\setmainfont{Merriweather}
+%\setmainfont{EB Garamond}
+\setmainfont{Crimson Text}
+%\setmainfont{Minion Pro}
+%\setmainfont{Source Serif Pro}
+%\setmainfont{Charis SIL}
+%\setsansfont{Public Sans}
+\setsansfont{Open Sans}
+%\setsansfont{Myriad Pro}
 \titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
 \titleformat*{\section}{\Large\bfseries\sffamily}
 \titleformat*{\subsection}{\large\bfseries\sffamily}
@@ -38,11 +46,16 @@
 \begin{document}
 \input{title.tex}
 \clearpage
+%\fontsize{15pt}{16pt}\selectfont
+\fontsize{12pt}{15pt}\selectfont
+%\fontsize{11pt}{14pt}\selectfont
 \input{abstract.tex}
 \clearpage
 \includepdf{co-authorship-form.pdf}
 \clearpage
 \input{acknowledgments.tex}
+\clearpage
+\input{dedication.tex}
 \tableofcontents
 \listoffigures 
 \listoftables
@@ -51,6 +64,6 @@
 \input{chapter3/chapter.tex}
 \input{chapter4/chapter.tex}
 \input{conclusion/conclusion.tex}
-\bibliography{chapter2/bibliography,chapter3/bibliography}
+\bibliography{introduction/bibliography,chapter2/bibliography,chapter3/bibliography,chapter4/bibliography}
 \end{document}
 

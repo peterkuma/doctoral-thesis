@@ -1,458 +1,599 @@
 \chapter{Introduction}
 
-Clouds represent one of the largest source of uncretainty in estimating
-global climate sensitivity (K. D. Williams and Bodas-Salcedo 2017).
-Clouds over ocean are especially important for determining the radiation
-budget as the ocean surface has low albedo compared to land. Over the
-Southern Ocean, cloud cover exceeds 80\%, with predominant boundary
-layer clouds (Mace et al. 2009). Due to its large influence on
-circulation and atmospheric transports in the Southern Hemisphere, the
-Southern Ocean is imporant for global climate. Unlike most other places
-on the globe, it is largely unaffected by sources of continental and
-antropogenic aerosols, is dominated by a strong circumpolar vortex, and
-has a southern boundary with a permanently ice-covered continent, which
-may mean that global parametrisations do not apply well in this region.
-Yet, observations in this region are sparse, which limits NWP (Numerical
-Weather Prediction) and GCM (General Circulation Model) assimillation
-and validation.
+Clouds represent one of the largest sources of uncertainty in estimating global
+climate sensitivity \citep{williams2017}. Clouds over the ocean
+are especially important for determining the radiation budget, due to the
+low albedo of the sea surface compared to land.
+Over the Southern Ocean (SO),
+cloud cover exceeds 80\%, with predominant boundary layer clouds \citep{mace2009}.
+Due to its large influence on circulation and atmospheric transports in the
+Southern Hemisphere, the SO is important for global climate. Unlike
+most other places on the globe, it is largely unaffected by sources of
+continental and anthropogenic aerosols, is dominated by a strong circumpolar
+vortex, and its southern boundary is a permanently ice-covered continent,
+which could mean that global parametrisations do not apply very well in this
+region. Observations in the SO are sparse, which limits the accuracy
+of simulations by numerical weather prediction (NWP) models and general
+circulation models (GCMs)
+Globally, clouds have a predominantly cooling effect on the climate due to reflection
+of sunlight, which exceeds the warming effect due to absorption of thermal
+radiation from the surface, an estimated 18 Wm$^{-2}$ of cooling relative to a cloud-free atmosphere
+\citep{zelinka2017}. This effect is about 5 times as large as heating from
+doubling of CO$_2$, which highlights the importance of cloud cover in modulating
+global climate. Nearly all climate models predict cloud feedback to be positive,
+i.e. amplification of warming with increasing CO$_2$ concentration.
 
-Shortwave (SW) radiation bias over the Southern Ocean of up to 30
-Wm$^{-2}$ is a well-documented problem in current NWP models and GCMs
-(Trenberth and Fasullo 2010), and it has been the subject of many
-studies. It manifests both as a bias in SW radiation reaching the
-surface and as shortwave reflectivity bias at ToA (Top of Atmosphere).
-Bodas-Salcedo et al. (2014) looked at SW bias in a number of GCMs and a
-strong SW bias is a very common feature, leading to increased SST (Sea
-Surface Temperature) in the Southern Ocean. Trenberth and Fasullo (2010)
-note that a poor representation of clouds might lead to unrealistic
-projections for the Southern Hemisphere. The bias is linked to
-large-scale model problems such the double-Intertropical Convergence
-Zone (Hwang and Frierson 2013), position of the midlatitude jet and
-meridional energy transport (Mason et al. 2014).
+Shortwave (SW) radiation bias over the SO of up to 30 Wm$^{-2}$ is a
+well-documented problem in current NWP models and GCMs
+\citep{trenberth2010}, and it has been the subject of many studies.
+It manifests both as a bias in SW radiation reaching the surface and as
+SW reflectivity bias at the top of atmosphere (TOA).
+\cite{bodas-salcedo2014} evaluated SW bias in a number
+of GCMs and found a strong SW bias is a very common problem, leading to
+overestimated sea surface temperature (SST) in the SO.
+\cite{trenberth2010} noted that a poor representation of clouds might lead to
+unrealistic projections for the Southern Hemisphere. This bias is linked to
+large-scale model errors such as a double-intertropical
+convergence zone \citep{hwang2013}, position of the midlatitude jet and
+meridional energy transport \citep{mason2014}.
+The reasons for the observed SW radiation bias
+can be numerous, concurrent and compensating. To summarise, they can range
+from microphysical to large-scale dynamics and be due to misrepresentation of:
+cloud fraction, cloud optical depth, frequency of cloud regimes or types,
+cloud vertical distribution and overlap, cloud horizontal distribution
+and homogeneity, cloud phase and supercooled liquid content, surface albedo
+(sea ice vs. water), moisture fluxes, large-scale circulation, extratropical
+and polar cyclones, weather regimes, direct and indirect aerosol effects,
+radiative transfer parametrisation, boundary layer turbulence and convection,
+among others.
 
-NZESM (New Zealand Earth System Model) is a new earth system model
-derived from the UK climate model HadGEM/UKESM (Walters et al. 2017),
-whose aim is to improve climate predictions for New Zealand, and
-reducing Southern Ocean model biases is essential for achieving this
-aim. The high-level UK model description by Walters et al. (2017) shows
-that a clear and extensive SW radiation bias over the Southern Ocean is
-presnet in the atmospheric component GA6.0 compared to satellite
-radiation budget observations from CERES (Clouds and the Earth's Radiant
-Energy System) (Wielicki et al. 1996). The bias in the context of the
-Met Office models has been studied by A. Bodas-Salcedo et al. (2012) by
-assessing cloud regimes in cyclones. Using observations from ISCCP,
-MISR, MODIS, CALIPSO and CloudSat, they found that the model
-understimates optical depth of stratocumulus and mid-topped clouds.
-Recently, Davies, Loveridge, and Rampal (2017) studied boundary layer
-clouds in the Southern Ocean compared to the Northern Hemisphere, with a
-focus on supercooled liquid in clouds and cloud homogeneity. They note
-that boundary layer clouds are the likely explanation for the bias due
-to their large fractional coverage over the Soutern Ocean. Examination
-of cloud cover in NZESM with the passive satellite instruments was
-already performed by Schuddeboom et al. (2017) and is an ongoing effort.
+The New Zealand Earth System Model (NZESM)
+is a relatively new earth system model based on the UK climate model HadGEM/UK Earth System Model (UKESM)
+\citep{williams2016}, whose aim is to improve climate predictions for
+Aotearoa/New Zealand (NZ). Reducing SO model biases is essential for
+achieving this aim. \cite{walters2017}
+showed that a clear and extensive SW radiation bias over the SO
+is present in the atmospheric component of the model Global Atmosphere version 6.0 (GA6.0) compared to satellite
+radiation budget observations by the Clouds and the Earth's Radiant Energy
+System (CERES) \citep{wielicki1996}. The bias in the context of the UK Met Office
+models has been studied by \cite{bodas-salcedo2012} by assessing cloud
+regimes in cyclones.
+Using observations by the International Satellite Cloud Climatology Project (ISCCP),
+Multi-angle Imaging SpectroRadiometer (MISR), Moderate Resolution Imaging Spectroradiometer (MODIS),
+Cloud-Aerosol Lidar and Infrared Pathfinder Satellite Observation
+(CALIPSO) and CloudSat satellites,
+they found that the model underestimates optical depth of stratocumulus and
+mid-topped clouds. Recently, \cite{davies2017} studied boundary layer
+clouds in the SO compared to the Northern Hemisphere,
+with a focus on supercooled liquid in clouds and cloud homogeneity.
+They noted that boundary layer clouds are a likely explanation for the bias
+due to their large fractional coverage over the SO.
+Examination of cloud cover in the NZESM against passive satellite instruments
+was performed by \cite{schuddeboom2017,schuddeboom2019} and is an ongoing effort.
 
-While some authors focued on cloud distribution, others emphasise the
-role of microphysics, especially supercooled liquid content. As
-supercooled liquid has higher SW reflectivity than the equivalent amount
-of ice particles, it has a positive effect on cloud albedo. Morrison,
-Siems, and Manton (2011) studied the occurrence of supercooled liquid in
-clouds over the Southern Ocean using observations from the MODIS
-instruments and found it to be present year-round in low clouds at
-temperature down to --40 $^{\circ}$C. R. P. Lawson and Gettelman (2014)
-note that supercooled liquid is often underestimated in the Antarctic in
-GCMs, and mixed clouds can occur at --32 $^{\circ}$C. They show that
-increasing supercooled liquid in CESM (Community Earth System Model)
-leads to CRE (Cloud Radiative Effect) increase of 7.4 Wm$^{-2}$ over
-Antarctica. More recently, Kay et al. (2016) managed to fix the SW
-radiation bias in CESM by increasing supercooled liquid in shallow
-convective clouds, and notably they also needed to reduce a compensating
-tropical SW radiation bias to maintain global radiation balance in the
-model.
+While some authors focused on cloud distribution, others
+emphasised the role of microphysics, especially supercooled liquid content.
+Because supercooled liquid has a higher SW reflectivity than the equivalent amount
+of ice particles (in terms of mixing ratio), it has a positive effect on cloud albedo.
+\cite{morrison2011} studied the occurrence of supercooled liquid in clouds
+over the SO using observations by MODIS and
+found that it is present year-round in low clouds at temperature as low as
+--40 $^{\circ}$C.
+\cite{lawson2014} noted that supercooled liquid is often
+underestimated in the Antarctic in GCMs, and mixed clouds can occur at
+--32 $^{\circ}$C.
+They showed that increasing supercooled liquid in the
+Community Earth System Model (CESM) leads to cloud radiative effect (CRE)
+increase of 7.4 Wm$^{-2}$ over Antarctica. More recently, \cite{kay2016}
+managed to fix the SW radiation bias in the CESM by increasing supercooled liquid
+in shallow convective clouds, and notably they also needed to reduce a
+compensating tropical SW radiation bias to maintain global radiation balance
+in the model.
+\cite{bodas-salcedo2016} found supercooled liquid to be abundant in
+the SO in summer and contribute about 30\% to the reflected
+SW radiation.
 
-As reflected by the various hypothetised reasons for the SW radiation
-bias by different authors, potential reasons for the observed SW
-radiation bias can be numerous, concurrent and compensating. To
-summarise, they can range from microphysical to large-scale dynamics and
-be due to misrepresentation of:
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Frequency of cloud regimes
-\item
-  Cloud vertical distribution
-\item
-  Cloud horizontal distribution (homogeneity) and overlap
-  parametrisation
-\item
-  Cloud phase and supercooled liquid in clouds
-\item
-  Surface albedo (sea ice vs.~sea surface)
-\item
-  Moisture availability and transport
-\item
-  Large-scale circulation
-\item
-  Frequency of weather regimes
-\item
-  Frequency and scale of extratropical cyclones
-\item
-  Cloud regimes in cyclones
-\item
-  Cloud-aerosol interaction
-\item
-  Radiative transfer parametrisation
-\item
-  Boundary layer physics parametrisations
-\item
-  Dynamics -- meridional heat and moisture transport and large-scale
-  convection
-\item
-  Cloud--temperature/humidity profile interaction
-\end{itemize}
-
-Multiple observations are available for assessing Southern Ocean biases.
-Satellite observations provide the most complete record both spatially
-and temporally (although they do not provide historical records prior to
-approx. 1980s). They have been utilised by most studies of clouds in the
-Southern Ocean and globally. Satellite instruments are very diverse,
-though only a few datasets (satellite products) are readily available
-for studying clouds. Operational geosynchronous satellites provide
-near-continuous temporal coverage, which makes them ideal for studying
-clouds, but they have limited use in high-latitude regions. In
-combination with operational polar-orbiting satellites (POESS), they
-have been used to produce a very long-term (1983--) cloud-oriented
-dataset ISCCP (Schiffer and Rossow 1983). However, this dataset is
-limited by a small number of spectral channels of the AVHRR instrument.
-Other extensive cloud datasets include MODIS (on board of the A-Train
-satellites Aqua and Terra) and APP-x (Extended AVHRR Polar Pathfinder)
-(Meier et al. 1997). Recently, active instruments for observing clouds
-became available: spaceborne radar on the CloudSat (G. L. Stephens et
-al. 2008) and spaceborne lidar on the CALIPSO (D. M. Winker, Pelon, and
-McCormick 2003) satellites, flying in a close coordination in the
-A-Train satellite constellation. Together, they provide an unparalleled
-view of global clouds due to their vertical view of clouds, generally
-absent in passive-instrument observations. They have been utilised very
-extensively in cloud studies globally. Other notable instruments
-available for studying clouds include the multi-angle radiometer MISR
-and passive microwave sensors, due to their ability to observe cloud
-liquid water, total column water vapour, and vertically-resolved
-temperature profile, and ability to `see' through clouds.
-
-Passive satellite observations of clouds are ideal due to their high
-spatial and temporal resolution, but have a number problems globally and
-some specifically in polar latitudes (Bromwich et al. 2012):
+Multiple observational datasets are available for assessing SO biases.
+Satellite observations provide the most complete record both spatially and
+temporally, although they do not provide historical records prior to
+1960s and past observations are limited by instrument capabilities and
+the availability of derived products. They have been utilised by most studies
+of clouds in the SO and globally. Satellite instruments are very diverse, though only a few
+datasets are readily available for studying clouds.
+Operational geosynchronous (GEO) satellites provide near-continuous temporal
+coverage,
+which makes them ideal for studying clouds, but they have a limited use in
+high-latitude regions such as the SO. In combination with operational polar-orbiting
+low Earth orbit (LEO) satellites such as the NASA
+Polar Operational Environmental Satellites (POES),
+they have been used to produce a very long-term (1983--present) cloud-oriented
+dataset ISCCP
+\citep{schiffer1983}. However, this dataset is limited by
+a small number of spectral channels of the Advanced Very High Resolution Radiometer
+(AVHRR). Other extensive
+cloud datasets include MODIS
+on board of the NASA Afternoon Train (A-Train) satellites Aqua and Terra
+and the Extended AVHRR Polar Pathfinder (APP-x) \citep{meier1997}. Other notable instruments available
+for studying clouds include MISR
+and passive
+microwave sensors, due to their ability to observe cloud liquid water,
+total column water vapour, vertically-resolved temperature profile, and
+ability to see through clouds, even though their relatively low spatial
+resolution makes them less popular than passive visible (VIS) and infrared (IR)
+instruments.
+Passive VIS and IR satellite observations of clouds are ideal due to their high
+spatial and temporal resolution, but have a number problems globally and some
+specifically in polar latitudes \citep{bromwich2012}:
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Passive instruments can only observe upper-level clouds.
-\item
-  It is difficult to discern clouds from surface ice and snow in the
-  visible spectrum due to similar albedo and in the IR (infrared)
-  spectrum due to similar temperature and frequent inversion.
-\item
-  There is lack of sunlight during winter months, needed for SW
-  measurements.
-\item
-  Poor detection of high-level thin clouds, falsely classified as
-  mid-level clouds (J. M. Haynes et al. 2011).
+\item Passive instruments can only observe the highest layer of clouds, unless
+the layer is semi-transparent.
+\item It is difficult to discern clouds from surface ice and snow
+in the visible spectrum due to similar albedo and in the IR (infrared)
+spectrum due to similar
+temperature and frequent inversions.
+\item Poor detection of semi-transparent high clouds, falsely classified as
+mid-level clouds \citep{haynes2011}.
+\item Lack of sunlight limits polar wintertime SW measurements.
 \end{itemize}
 
-Active satellite instruments are affected by signal attentuation in
-thick clouds, and compared to passive instruments they have smaller
-spatial coverage, shorter historical record and a small number of
-spectral bands, limiting their ability to determine cloud microphysical
-properties.
+\noindent Active satellite instruments are affected by signal attenuation by
+optically thick
+clouds (lidar), ground clutter (radar), and compared to passive instruments they have smaller spatial coverage,
+shorter historical record and a small number of spectral bands, limiting their
+ability to determine cloud microphysical properties.
 
 In addition to spaceborne observations, ground-based and in situ
-observations can provide a vital complementing view of clouds `from
-below' and `inside'. These include high-frequency radars, ceilometers
-(lidars), pyranometers, sky cameras, radiosondes, dropsondes, in situ
-aerosol measurements (cloud condensation nuclei and ice nuclei) and
-airborne observations from drones, weather balloons and aircrafts. These
-observations are logistically difficult and expensive, and are generally
-sparse in the Southern Ocean, with limited time periods and limited
-historical records. Use of ground-based and in situ observations alone
-for assessment of GCMs is difficult due to their small
-representativeness of climatic conditions.
+observations can provide an important complementing view of clouds from below.
+These include radars, ceilometers, lidars,
+pyranometers, sky cameras, radiosondes, dropsondes, in situ aerosol measurements
+(cloud condensation nuclei and ice nuclei) and airborne observations from
+drones, weather balloons, kites and aircraft. These observations are logistically
+difficult and expensive, and are generally sparse in the SO, with
+limited time periods and limited historical records. The use of ground-based and
+in situ observations alone for assessment of GCMs is difficult due to their
+small representativeness of climatic conditions, and therefore there
+is a risk of tuning the model to the specific conditions occurring during a
+case study. Deployments on ships of opportunity can make these types
+of observations more cost-efficient and common.
 
-Different processing of observations from the same instruments can lead
-to different results (e.g. H Chepfer et al. (2010) in their GOCCP
-product). For example, different thresholds can exists which define what
-is `cloud', and cloud detection is affected by targeting a particular
-false alarm ratio, such as 5\% as in the CloudSat-CALIPSO dataset
-(Hagihara, Okamoto, and Yoshida 2010). Probability of detection
-(sensitivity) then depends on the ROC (Receiver Operating
-Characteristic) curve, which in turn depends on instrument errors.
-Moreover, instrument errors can vary over lifetime of a single
-instrument, or between instruments in multi-instrument datasets. A
-problem with different processing algorithms was noted by Martucci,
-Milroy, and O'Dowd (2010), who compared manufacturer-supplied cloud base
-height determination from colocated Vaisala CL31 and Jenoptik CHM 15k
-ceilometers and found a poor agreement, but developed a new algorithm
-for determining cloud base height which leads to consistent heights
-between the two instruments.
+Different processing of observations from the same instrument can lead
+to different results, for example the
+GCM-Oriented CALIPSO Cloud Product (GOCCP) relative to the standard
+Cloudsat-CALIPSO products \citep{chepfer2010}.
+Different thresholds can be applied which define what is 'cloud',
+and cloud detection is affected by targeting a particular false alarm ratio,
+such as 5\% as in the CloudSat-CALIPSO dataset \citep{hagihara2010}.
+Probability of detection (sensitivity) then depends on the receiver operating
+characteristic (ROC) curve, which in turn depends on instrument
+noise. Instrument noise ana bias can vary over lifetime of the instrument,
+or between instruments of multi-instrument datasets such as ISCCP.
+A problem with different processing
+algorithms was noted by \cite{martucci2010}, who compared
+manufacturer-supplied cloud base height
+determination from co-located Vaisala CL31 and Jenoptik CHM 15k ceilometers
+and found a poor agreement, and developed a new algorithm for determining
+cloud base height which leads to consistent heights between the two instruments.
 
-Due to the reasons outlined above, a combination of multiple passive,
-active, ground-based and in situ observations are needed to
-comprehensively assess cloud climatology and biases. This has been also
-noted by other authors: K. D. Williams and Bodas-Salcedo (2017) assess
-cloud representation in Met Office UM model using a multi-dataset and
-multi-diagnostic approach, and stress the importance of using multiple
-instruments due to compensating errors in GCMs. While use of single or
-combined satellite observations to assess model performance is common in
-many studies, combination of ground-based and spaceborne instruments is
-less common. For example, Muhlbauer et al. (2015) studied cirrus clouds
-using A-Train observations (CloudSat, CALIPSO, MODIS, CERES),
-ground-based ARM (Atmospheric Radiation Measurement) radar and aircraft
-observations. J. Zhang, Xia, and Chen (2017) performed a comparison of
-satellite and ground-based cloud observations at an ARM site.
+Due to the reasons outlined above, a combination of multiple passive, active,
+ground-based and in situ observations are needed to comprehensively assess
+cloud climatology and biases. This has been also noted by other authors:
+\cite{williams2017} evaluated cloud representation in the UK Met Office
+Unified Model (UM) using a multi-dataset and multi-diagnostic approach, and
+highlighted the
+importance of using multiple instruments due to compensating errors in GCMs.
+While use of single or combined satellite observations to assess model
+performance is common in many studies,
+combination of ground-based and spaceborne instruments is less common.
+For example, \cite{muhlbauer2015} studied cirrus clouds using A-Train
+observations (CloudSat, CALIPSO, MODIS, CERES), ground-based
+Atmospheric Radiation Measurement (ARM) radar and aircraft observations.
+\cite{zhang2017} performed a comparison of satellite and ground-based cloud
+observations at an ARM site.
 
-Comparison between models and observations cannot always be performed
-directly, esp. if observations do not produce model quantities or
-measure only a variable part of a model field (e.g.~cloud tops). Even
-though observations can be mapped to model fields by inversion, this may
-be unreliable due to a large number of factors involved and a limited
-view of the instrument. Conversely, model fields can be mapped to
-observations by instrument simulators, and this approach has been used
-extensively in a number of studies. Satellite simulators such as COSP
-(A. Bodas-Salcedo et al. 2011) solve the problem by transforming model
-fields to observation fields. The COSP simulator was developed as part
-of CFMIP (Cloud Feedback Model Intercomparison Project) (S. Bony et al.
-2011), and it was used for evaluation of GCMs in CMIP5 (Coupled Model
-Intercomparison Project Phase 5) (Taylor, Stouffer, and Meehl 2011). The
-simulator implements a number of passive and active instruments:
+Comparison between models and observations cannot always be performed directly,
+especially if observations do not produce fields equivalent to model quantities.
+In such cases observations can be mapped to model fields by inversion algorithms,
+but this may be unreliable
+due to a large number of factors involved and a limited view of the instrument.
+Conversely, model fields can be mapped to observations by instrument simulators,
+and this approach has been used extensively in a number of studies.
+Satellite simulators such as the Cloud Feedback Model Intercomparison Project (CFMIP) Observation Simulator Package (COSP)
+\citep{bodas-salcedo2011} solve the problem
+by transforming model fields to observed fields, which can then
+be compared directly or statistically.
 
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  ISCCP
-\item
-  MODIS
-\item
-  MISR
-\item
-  CloudSat
-\item
-  CALIPSO
-\item
-  ARM ground-based radar (MMCR/KAZR)
-\item
-  RTTOV
-\end{itemize}
+\section{Objectives}
 
-Notably, radar observations are simulated by the QuickBeam simulator
-(Haynes et al. 2007) and lidar (CALIPSO) observations are simulated by
-the ACTSIM simulator (H{é}lene Chepfer et al. 2008). In general, these
-may need to be tuned for any particular instrument being simulated due
-to different wavelengths, signal modulation, view and error
-characteristics. The COSP simulator allows for comparison of instrument
-quantities (backscatter, radar reflectivity), or derived products (cloud
-top/base, cloud phase, \ldots{}) between the model and observations. An
-exact colocated comparison is limited by the low spatial resolution of
-GCMs, and pseudo-observations need to be made on subcolumns generated by
-a cloud generator. Algorithms for calculating derived products are
-generally not available, and datasets such as CALIPSO-GOCCP were
-developed for the purpose of comparison of equivalent quantities from
-observations and the simulator (H Chepfer et al. 2010).
-
-In order to assess cloud representation in GCMs, it is imporant to
-attribute biases in observations to model processes. However, these
-often cannot be observed directly, and meaningful hypotheses about
-deficiencies in these processes need to be formed and tested by
-observations. It was noted by S. A. Klein and Jakob (1999) that an
-observed bias can be due to a large number of causes in the model. Cloud
-parametrisations in models include:
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Cloud liquid and ice water content
-\item
-  Cloud droplet size distribution
-\item
-  Ice particle size and habit
-\item
-  Cloud distribution parametrisation (McICA)
-\item
-  Radiative transfer approximations in cloudy atmosphere
-\item
-  Supercooled liquid parametrisation in clouds
-\item
-  Cloud-aerosol interaction
-\end{itemize}
-
-Clouds are tightly linked to their effects on radiation balance. In the
-NZESM model the radiative transfer parametrisation follow J. Edwards and
-Slingo (1996; J. M. Edwards et al. 2015). Clouds are represented by
-convective and stratiform liquid/ice mass mixing ratio and effective
-radius. Subcolumn cloud distribution is treated by the McICA method
-(Barker, Stephens, and Fu 1999), with a stochastic cloud subcolumn
-generator based on gamma distributed cloud water content and vertical
-overlap defined by a decorrelation depth (R{ä}is{ä}nen et al. 2004). It
-is notable that some of the parameters are fixed globally, and as such
-may be a poor representation for the southern polar latitudes,
-especially considering the poor validation possibilities in this region.
-
-This study will focus on complementing other studies assessing
-representation of clouds, aerosols and cloud-aerosol interaction in the
-Southern Ocean (taking into consideration the Southern Hemisphere and
-global processes) in the NZESM, with a particular focus on utilising
-ground-based measurements available from intensive observation periods
-and transient sites. For this purpose the COSP simulator will need to be
-extended to support these instruments. It is foreseen that the
-ground-based measurements will need to be combined with satellite
-observations, especially CloudSat and CALIPSO, but exploring
-possibilities to use passive instruments (if they can provide
-complementary information to other studies). Upscaling of ground-based
-observations (outlined in the methodology section) will be explored as a
-means of making ground-based observations more relavant for
-characterising climate. Other diagnostic means may include case-studies,
-calculation of climatologies and classification. Particular focus of the
-study will be on linking observed biases to model processes, and
-following closely the NZESM development process.
-
-\section{Objectives}\label{objectives}
-
-\begin{itemize}
-\item
-  Use satellite, ground-based and in situ observations to identify
-  processes related to clouds and aerosols in the NZESM leading to
-  biases in the Southern Ocean.
-\item
-  Extend the COSP simulator to be able to simulate ground-based lidar
-  and radar observations available.
-\item
-  Use selected active and passive satellite instruments to assess NZESM
-  results, complementing other past and ongoing research.
-\item
-  Use collocated satellite and ground-based observations in the Southern
-  Ocean to assess their differences.
-\item
-  Explore potential for extrapolating (upscaling) ground-based
-  observations by correlating them with satellite observations, e.g.~by
-  classification of both and linking correlated classes.
-\end{itemize}
-
-\section{Methods}\label{methods}
-
-Central to our study will be a dataset of ground-based observations from
-a number of IOPs (Intensive Observation Periods) and transient sites in
-the Southern Ocean and the Antarctic region:
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Aurora Australis
-\item
-  Macquaire Island (2016--)
-\item
-  RV Tangaroa (2015), 2×
-\item
-  HMNZS Wellington (2016)
-\item
-  RV Tangaroa (14 March -- 1 April 2017)
-\item
-  Nathaniel B. Palmer (April -- June 2017)
-\end{itemize}
-
-This observations include measurements from ground-based ceilometers
-(Vaisala CL51 and Lufft CHM 15k) and radar (Meter MRR-2), radiosondes,
-aerosol particle counters and AWS (Automatic Weather Station).
-
-These observations are complemented by publicly-available datasets from
-comprehensive measurements at the ARM mobile facilities:
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  AWR M1 -- McMurdo, Antarctica (October 2015 -- September 2016)
-\item
-  MAR M1 (MARCUS) -- Ship voyage from Hobart, Australia to Antarctic
-  coast on Aurora Australis (planned September 2017 -- April 2018)
-\end{itemize}
-
-Our assessment will focus on the NZESM model, although contrasting with
-other GCMs may be useful. We will focus on biases in the Southern Ocean
-and the Antarctic, but pay attention to any processes relavant to the
-Southern Hemisphere and globally. A one-year 2007 simulation from a
-nudged and un-nudged run of NZESM is already available, with more
-simulations in progress.
-
-We will utilise the COSP simulator to produce pseudo-observations
-equivalent to available ground-based measurements. This will require
-running the COSP simulator in the `offline' mode on fields output from
-the model run, and development of new code specific to the instruments.
-It is likely that the existing lidar and radar simulators ACTSIM and
-QuickBeam can be reused for this purpose.
-
-It is foreseen that the ground-based and in situ observations will not
-provide enough information alone, and a combination with satellite
-observations will be necessary. A possible technique of upscaling may
-allows us to utilise these observations on a wider scale. Upscaling can
-be performed by a linked classification of colocated ground-based and
-satellite observations. Methods such as Bayesian classification (via
-MCMC (Markov chain Monte Carlo) simulation), k-means clustering, SOM
-(self-organising map) and CCA (canonical correlation analysis) can be
-utilised.
-
-Satallite datasets will include the active instruments on CloudSat and
-CALIPSO, complemented by the CERES dataset for assessing radiation
-budget, and possibly MODIS, ISCCP and APP-x datasets, exploring the
-possibility to use passive microwave datasets for cloud water content
-and moisture assessment.
-
-K. D. Williams and Bodas-Salcedo (2017) summarised a number of
-compositing techniques for cloud assessment with respect to specific
-atmopheric conditions:
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Large scale vertical velocity
-\item
-  Lower tropospheric stability
-\item
-  Position relative to cyclone centre
-\item
-  Cloud regime
-\end{itemize}
-
-These may be used to complement methods outlined above.
-
-In our study we will try to assess specific deficiencies in the NZESM
+Our objectives are adjacent to the New Zealand Deep South National
+Science Challenge (DSC), whose mission is to \textit{`enable New Zealanders to adapt,
+manage risk, and thrive in a changing climate'}, and is
+broadly in line with the current international research in the area
+such as the Southern Ocean Clouds
+Radiation Aerosol Transport Experimental Study (SOCRATES) \citep{mcfarquhar2014}.
+Here, we focus on complementing other studies evaluating
+representation of clouds, aerosols and cloud-aerosol interaction in the SO,
+but also taking into consideration the Southern Hemisphere and global processes,
+with a particular focus on utilising in situ measurements
+available from intensive observation periods (IOPs), complemented by land-based
+stations. For this
+purpose the COSP simulator will need to be extended to support these
+instruments. It is foreseen that ground-based observations will need to be
+complemented by satellite observations, especially the global radiation budget
+measurements by CERES.
+Other diagnostic means may include
+case studies, by which we can ensure that any improvements are due to
+the right physical reasons rather than just improving statistics by mutually
+compensating model errors. Our particular focus is therefore on linking
+observed biases to model processes. 
+We shall try to evaluate specific deficiencies in the NZESM subgrid-scale
 parametrisations affecting clouds and radiative transfer, in order to
-assess the relative importance of cloud macrophysical and microphysical
-properties in the observed biases. This has been explored to some extent
-by other authors, but not always in the context of the UK model or
-NZESM, where the causes can be different. Some of the questions we may
-try to answer are:
+determine the relative importance of cloud macrophysical and microphysical
+characteristics in the observed biases. This has been explored to some extent
+by other authors, but not always in the context of the UM or the NZESM,
+where the causes can be different.
+While our focus is on evaluation of the NZESM, contrasting with other
+models, such as atmospheric reanalyses, might be useful.
+We shall focus on biases in the SO and the
+Antarctic, but pay attention to any processes relevant to the Southern
+Hemisphere and globally.
+Adjacent to our study will be development of a publicly-available dataset
+of in situ observations in the SO based on previous and new SO voyages
+and permanent stations collected by the University of Canterbury and our
+collaborators.
+Our main objectives are outlined below:
+
+\begin{enumerate}
+\item Participate on SO IOPs
+with the aim of collecting atmospheric observations for model evaluation.
+\item Collate and post-process the existing and new SO in situ datasets.
+\item Extend the COSP lidar simulator with a ceilometer and ground-based lidar
+simulator for instruments deployed on the SO voyages.
+\item Use in situ and satellite observations in conjuction with the lidar simulator
+to evaluate SO cloud biases in the NZESM.
+\item Perform experimental simulations of the NZESM with the aim of
+improving the simulation of SO clouds relative to the observations.
+\end{enumerate}
+
+\section{Methods}
+
+Achieving our objectives will require a number of modelling and
+observational resources. As outlined here and discussed in
+a greater detail in Chapter 2, 3 and 4, these include access to the model output
+and
+code of the NZESM, the COSP simulator, publicly-available reanalyses,
+ in situ SO observations and publicly-available
+satellite datasets.
+
+\subsection{New Zealand Earth System Model}
+
+The NZESM is an actively developed branch of HadGEM/UKESM, with the
+aim of improving the atmosphere, ocean and cryosphere simulation affecting NZ
+\citep{williams2016}. Development is done by the National Institute of Water and
+Atmospheric Research (NIWA) in Wellington.
+The NZESM is a fully coupled atmosphere-ocean model, including land surface
+and sea ice. The parent model UKESM \citep{walters2017} is planned to participate
+in the 6th Climate Model Intercomparison Project (CMIP6) \citep{eyring2016,meehl2014},
+which shall eventually contribute to the upcoming
+Intergovernmental Panel on Climate Change (IPCC) 6th
+Assessment Report (AR6). Participation of the NZESM in the CMIP6 is currently not
+envisioned, although any improvements achieved will be continuously contributed
+to the parent model.
+
+Apart from a standard free-running mode, it is possible to run the NZESM
+in a nudged mode, continuously modulated by observed meteorological
+conditions via the ERA-Interim reanalysis \citep{dee2011} and prescribed SST and sea ice
+by the HadISST dataset \citep{rayner2003}.
+A nudged run can be useful for comparison with instantaneous values of
+observational data taken during the simulated period,
+as opposed to long-term statistics. The model fields can be exported
+at arbitrary intervals down to the model time step of 20 minutes.
+
+\subsection{CFMIP Observation Simulator Package}
+
+COSP \citep{bodas-salcedo2011} is a satellite instrument simulator package
+for atmospheric model evaluation developed as part of
+the CFMIP \citep{bony2011},
+whose purpose is to generate pseudo-measurements and statistics from model fields, which can
+then be compared to real
+measurements. A direct comparison without a simulator is often not possible
+due to a limited field of view (FOV) of the instrument and attenuation by atmospheric
+constituents (clouds, aerosols, gases), which is a wavelength-dependent process.
+COSP was utilised in evaluation of GCMs in the
+Coupled Model Intercomparison Project Phase 5 (CMIP5) \citep{taylor2011}.
+COSP contains multiple simulators of different instruments:
+ISCCP, MODIS, MISR, CloudSat, CALIPSO, a MMCR/KAZR ground-based radar
+and the Radiative Transfer for Television Infrared Observation Satellite (TIROS)
+Operational Vertical Sounder (TOSV) (RTTOV).
+Notably, radar observations are simulated by the QuickBeam simulator
+\citep{haynes2007} and lidar (CALIPSO) observations are simulated
+by the Active Remote Sensing Simulator (ACTSIM) \citep{chepfer2008}. In general, these may need
+to be tuned for any particular instrument being simulated due to different
+wavelengths, signal modulation, view and error characteristics.
+COSP allows for comparison of instrument quantities
+(backscatter, radar reflectivity), or derived products
+(cloud top/base, cloud phase, ...) between the model and observations.
+An exact co-located comparison is limited by the relatively low spatial and
+temporal resolution
+of GCMs, and pseudo-observations need to be made on subcolumns generated by
+a cloud generator. Algorithms for calculating derived products are generally not
+available, and datasets such as CALIPSO-GOCCP were developed for the purpose
+of comparison of equivalent quantities from observations and the simulator
+\citep{chepfer2010}.
+The COSP package can be run either online (inside the model) or offline,
+when fields from a model are provided to COSP after completing the simulation.
+Running the simulator offline allows for rapid modification
+and testing of code. Cloud overlap in COSP is treated by the Subgrid Cloud Overlap Profile Sampler
+(SCOPS) \citep{webb2001}, which generates subcolumns based on the grid cell
+cloud faction and precipitation fluxes. Either random or maximum-random cloud overlap
+(Geleyn and Hollingsworth 1979, Ritter and Geleyn 1992) is assumed,
+whereby cloud in the adjacent layers overlaps maximally, and cloud separated
+by clear layers overlap randomly.
+
+ACTSIM is a lidar simulator integrated in COSP
+\citep{chepfer2008,chiriaco2006}. In the current implementation it simulates a
+spaceborne lidar with a wavelength of 532 nm, aimed at simulating the CALIOP
+instrument on CALIPSO. The simulator produces attenuated volume backscatter
+coefficient, which can be compared directly with measurements from a lidar.
+Support for a ground-based ceilometer such as Lufft CHM 15k or Vaisala CL51
+will require modification of ACTSIM. Firstly, the viewpoint from
+the ground means that the lidar signal passes through atmospheric layers in a reversed
+order relative to what is assumed for a spaceborne lidar. Secondly,
+wavelength of our instruments is different from CALIOP (1064 nm and 910 nm),
+which requires re-calculation of the Mie and Rayleigh scattering coefficients.
+
+\subsection{In situ observations in the Southern Ocean}
+
+In situ SO observations are essential for improving the model SO biases.
+A set of SO datasets have been collected by the University of Canterbury
+and partner organisations by deploying our instruments on a number
+of voyages of opportunity as well as conducting IOPs:
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  Is frequency of modelled cloud regimes consistent with observations?
-\item
-  Does the vertical distribution of clouds correspond to observations?
-\item
-  Are the chosen subcolumn cloud generator parameters suitable for the
-  Soutern Ocean?
-\item
-  Is supercooled liquid well-represented?
-\item
-  Is modelled humidity and cloud liquid water consistent with passive
-  microwave measurements?
-\item
-  Are modelled cloud bases consistent with those observed by a
-  ceilometer?
-\item
-  Are clouds simulated well in different weather regimes liked to
-  cyclones and anticyclones?
-\item
-  Is the sea ice albedo affecinting ToA reflectivity biases?
+\item \textit{Aurora Australis} voyages to Casey, Davis and Mawson, Antarctica (2015--2016).
+\item Macquaire Island station (2016--2018).
+\item \textit{HMNZS Wellington} voyages to the Ross Sea (2016).
+\item \textit{RV Nathaniel B. Palmer} voyage NBP1704 to the Ross Sea (2017).
+\item \textit{RV Tangaroa} voyages TAN1502, TAN1503 (2015), TAN1702 (2017) and TAN1802 (2018)
+to the Ross Sea, Chatham Islands, Campbell Plateau and Ross Sea, respectively.
 \end{itemize}
 
-Adjacent to our study will be development of a publicly-available
-dataset of ground-based and in situ observations in the Southern Ocean.
+\noindent
+The author participated on the TAN7102 and TAN1802 voyages and the deployments
+on the \textit{HMNZS Wellington} and the NBP1704.
+In addition to the datasets outlined above we have access to a set of
+ceilometer and lidar observations from the following land-based locations in NZ:
 
+\begin{itemize}
+\item \textbf{Cass}, a deplyment of a Vaisala CL51 ceilometer at a station in the
+Southern Alps, NZ.
+\item \textbf{Lauder}, a dataset of a Sigma Space MiniMPL lidar and a Vaisala CL31
+ceilometer observations at a station in NZ made available by NIWA.
+\item \textbf{Christchurch}, a deployment of a Lufft CHM 15k and a Sigma Space MiniMPL on the
+Ernest Rutherford building of the University of Canterbury, NZ.
+\end{itemize}
+
+Observations collected on the voyages include remote sensing with ceilometers and lidars,
+a micro rain radar, radiosonde profiles, automatic weather station (AWS) data (temperature, relative humidity,
+wind, SST, radiometer...), UAV and tethered balloon soundings and
+aerosol concentration. Below, we briefly describe the instruments.
+
+\textit{Lufft CHM 15k} is an infrared ceilometer operating at a single wavelength of
+1064 nm, which makes it suitable for observation of cloud droplets and
+ice particles of similar size and boundary layer aerosol.
+The primary purpose of a ceilometer
+is observation of cloud base height, although other atmospheric features
+such as boundary layer height, visibility, precipitation and multiple
+cloud layers can be detected as well using a suitable algorithm. The
+primary measured quantity is attenuated volume backscattering coefficient
+$\beta$ (km$^{-1}$sr$^{-1}$), which
+can also be used for a direct comparison with a ceilometer simulator.
+The instrument allows for an easy deployment
+in adverse conditions such as on ships.
+The ceilometer recors data in the NetCDF format \citep{rew2006},
+which makes it easy
+for processing by various data analysis tools.
+The averaging period of the instrument is 2 s. This provides spatiotemporal
+resolution much greater than a GCM. Averaging over longer time periods can
+be applied to improve the signal-to-noise ratio (SNR).
+
+\textit{Vaisala CL51} is an infrared ceilometer operating a
+wavelength of 910 nm. Similar to Lufft CHM 15k, it is suitable for observation
+of cloud droplets and ice particles. The averaging period is 6 s.
+The firmware contains onboard detection of multiple cloud layers and
+visibility by a standard algorithm and a Sky Condition Algorithm (SCA).
+Two-dimensional backscatter profile is recorded in ASCII-encoded data files.
+
+\textit{Metek MRR-2} is a micro rain radar, operating at a microwave frequency of
+24.230 GHz, i.e. wavelength of 12.38 mm. The wavelength makes it suitable
+for observation of liquid and ice precipitation. This instrument can
+be used alongside the Vaisala CL51 instrument to detect period of time with
+precipitation and rain rate. A Metek MRR-2 was deployed on the TAN1702, TAN1802
+\textit{HMNZS Wellington} voyages.
+
+A sky camera was used as an ancillary instrument providing a visual
+perspective of the atmospheric conditions (type of cloud, fog,
+precipitation), as well as a primary instrument for determining cloud fraction.
+Our deployments included
+an off-the-shelf time lapse camera Brinno BCC200 (as a low-cost but
+satisfactory solution) and a fisheye lens camera.
+The sampling period can be chosen from a wide range of values; we have
+determined that a 5-minute interval is sufficient.
+
+\subsection{Satellite radiation budget observations}
+
+Earth radiation budget (ERB) observations are central for assessment and development
+of GCMs. LEO satellite observations of TOA SW and longwave (LW) fluxes
+have been performed starting with the Nimbus satellite series in 1970s
+\citep{smith1977}, followed by the Earth Radiation Budget Satellite (ERBS) and NOAA
+satellites in 1980s \citep{barkstrom1984}, the Scanner for Radiation Budget (ScaRaB)
+project on on Meteor-3 and Resurs-01/4 LEO satellites in 1990s \citep{kandel1994}
+and the
+CERES instruments on a number of LEO satellites from late 1990s
+to the present day \citep{wielicki1996}. Geosynchronous satellite measurements
+provide advantage of continuous temporal sampling, but cannot provide
+good angular resolution and observations of polar latitudes. They have,
+however, been utilised as part of the Geostationary Earth Radiation Budget (GERB)
+project.
+The National Institute of Standards and Technology Advanced Radiometer (NISTAR)
+instrument on the Deep Space Climate Observatory (DSCOVR) satellite in L1 Lagrangian point provides continuous
+measurements of the sunlit part of the Earth \citep{khlopenkov2017}, it has however not been used
+as extensively as the earlier satellite observations. Global radiation balance
+is one of the most commonly adjusted properties of GCMs
+\citep{hourdin2017,schmidt2017}. It is vital for GCMs to simulate accurate
+spatiotemporal variability of the radiation budget, as deviations can cause
+shifts in circulation patterns such as the polar fronts and
+the inter-tropical convergence zone (ITCZ).
+
+CERES are instruments measuring the ERB,
+deployed on multiple satellites:
+TRMM (1997--2015), Terra (2000--present), Aqua (2002--present), Suomi NPP (2011--present) and JPSS-1
+(2017--present) \citep{damadeo2017}. They are
+considered to provide the most reliable measurements of radiation budget,
+although they are limited by the necessity of temporal (diurnal) and angular
+interpolation \citep{smith2011}.
+Recent version of the CERES dataset (Edition 4.0) has been found to decrease
+clear-sky TOA SW flux in the SO region by up to 15 Wm$^{-2}$
+in summer compared to the previous version \citep{loeb2017},
+which may affect previous results and should be taken into consideration in
+future analysis.
+
+The Geostationary Earth Radiation Budget (GERB) project involves ERB instruments
+on Meteosat Second Generation (MSG) GEO satellites \citep{harries2005}.
+Measurements began in 2002 on MSG-1 and continue to the present day.
+Both SW and LW bands are available. The advantage of GERB
+over CERES is its continuous temporal and spatial coverage in its FOV
+\citep{sandford2003}. However, it does not provide full spatial coverage
+(polar latitudes and longitudes outside of its FOV).
+GERB has been used for correction of CERES temporal interpolation
+(CERES geostationary method), resulting in difference in excess of 25 Wm$^{-2}$
+over marine stratus and land convection relative to uncorrected data
+(CERES-only) \citep{doelling2013}. It is therefore important to consider
+the effect of temporal interpolation when comparing regional ERB with a GCM.
+Because high latitudes are not observed by GEO satellites, this correction
+cannot be done for latitudes over 60$^{\circ}$. This is compensated by the high-revisit
+frequency of the CERES-carrying satellites at the poles.
+
+%\begin{figure}
+%\begin{subfigure}[b]{0.5\textwidth}
+%\textbf{a}\\
+%\includegraphics[width=\textwidth]{img/sr_hist_2007_spaceborne.pdf}
+%\end{subfigure}
+%\begin{subfigure}[b]{0.5\textwidth}
+%\textbf{b}\\
+%\includegraphics[width=\textwidth]{img/sr_hist_2007_surface.pdf}
+%\end{subfigure}
+%\caption{
+%\textbf{Simulated scattering ratio histogram
+%(global, year 2007 of NZESM simulation).}
+%\textbf{a,} Surface lidar (532 nm),
+%\textbf{b,} Spaceborne lidar (532 nm).
+%}
+%\label{fig:hist}
+%\end{figure}
+
+\subsection{Auxiliary software}
+
+As part of the observational data processing work we developed
+open source tools for transforming the native instrument data formats to
+the more commonly used NetCDF and HDF formats:
+
+\begin{itemize}
+\item \textbf{cl2nc}\footnote{\url{https://github.com/peterkuma/cl2nc}.}, a tool for converting Vaisala CL51
+ceilometer data to NetCDF4.
+\item \textbf{mrr2c}\footnote{\url{https://github.com/peterkuma/mrr2c}.}, a tool for converting
+Metek MRR-2 radar data to HDF.
+\item \textbf{mpl2nc}\footnote{\url{https://github.com/peterkuma/mpl2nc}.}, a tool for converting Sigma Space MiniMPL lidar data to NetCDF and applying calibration.
+\end{itemize}
+
+\noindent
+These tools were made publickly available on the code collaboration network GitHub.
+
+\section{Outline of the thesis}
+
+This thesis is organised as follows. In Chapter 2 we evaluate
+SO cloud in a nudged run of GA7.1 and in MERRA-2 in comparison
+with a collection of SO voyage observations. In Chapter 3 we
+describe a new ground based lidar processing and simulator framework.
+In Chapter 4 we describe and evaluate an experimental run of the UM11.4 aimed at
+improving representation of boundary layer cloud in the SO.
+
+As of 13 April 2020, Chapter 2 was submitted to the Atmospheric
+Chemistry and Physics (ACP) journal and is in a second round of review
+with minor comments from two referees. Chapter 3 was submitted to the
+Geoscientific Model Development (GMD) journal. Chapter 4 is a manuscript
+in preparation with an planned submission in May 2020.
+
+\clearpage
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.8\textwidth]{img/actsim.pdf}
+\caption{
+\textbf{Lidar simulator (ACTSIM) interface.}
+Primary input fields are
+highlighted in red, primary output fields are highlighted in green.
+\texttt{q\_lsliq} -- startiform liquid mixing ratio, \texttt{q\_lsice} --
+stratiform ice mixing
+ratio, \texttt{q\_cvliq} -- convective liquid mixing ratio,
+\texttt{q\_cvice} -- convective
+ice mixing ratio, \texttt{ls\_radliq} -- stratiform liquid effective radius,
+\texttt{ls\_radice} -- stratiform ice effective radius, \texttt{cv\_radliq} --
+convective liquid effective radius, \texttt{cv\_radice} --
+convective ice effective radius, \texttt{pmol} --
+molecular attenuated volume backscatter coefficient, \texttt{pnorm} -- total
+attenuated volume backscatter coefficient.
+}
+\label{fig:actsim}
+\end{figure}
+
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.8\textwidth]{img/map.pdf}
+\caption{
+\textbf{Map showing voyage tracks and a ground-based station on Macquarie Island.}
+}
+\label{fig:map}
+\end{figure}
+
+\begin{figure}
+\centering
+%\includegraphics[width=0.7\textwidth]{img/instruments.pdf}
+\caption{
+\textbf{Instrument deployment and observations on the Southern Ocean voyages
+and stations.}
+}
+\label{fig:instruments}
+\end{figure}
+
+\begin{figure}
+\centering
+%\includegraphics[width=\textwidth]{img/results.pdf}
+\caption{
+\textbf{Attenuated volume backscatter coefficient histograms produced from
+observations on NB Palmer NBP1704 voyage, and by ACTSIM ceilometer simulator
+based on the NZESM output.} Background noise is removed by the Lufft CHM 15k
+instrument firmware,
+and an additional noise removal is applied based on signal at 15 km height.
+}
+\label{fig:results}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+%\includegraphics[width=0.8\textwidth]{fig/instruments.pdf}
+\caption{
+Atmospheric measurement instruments deployed on the Southern Ocean voyages and Macquarie Island.
+}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+%\includegraphics[width=\textwidth]{fig/cbh.pdf}
+\caption{
+Cloud base height distribution on three Southern Ocean voyages derived from
+ceilometer observations.
+}
+\end{figure}
