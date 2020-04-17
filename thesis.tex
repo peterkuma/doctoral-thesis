@@ -10,12 +10,14 @@
 \usepackage{pdfpages}
 \usepackage{microtype}
 %\setmainfont{Merriweather}
-%\setmainfont{EB Garamond}
-\setmainfont{Crimson Text}
+\setmainfont{EB Garamond}
+%\setmainfont{Crimson Text}
+%\setmainfont{Cormorant Garamond}
 %\setmainfont{Minion Pro}
 %\setmainfont{Source Serif Pro}
 %\setmainfont{Charis SIL}
 %\setsansfont{Public Sans}
+%\setsansfont{Source Sans Pro}
 \setsansfont{Open Sans}
 %\setsansfont{Myriad Pro}
 \titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
@@ -47,15 +49,15 @@
 \input{title.tex}
 \clearpage
 %\fontsize{15pt}{16pt}\selectfont
-\fontsize{12pt}{15pt}\selectfont
+\fontsize{12pt}{16pt}\selectfont
 %\fontsize{11pt}{14pt}\selectfont
 \input{abstract.tex}
 \clearpage
 \includepdf{co-authorship-form.pdf}
 \clearpage
 \input{acknowledgments.tex}
-\clearpage
-\input{dedication.tex}
+%\clearpage
+%\input{dedication.tex}
 \tableofcontents
 \listoffigures 
 \listoftables
@@ -63,7 +65,8 @@
 \input{chapter2/chapter.tex}
 \input{chapter3/chapter.tex}
 \input{chapter4/chapter.tex}
-\input{conclusion/conclusion.tex}
+\input{conclusions/conclusions.tex}
+\small
 \bibliography{introduction/bibliography,chapter2/bibliography,chapter3/bibliography,chapter4/bibliography}
 \end{document}
 

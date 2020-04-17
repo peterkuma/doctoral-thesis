@@ -23,9 +23,26 @@ doubling of CO$_2$, which highlights the importance of cloud cover in modulating
 global climate. Nearly all climate models predict cloud feedback to be positive,
 i.e. amplification of warming with increasing CO$_2$ concentration.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig/trenberth-fassulo-sw-bias.png}
+\caption{
+Biases in the TOA net radiation down relative to observations regionally for
+1990--99
+in $Wm^{-2}$, where stippled (hatched) regions correspond to regions
+in which at least three quarters of the models share a common
+positive (negative) bias. (right) The model zonal mean is given
+(dots) with the 25th to 75th percentile range (lines) over land (red),
+ocean (blue), and all (black) surfaces. \textbf{Adopted from
+\cite{trenberth2010}.}
+}
+\label{fig:trenberth-fassulo-sw-bias}
+\end{figure}
+
 Shortwave (SW) radiation bias over the SO of up to 30 Wm$^{-2}$ is a
 well-documented problem in current NWP models and GCMs
-\citep{trenberth2010}, and it has been the subject of many studies.
+\citep{trenberth2010} (Fig. \ref{fig:trenberth-fassulo-sw-bias}),
+and it has been the subject of many studies.
 It manifests both as a bias in SW radiation reaching the surface and as
 SW reflectivity bias at the top of atmosphere (TOA).
 \cite{bodas-salcedo2014} evaluated SW bias in a number
@@ -137,15 +154,30 @@ mid-level clouds \citep{haynes2011}.
 \item Lack of sunlight limits polar wintertime SW measurements.
 \end{itemize}
 
-\noindent Active satellite instruments are affected by signal attenuation by
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig/space_vs_surface_lidar.png}
+\caption{
+\textbf{(a), (a')} Spaceborne vs. \textbf{(b), (b')} surface lidar scattering ratio
+(SR) simulated based on the New Zealand Earth System Model (NZESM) output in year 2017 at a wavelength of 532 nm.
+\textbf{(a), (b)} show SR at a model level corresponding to approximately 300 m
+above sea level (ASL) over the sea, and \textbf{(a'), (b')} show an SR histogram by height.
+}
+\label{fig:surface-vs-spaceborne-lidar}
+\end{figure}
+
+Active satellite instruments are affected by signal attenuation by
 optically thick
 clouds (lidar), ground clutter (radar), and compared to passive instruments they have smaller spatial coverage,
 shorter historical record and a small number of spectral bands, limiting their
 ability to determine cloud microphysical properties.
-
 In addition to spaceborne observations, ground-based and in situ
 observations can provide an important complementing view of clouds from below.
-These include radars, ceilometers, lidars,
+Figure \ref{fig:surface-vs-spaceborne-lidar} shows that the scattering ratio
+in the boundary layer measured by a lidar is much higher when measured by 
+a ground-based lidar than a spaceborne lidar due to obscuration by higher-level
+cloud.
+Ground-based and in situ instruments include radars, ceilometers, lidars,
 pyranometers, sky cameras, radiosondes, dropsondes, in situ aerosol measurements
 (cloud condensation nuclei and ice nuclei) and airborne observations from
 drones, weather balloons, kites and aircraft. These observations are logistically
@@ -344,6 +376,15 @@ which requires re-calculation of the Mie and Rayleigh scattering coefficients.
 
 \subsection{In situ observations in the Southern Ocean}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig/instruments.jpg}
+\caption{
+Instruments deployed on Southern Ocean voyages and stations.
+}
+\label{fig:instruments}
+\end{figure}
+
 In situ SO observations are essential for improving the model SO biases.
 A set of SO datasets have been collected by the University of Canterbury
 and partner organisations by deploying our instruments on a number
@@ -364,6 +405,16 @@ on the \textit{HMNZS Wellington} and the NBP1704.
 In addition to the datasets outlined above we have access to a set of
 ceilometer and lidar observations from the following land-based locations in NZ:
 
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{fig/chm15k_profile.png}
+\caption{
+A Lufft CHM 15k ceilometer volume backscattering coefficient profile plot
+and corresponding sky camera images collected on the TAN1702 voyage
+on 23 March 2017.
+}
+\label{fig:chm15k-profile}
+\end{figure}
+
 \begin{itemize}
 \item \textbf{Cass}, a deplyment of a Vaisala CL51 ceilometer at a station in the
 Southern Alps, NZ.
@@ -376,7 +427,8 @@ Ernest Rutherford building of the University of Canterbury, NZ.
 Observations collected on the voyages include remote sensing with ceilometers and lidars,
 a micro rain radar, radiosonde profiles, automatic weather station (AWS) data (temperature, relative humidity,
 wind, SST, radiometer...), UAV and tethered balloon soundings and
-aerosol concentration. Below, we briefly describe the instruments.
+aerosol concentration (Fig. \ref{fig:instruments}.
+Below, we briefly describe the instruments.
 
 \textit{Lufft CHM 15k} is an infrared ceilometer operating at a single wavelength of
 1064 nm, which makes it suitable for observation of cloud droplets and
@@ -419,6 +471,46 @@ an off-the-shelf time lapse camera Brinno BCC200 (as a low-cost but
 satisfactory solution) and a fisheye lens camera.
 The sampling period can be chosen from a wide range of values; we have
 determined that a 5-minute interval is sufficient.
+Figure \ref{fig:chm15k-profile} shows an example backscatter profile plot
+from the TAN1702 voyage, combined with sky camera images. 
+In addition to cloud base height, these measurements provide a wealth
+of information about the cloud type, the vertical extent, optical thickness,
+precipitation, fog and boundary layer aerosol.
+
+Preliminary analysis of multiple voyage datasets indicates that low cloud
+below 2 km constitues the majority of cloud in the summertime in the SO
+(Fig. \ref{fig:cbh}). Preliminary results from the TAN1802 voyage also
+show a very high cloud fraction of 94\% and a strong peak of boundary layer
+cloud below 1 km above sea level (ASL) (Fig. \ref{fig:tan1802-stats}a), the predominance
+of stratus (52\%) and stratocumulus (30\%) clouds (Fig. \ref{fig:tan1802-stats}b), predominantly
+near-zero SST (Fig. \ref{fig:tan1802-stats}c) and near-surface air temperature below SST
+(Fig. \ref{fig:tan1802-stats}d, e). These results suggest a cold boundary layer
+destabilised by relatively warm SST and subsquent formation of
+low stratus and stratocumulus cloud.
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{fig/cbh.pdf}
+\caption{
+Cloud base height distribution on the \textit{HMNZS Wellington} 2016, TAN702 and NBP1704
+voyages derived with a Lufft CHM 15k ceilometer observations (as determined by
+the instrument's firmware).
+}
+\label{fig:cbh}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{fig/tan1802_stats.pdf}
+\caption{
+Statistics calculated from observations collected on the TAN1802 voyage.
+\textbf{(a)} cloud occurrence as a function of height, the 68-th and
+90-th percentiles and the total cloud fraction (CF) calculated from a Lufft CHM 15k ceilometer observations.
+\textbf{(b)} cloud type and cloud cover (octas) occurrence
+in \% calculated from human observations. Histograms of \textbf{(c)} sea surface temperature (SST), \textbf{(d)} air temperature
+and \textbf{(e)} SST - air temperature calculated from the automatic
+weather station (AWS) data.
+}
+\label{fig:tan1802-stats}
+\end{figure}
 
 \subsection{Satellite radiation budget observations}
 
@@ -526,74 +618,3 @@ in preparation with an planned submission in May 2020.
 
 \clearpage
 
-\begin{figure}
-\centering
-%\includegraphics[width=0.8\textwidth]{img/actsim.pdf}
-\caption{
-\textbf{Lidar simulator (ACTSIM) interface.}
-Primary input fields are
-highlighted in red, primary output fields are highlighted in green.
-\texttt{q\_lsliq} -- startiform liquid mixing ratio, \texttt{q\_lsice} --
-stratiform ice mixing
-ratio, \texttt{q\_cvliq} -- convective liquid mixing ratio,
-\texttt{q\_cvice} -- convective
-ice mixing ratio, \texttt{ls\_radliq} -- stratiform liquid effective radius,
-\texttt{ls\_radice} -- stratiform ice effective radius, \texttt{cv\_radliq} --
-convective liquid effective radius, \texttt{cv\_radice} --
-convective ice effective radius, \texttt{pmol} --
-molecular attenuated volume backscatter coefficient, \texttt{pnorm} -- total
-attenuated volume backscatter coefficient.
-}
-\label{fig:actsim}
-\end{figure}
-
-
-\begin{figure}
-\centering
-%\includegraphics[width=0.8\textwidth]{img/map.pdf}
-\caption{
-\textbf{Map showing voyage tracks and a ground-based station on Macquarie Island.}
-}
-\label{fig:map}
-\end{figure}
-
-\begin{figure}
-\centering
-%\includegraphics[width=0.7\textwidth]{img/instruments.pdf}
-\caption{
-\textbf{Instrument deployment and observations on the Southern Ocean voyages
-and stations.}
-}
-\label{fig:instruments}
-\end{figure}
-
-\begin{figure}
-\centering
-%\includegraphics[width=\textwidth]{img/results.pdf}
-\caption{
-\textbf{Attenuated volume backscatter coefficient histograms produced from
-observations on NB Palmer NBP1704 voyage, and by ACTSIM ceilometer simulator
-based on the NZESM output.} Background noise is removed by the Lufft CHM 15k
-instrument firmware,
-and an additional noise removal is applied based on signal at 15 km height.
-}
-\label{fig:results}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-%\includegraphics[width=0.8\textwidth]{fig/instruments.pdf}
-\caption{
-Atmospheric measurement instruments deployed on the Southern Ocean voyages and Macquarie Island.
-}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-%\includegraphics[width=\textwidth]{fig/cbh.pdf}
-\caption{
-Cloud base height distribution on three Southern Ocean voyages derived from
-ceilometer observations.
-}
-\end{figure}
