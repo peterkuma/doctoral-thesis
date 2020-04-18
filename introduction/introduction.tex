@@ -67,7 +67,7 @@ among others.
 The New Zealand Earth System Model (NZESM)
 is a relatively new earth system model based on the UK climate model HadGEM/UK Earth System Model (UKESM)
 \citep{williams2016}, whose aim is to improve climate predictions for
-Aotearoa/New Zealand (NZ). Reducing SO model biases is essential for
+Aotearoa/New Zealand. Reducing SO model biases is essential for
 achieving this aim. \cite{walters2017}
 showed that a clear and extensive SW radiation bias over the SO
 is present in the atmospheric component of the model Global Atmosphere version 6.0 (GA6.0) compared to satellite
@@ -136,7 +136,7 @@ and passive
 microwave sensors, due to their ability to observe cloud liquid water,
 total column water vapour, vertically-resolved temperature profile, and
 ability to see through clouds, even though their relatively low spatial
-resolution makes them less popular than passive visible (VIS) and infrared (IR)
+resolution makes passive microwave instruments less popular than passive visible (VIS) and infrared (IR)
 instruments.
 Passive VIS and IR satellite observations of clouds are ideal due to their high
 spatial and temporal resolution, but have a number problems globally and some
@@ -146,7 +146,7 @@ specifically in polar latitudes \citep{bromwich2012}:
 \item Passive instruments can only observe the highest layer of clouds, unless
 the layer is semi-transparent.
 \item It is difficult to discern clouds from surface ice and snow
-in the visible spectrum due to similar albedo and in the IR (infrared)
+in the VIS spectrum due to similar albedo and in the IR
 spectrum due to similar
 temperature and frequent inversions.
 \item Poor detection of semi-transparent high clouds, falsely classified as
@@ -159,7 +159,8 @@ mid-level clouds \citep{haynes2011}.
 \includegraphics[width=\textwidth]{fig/space_vs_surface_lidar.png}
 \caption{
 \textbf{(a), (a')} Spaceborne vs. \textbf{(b), (b')} surface lidar scattering ratio
-(SR) simulated based on the New Zealand Earth System Model (NZESM) output in year 2017 at a wavelength of 532 nm.
+(SR) simulated based on the New Zealand Earth System Model (NZESM) output in
+year 2017 at a lidar wavelength of 532 nm.
 \textbf{(a), (b)} show SR at a model level corresponding to approximately 300 m
 above sea level (ASL) over the sea, and \textbf{(a'), (b')} show an SR histogram by height.
 }
@@ -173,7 +174,8 @@ shorter historical record and a small number of spectral bands, limiting their
 ability to determine cloud microphysical properties.
 In addition to spaceborne observations, ground-based and in situ
 observations can provide an important complementing view of clouds from below.
-Figure \ref{fig:surface-vs-spaceborne-lidar} shows that the scattering ratio
+Figure \ref{fig:surface-vs-spaceborne-lidar} shows that scattering ratio (SR)
+(the ratio of total backscatter to molecular backscatter)
 in the boundary layer measured by a lidar is much higher when measured by 
 a ground-based lidar than a spaceborne lidar due to obscuration by higher-level
 cloud.
@@ -193,19 +195,19 @@ Different processing of observations from the same instrument can lead
 to different results, for example the
 GCM-Oriented CALIPSO Cloud Product (GOCCP) relative to the standard
 Cloudsat-CALIPSO products \citep{chepfer2010}.
-Different thresholds can be applied which define what is 'cloud',
+Different thresholds can be applied which define what 'cloud' is,
 and cloud detection is affected by targeting a particular false alarm ratio,
 such as 5\% as in the CloudSat-CALIPSO dataset \citep{hagihara2010}.
 Probability of detection (sensitivity) then depends on the receiver operating
 characteristic (ROC) curve, which in turn depends on instrument
-noise. Instrument noise ana bias can vary over lifetime of the instrument,
+noise. Instrument noise and bias can vary over lifetime of the instrument,
 or between instruments of multi-instrument datasets such as ISCCP.
 A problem with different processing
 algorithms was noted by \cite{martucci2010}, who compared
-manufacturer-supplied cloud base height
-determination from co-located Vaisala CL31 and Jenoptik CHM 15k ceilometers
+manufacturer-supplied cloud base height (CBH)
+determination between co-located Vaisala CL31 and Jenoptik CHM 15k ceilometers
 and found a poor agreement, and developed a new algorithm for determining
-cloud base height which leads to consistent heights between the two instruments.
+CBH which leads to consistent height between the two instruments.
 
 Due to the reasons outlined above, a combination of multiple passive, active,
 ground-based and in situ observations are needed to comprehensively assess
@@ -281,7 +283,7 @@ with the aim of collecting atmospheric observations for model evaluation.
 \item Collate and post-process the existing and new SO in situ datasets.
 \item Extend the COSP lidar simulator with a ceilometer and ground-based lidar
 simulator for instruments deployed on the SO voyages.
-\item Use in situ and satellite observations in conjuction with the lidar simulator
+\item Use in situ and satellite observations in conjunction with the lidar simulator
 to evaluate SO cloud biases in the NZESM.
 \item Perform experimental simulations of the NZESM with the aim of
 improving the simulation of SO clouds relative to the observations.
@@ -300,7 +302,8 @@ satellite datasets.
 \subsection{New Zealand Earth System Model}
 
 The NZESM is an actively developed branch of HadGEM/UKESM, with the
-aim of improving the atmosphere, ocean and cryosphere simulation affecting NZ
+aim of improving the atmosphere, ocean and cryosphere simulation affecting
+Aotearoa/New Zealand
 \citep{williams2016}. Development is done by the National Institute of Water and
 Atmospheric Research (NIWA) in Wellington.
 The NZESM is a fully coupled atmosphere-ocean model, including land surface
@@ -334,7 +337,8 @@ constituents (clouds, aerosols, gases), which is a wavelength-dependent process.
 COSP was utilised in evaluation of GCMs in the
 Coupled Model Intercomparison Project Phase 5 (CMIP5) \citep{taylor2011}.
 COSP contains multiple simulators of different instruments:
-ISCCP, MODIS, MISR, CloudSat, CALIPSO, a MMCR/KAZR ground-based radar
+ISCCP, MODIS, MISR, CloudSat, CALIPSO, a MilliMeter-wavelength Cloud Radar
+(MMCR)/Ka-Band ARM Zenith Radar (KAZR) ground-based radar
 and the Radiative Transfer for Television Infrared Observation Satellite (TIROS)
 Operational Vertical Sounder (TOSV) (RTTOV).
 Notably, radar observations are simulated by the QuickBeam simulator
@@ -352,13 +356,13 @@ a cloud generator. Algorithms for calculating derived products are generally not
 available, and datasets such as CALIPSO-GOCCP were developed for the purpose
 of comparison of equivalent quantities from observations and the simulator
 \citep{chepfer2010}.
-The COSP package can be run either online (inside the model) or offline,
+COSP can be run either online (inside the model) or offline,
 when fields from a model are provided to COSP after completing the simulation.
 Running the simulator offline allows for rapid modification
 and testing of code. Cloud overlap in COSP is treated by the Subgrid Cloud Overlap Profile Sampler
 (SCOPS) \citep{webb2001}, which generates subcolumns based on the grid cell
 cloud faction and precipitation fluxes. Either random or maximum-random cloud overlap
-(Geleyn and Hollingsworth 1979, Ritter and Geleyn 1992) is assumed,
+\citep{geleyn1979,ritter1992} is assumed,
 whereby cloud in the adjacent layers overlaps maximally, and cloud separated
 by clear layers overlap randomly.
 
@@ -392,18 +396,19 @@ of voyages of opportunity as well as conducting IOPs:
 
 \begin{itemize}
 \item \textit{Aurora Australis} voyages to Casey, Davis and Mawson, Antarctica (2015--2016).
-\item Macquaire Island station (2016--2018).
+\item Macquarie Island station (2016--2018).
 \item \textit{HMNZS Wellington} voyages to the Ross Sea (2016).
 \item \textit{RV Nathaniel B. Palmer} voyage NBP1704 to the Ross Sea (2017).
 \item \textit{RV Tangaroa} voyages TAN1502, TAN1503 (2015), TAN1702 (2017) and TAN1802 (2018)
-to the Ross Sea, Chatham Islands, Campbell Plateau and Ross Sea, respectively.
+to the Ross Sea, Chatham Islands, the Campbell Plateau and the Ross Sea, respectively.
 \end{itemize}
 
 \noindent
-The author participated on the TAN7102 and TAN1802 voyages and the deployments
+The author participated on field measurements on the TAN7102 and TAN1802 voyages and the deployments
 on the \textit{HMNZS Wellington} and the NBP1704.
 In addition to the datasets outlined above we have access to a set of
-ceilometer and lidar observations from the following land-based locations in NZ:
+ceilometer and lidar observations from the following land-based locations in
+Aotearoa/New Zealand:
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{fig/chm15k_profile.png}
@@ -416,12 +421,13 @@ on 23 March 2017.
 \end{figure}
 
 \begin{itemize}
-\item \textbf{Cass}, a deplyment of a Vaisala CL51 ceilometer at a station in the
-Southern Alps, NZ.
+\item \textbf{Cass}, a deployment of a Vaisala CL51 ceilometer at a station in the
+Southern Alps, Aotearoa/New Zealand.
 \item \textbf{Lauder}, a dataset of a Sigma Space MiniMPL lidar and a Vaisala CL31
-ceilometer observations at a station in NZ made available by NIWA.
+ceilometer observations at a station in Aotearoa/New Zealand made available by NIWA.
 \item \textbf{Christchurch}, a deployment of a Lufft CHM 15k and a Sigma Space MiniMPL on the
-Ernest Rutherford building of the University of Canterbury, NZ.
+Ernest Rutherford building of the University of Canterbury, Aotearoa/New
+Zealand.
 \end{itemize}
 
 Observations collected on the voyages include remote sensing with ceilometers and lidars,
@@ -430,11 +436,11 @@ wind, SST, radiometer...), UAV and tethered balloon soundings and
 aerosol concentration (Fig. \ref{fig:instruments}.
 Below, we briefly describe the instruments.
 
-\textit{Lufft CHM 15k} is an infrared ceilometer operating at a single wavelength of
+\textit{Lufft CHM 15k} is an IR ceilometer operating at a single wavelength of
 1064 nm, which makes it suitable for observation of cloud droplets and
 ice particles of similar size and boundary layer aerosol.
 The primary purpose of a ceilometer
-is observation of cloud base height, although other atmospheric features
+is observation of CBH, although other atmospheric features
 such as boundary layer height, visibility, precipitation and multiple
 cloud layers can be detected as well using a suitable algorithm. The
 primary measured quantity is attenuated volume backscattering coefficient
@@ -442,14 +448,14 @@ $\beta$ (km$^{-1}$sr$^{-1}$), which
 can also be used for a direct comparison with a ceilometer simulator.
 The instrument allows for an easy deployment
 in adverse conditions such as on ships.
-The ceilometer recors data in the NetCDF format \citep{rew2006},
+The ceilometer records data in the NetCDF format \citep{rew2006},
 which makes it easy
 for processing by various data analysis tools.
 The averaging period of the instrument is 2 s. This provides spatiotemporal
 resolution much greater than a GCM. Averaging over longer time periods can
 be applied to improve the signal-to-noise ratio (SNR).
 
-\textit{Vaisala CL51} is an infrared ceilometer operating a
+\textit{Vaisala CL51} is an IR ceilometer operating a
 wavelength of 910 nm. Similar to Lufft CHM 15k, it is suitable for observation
 of cloud droplets and ice particles. The averaging period is 6 s.
 The firmware contains onboard detection of multiple cloud layers and
@@ -461,31 +467,31 @@ Two-dimensional backscatter profile is recorded in ASCII-encoded data files.
 for observation of liquid and ice precipitation. This instrument can
 be used alongside the Vaisala CL51 instrument to detect period of time with
 precipitation and rain rate. A Metek MRR-2 was deployed on the TAN1702, TAN1802
-\textit{HMNZS Wellington} voyages.
+and \textit{HMNZS Wellington} voyages.
 
 A sky camera was used as an ancillary instrument providing a visual
 perspective of the atmospheric conditions (type of cloud, fog,
 precipitation), as well as a primary instrument for determining cloud fraction.
 Our deployments included
 an off-the-shelf time lapse camera Brinno BCC200 (as a low-cost but
-satisfactory solution) and a fisheye lens camera.
+satisfactory solution) and a fisheye-lens camera.
 The sampling period can be chosen from a wide range of values; we have
 determined that a 5-minute interval is sufficient.
 Figure \ref{fig:chm15k-profile} shows an example backscatter profile plot
 from the TAN1702 voyage, combined with sky camera images. 
-In addition to cloud base height, these measurements provide a wealth
+In addition to CBH, these measurements provide a wealth
 of information about the cloud type, the vertical extent, optical thickness,
 precipitation, fog and boundary layer aerosol.
 
 Preliminary analysis of multiple voyage datasets indicates that low cloud
-below 2 km constitues the majority of cloud in the summertime in the SO
+below 2 km constitutes the majority of cloud in the summertime in the SO
 (Fig. \ref{fig:cbh}). Preliminary results from the TAN1802 voyage also
 show a very high cloud fraction of 94\% and a strong peak of boundary layer
 cloud below 1 km above sea level (ASL) (Fig. \ref{fig:tan1802-stats}a), the predominance
 of stratus (52\%) and stratocumulus (30\%) clouds (Fig. \ref{fig:tan1802-stats}b), predominantly
 near-zero SST (Fig. \ref{fig:tan1802-stats}c) and near-surface air temperature below SST
 (Fig. \ref{fig:tan1802-stats}d, e). These results suggest a cold boundary layer
-destabilised by relatively warm SST and subsquent formation of
+destabilised by relatively warm SST and subsequent formation of
 low stratus and stratocumulus cloud.
 
 \begin{figure}[t]
@@ -523,14 +529,15 @@ project on on Meteor-3 and Resurs-01/4 LEO satellites in 1990s \citep{kandel1994
 and the
 CERES instruments on a number of LEO satellites from late 1990s
 to the present day \citep{wielicki1996}. Geosynchronous satellite measurements
-provide advantage of continuous temporal sampling, but cannot provide
-good angular resolution and observations of polar latitudes. They have,
+provide advantage of continuous temporal sampling, but cannot provide a
+good angular resolution and observations at high polar latitudes. They have,
 however, been utilised as part of the Geostationary Earth Radiation Budget (GERB)
 project.
 The National Institute of Standards and Technology Advanced Radiometer (NISTAR)
 instrument on the Deep Space Climate Observatory (DSCOVR) satellite in L1 Lagrangian point provides continuous
-measurements of the sunlit part of the Earth \citep{khlopenkov2017}, it has however not been used
-as extensively as the earlier satellite observations. Global radiation balance
+measurements of the sunlit part of the Earth \citep{khlopenkov2017}. It has,
+however, not been used
+as extensively as earlier satellite observations. Global radiation balance
 is one of the most commonly adjusted properties of GCMs
 \citep{hourdin2017,schmidt2017}. It is vital for GCMs to simulate accurate
 spatiotemporal variability of the radiation budget, as deviations can cause
@@ -594,12 +601,15 @@ the more commonly used NetCDF and HDF formats:
 \item \textbf{cl2nc}\footnote{\url{https://github.com/peterkuma/cl2nc}.}, a tool for converting Vaisala CL51
 ceilometer data to NetCDF4.
 \item \textbf{mrr2c}\footnote{\url{https://github.com/peterkuma/mrr2c}.}, a tool for converting
-Metek MRR-2 radar data to HDF.
-\item \textbf{mpl2nc}\footnote{\url{https://github.com/peterkuma/mpl2nc}.}, a tool for converting Sigma Space MiniMPL lidar data to NetCDF and applying calibration.
+Metek MRR-2 radar data to HDF5.
+\item \textbf{mpl2nc}\footnote{\url{https://github.com/peterkuma/mpl2nc}.}, a
+tool for converting Sigma Space MiniMPL lidar data to NetCDF4 and applying
+dead time, overlap and afterpulse calibration.
 \end{itemize}
 
 \noindent
-These tools were made publickly available on the code collaboration network GitHub.
+These tools were made publicly available on the code collaboration network
+GitHub.
 
 \section{Outline of the thesis}
 
@@ -614,7 +624,4 @@ As of 13 April 2020, Chapter 2 was submitted to the Atmospheric
 Chemistry and Physics (ACP) journal and is in a second round of review
 with minor comments from two referees. Chapter 3 was submitted to the
 Geoscientific Model Development (GMD) journal. Chapter 4 is a manuscript
-in preparation with an planned submission in May 2020.
-
-\clearpage
-
+in preparation with a planned submission in May 2020.
