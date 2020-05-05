@@ -1,5 +1,4 @@
-\chapter{Ground-based lidar processing and simulator framework for
-comparing models and observations}
+\chapter{Ground-based lidar processing and simulator framework for comparing models and observations (ALCF 1.0)}
 
 \section*{Abstract}
 
@@ -111,7 +110,7 @@ of models using satellite, and more recently ground-based, observations.
 The simulators in COSP include active instruments such as spaceborne and
 ground-based radars: Cloud Profiling Radar (CPR) on CloudSat \citep{stephens2002}, Ka-band ARM Zenith Radar (KAZR); lidars:
 Cloud-Aerosol Lidar Orthogonal Polarization (CALIOP) on CALIPSO \citep{winker2009}, Cloud-Aerosol Transport System (CATS) on ISS \citep{mcgill2015}, the Atmospheric Lidar (ATLID) on EarthCARE \citep{illingworth2015}; and spaceborne passive instruments:
-ISCCP \citep{rossow1991}, MODIS \citep{parkinson2003}, MISR \citep{diner1998}. The more recent addition of ground-based radar
+ISCCP \citep{rossow1991}, MODIS \citep{parkinson2003} and MISR \citep{diner1998}. The more recent addition of ground-based radar
 \citep{zhang2018} and lidar \citep{chiriaco2018,bastin2018}
 opens up new possibilities to use the large amount of remote sensing data
 obtained from ground-based active remote sensing instruments. In practice,
@@ -137,7 +136,9 @@ allowing for one-to-one comparison of model and observations.
 A particular focus of our work was on applying the same processing steps on the
 observed and simulated backscatter in order to
 avoid biases. The ALCF is made available under an open source license (MIT)
-at \url{https://alcf-lidar.github.io}.
+at \url{https://alcf-lidar.github.io}, and as a permanent archive
+of code and technical documentation on Zenodo at
+\url{https://doi.org/10.5281/zenodo.3779518}.
 
 A relatively small amount of other open source code is available for
 ALC data processing. A lidar simulator has been developed as part of the Goddard
@@ -154,10 +155,10 @@ Here, we provide an overview (Sect. \ref{sec:alcf}) and describe
 the supported ALCs, reanalyses and models (Sect. \ref{sec:supported-alcs-reanalyses-and-models}).
 We present a set of case studies at three sites in New Zealand (NZ)
 (Sect. \ref{sec:case-studies}) to demonstrate the value of this new tool.
-Furhermore, we describe the lidar simulator (Sect. \ref{sec:lidar-simulator}), observed and simulated lidar data processing steps (Sect. \ref{sec:lidar-data-processing}) and the results of the case studies
+Furthermore, we describe the lidar simulator (Sect. \ref{sec:lidar-simulator}), observed and simulated lidar data processing steps (Sect. \ref{sec:lidar-data-processing}) and the results of the case studies
 (Sect. \ref{sec:results}).
 
-\section{ALCF}
+\section{Overview of operation of the Automatic Lidar and Ceilometer Framework (ALCF 1.0)}
 \label{sec:alcf}
 
 The ALCF performs the necessary
@@ -175,35 +176,64 @@ supports multiple common ALCs (Sect. \ref{sec:alcs}), reanalyses and models
 (Sect. \ref{sec:reanalyses-and-models}).
 The schematic in Fig. \ref{fig:scheme} illustrates this process
 as well as the ALCF commands which perform the individual steps.
-The observational ALC data are first processed by converting from the vendor format
-to NetCDF. In the subsequent step (\textbf{lidar}), the data are resampled
+The following commands are implemented: \textbf{model}, \textbf{simulate},
+\textbf{lidar}, \textbf{stats} and \textbf{plot}. The commands are normally
+executed in a sequence, which is also implemented by a meta-command \textbf{auto},
+which is equivalent to executing a sequence of commands. The commands are
+described in detail in the technical documentation available online at
+\url{https://alcf-lidar.github.io}, on Zenodo at \url{https://doi.org/10.5281/zenodo.3779518}
+and in the Supplementary information. The physical basis is described here.
+
+The \textbf{model}
+command extracts 2-dimensional profiles of cloud liquid and ice content
+(and other thermodynamic fields) from the supported NWP model, GCM and
+reanalysis data (\textit{model data} in Fig. \ref{fig:scheme}) at a geographical point, along a ship track or a flight path.
+The resulting profiles are recorded as NetCDF files. Sect. \ref{sec:reanalyses-and-models}
+describes the supported reanalyses and models. The \textit{model data} can
+be either in one of the supported model output formats,
+or a new module for reading arbitrary model output can be written,
+providing that the required atmospheric fields are present in the model output.
+The required model fields are: per-level specific cloud liquid water content,
+specific cloud ice water content, cloud fraction, geopotential height, temperature,
+surface-level pressure and orography. No physical calculations are performed
+by this command. The atmospheric profiles are extracted by a nearest-neighbour
+selection.
+
+The \textbf{simulate} command runs the lidar simulator described in Sect. \ref{sec:lidar-simulator}
+on the extracted model data (the output of the \textbf{model} command) and produces simulated backscatter profiles. This command runs the COSP-derived lidar simulator, which performs
+radiative transfer calculations of the laser radiation through the atmosphere.
+The resulting simulated backscatter profiles are the output of this command.
+
+The \textbf{lidar} command applies various processing algorithms on either
+the simulated backscatter data (the output of the \textbf{simulate} command)
+or the observed ALC data (\textit{lidar data} in Fig. \ref{fig:scheme})
+(Sect. \ref{sec:lidar-data-processing}). The data are resampled
 to increase the signal-to-noise ratio (SNR), noise is subtracted, LR is calculated,
 a cloud mask is calculated by applying a cloud detection algorithm and CBH is determined
 from the cloud mask. Absolute calibration (Sect. \ref{sec:backscatter-calibration})
 can also be applied in this step by
 multiplying the observed backscatter by a calibration coefficient. This is
 important in order to obtain unbiased backscatter profiles comparable with the simulated
-backscatter profiles. The \textbf{stats} step calculates summary statistics
-such as CF, cloud occurrence by height, backscatter histograms and the averages
-of LR and backscatter. The \textbf{plot} step plots the backscatter profiles
-(Fig. \ref{fig:examples}, \ref{fig:examples2}, \ref{fig:examples3}), cloud occurrence
+backscatter profiles. Sect. \ref{sec:alcs} describes the supported instruments.
+The \textit{lidar data} can be in one of the supported instrument formats. If
+the native instrument format is not NetCDF, it has to be converted from the native
+format with the auxiliary command \textbf{convert} or one of the conversion
+programs: cl2nc (Vaisala CL31, CL51), mpl2nc or SigmaMPL (Sigma Space MiniMPL).
+
+The \textbf{stats} step calculates summary statistics from the output of the 
+\textbf{lidar} command. These include CF, cloud occurrence by height,
+backscatter histograms and the averages of LR and backscatter.
+
+The \textbf{plot} command plots the backscatter profiles produced by the \textbf{lidar}
+command (Fig. \ref{fig:examples}, \ref{fig:examples2}, \ref{fig:examples3}), and
+the statistics produced by the \textbf{stats} command: cloud occurrence
 (Fig. \ref{fig:case-studies}), backscatter histograms (Fig. \ref{fig:micro-backscatter})
 and backscatter noise standard deviation histograms (Fig. \ref{fig:backscatter-sd-hist}).
-An equivalent set of steps is performed on the reanalysis or model data.
-The \textbf{model} step extracts profiles from the model data co-located with
-the observations, located either at a fixed geographical point or along a ship
-track (the use along a flight track might also be possible). The \textbf{simulate} steps runs the lidar simulator on the model data
-and produces simulated backscatter profiles. These profiles are absolutely
-calibrated and do not contain any noise. The subsequent steps
-(\textbf{lidar}, \textbf{stats} and \textbf{plot})
-are applied on the simulated profiles in the same way as on the observed profiles.
-The resulting backscatter profiles and detected cloud are comparable between
-the observed and simulated backscatter.
 
-\section{Supported ALCs, reanalyses and models}
+\section{Supported input data: instruments, reanalyses and models}
 \label{sec:supported-alcs-reanalyses-and-models}
 
-\subsection{ALCs}
+\subsection{Instruments}
 \label{sec:alcs}
 
 The primary focus of the framework is to support common commercial ALCs.
@@ -331,54 +361,6 @@ The model was nudged to the ERA-Interim \citep{dee2011} atmospheric fields of ho
 \citep{rayner2003}. The model uses 85 vertical levels and a horizontal grid
 resolution of 1.875\unit{^\circ}$\times$1.25\unit{^\circ}.
 
-\section{Case studies}
-\label{sec:case-studies}
-
-The case studies analysed here were selected
-to include all instruments supported by the framework. We compare four different
-instruments (CHM 15k, CL31, CL51, MiniMPL) deployed at three locations in NZ
-(Lauder, Christchurch, Cass) with three reanalyses (MERRA-2, ERA5, JRA-55),
-one NWP model (AMPS) and one GCM (UM).
-These case studies aim to demonstrate capability rather than to comprehensively evaluate cloud simulation in the
-models and reanalyses. The work detailed in \citep{kuma2019} provides a detailed evaluation of the UM and MERRA-2 relative to shipborne ceilometer observations.
-Figure \ref{fig:map} shows the location of the sites and Table \ref{tab:case-studies}
-summarises the case studies, which are also described in greater detail below.
-The sites were chosen from available datasets to demonstrate the use of the
-framework with all supported instruments. Two of the sites also had co-located
-instruments: CL31 and MiniMPL in Lauder, and CHM 15k and MiniMPL in
-Christchurch. The MiniMPL in Lauder and Christchurch were two different units.
-
-Cass is a field station of the University of Canterbury
-located at an altitude of 577 m in the Southern Alps
-of the South Island of NZ. The station is located far from any 
-settlements and likely affected little by anthropogenic aerosol relative to the
-other sites. We have analysed
-13 days of observations with a CL51 at this station performed in September
-and October 2014.
-
-Lauder is a field station of NIWA located
-inland in the Central Otago region on the South Island of NZ.
-The station is situated in a rural area relatively far from large human
-settlements. We have analysed 13 days of co-located MiniMPL and CL31
-observations made in January 2018. The MiniMPL was operated in a fixed
-vertical scanning mode during this period (elevation angle 90\unit{^\circ}).
-
-Observations at the Christchurch site were performed at the
-University of Canterbury campus on the Ernest Rutherford building rooftop.
-Christchurch is located on the east coast of the South Island of NZ.
-Its climate is affected by the ocean, its proximity to the hilly area
-of the Banks Peninsula, the Canterbury Plains and föhn-type winds (Canterbury northwester)
-resulting from its position on the lee side of the Southern Alps. The city is affected by
-significant wintertime air pollution from domestic wood burning and transport.
-The orography of the city and the adjacent Canterbury Plains is very flat,
-making it prone to inversions. The Ernest Rutherford building is a 5 floor
-building situated in an urban area, surrounded by multiple buildings of similar
-height. We have analysed 24 days of co-located MiniMPL and CHM 15k observations
-performed in July and August 2019. The MiniMPL was operated in a fixed vertical
-scanning mode (elevation angle 90\unit{^\circ}).
-The nudged run of the UM was only available up to year 2018. Therefore,
-it was not analysed for this site.
-
 \section{Lidar simulator}
 \label{sec:lidar-simulator}
 
@@ -406,7 +388,9 @@ Atmospheric model output typically contains 4-dimensional fields of mass mixing 
 of liquid and ice and CF. The lidar equation can be applied on these
 output fields to simulate the backscattered radiation received by the instrument.
 Table \ref{tab:physical-quantities} lists physical quantities used in the
-following sections.
+following sections. Here, we use radiative transfer notation similar to
+\cite{petty2006} and the notation of the original lidar simulator
+\citep{chiriaco2006}.
 
 \subsection{Rayleigh and Mie scattering}
 \label{sec:rayleigh-and-mie-scattering}
@@ -419,7 +403,9 @@ The Rayleigh volume backscattering coefficient $\beta_\text{mol}$ (\unit{m^{-1}s
 = \frac{p}{k_BT}C_\text{mol} ,
 \end{align}
 
-\noindent where for $\lambda$ = 532 nm, $C_\text{mol} = 6.2446\times 10^{-32}$.
+\noindent where for lidar wavelength $\lambda$ = 532 nm, $C_\text{mol} = 6.2446\times 10^{-32}$
+; $k_B$ is the Boltzmann constant $k_B \approx 1.38\times 10^{-23}$ \unit{JK^{-1}},
+$p$ is the atmospheric pressure and $T$ is the atmospheric temperature.
 We multiply this equation by $\exp(4.09(\log(532) - \log(\lambda)))$ (where the value of $\lambda$ is in nm)
 to get molecular backscatter for wavelengths other than 532 nm, which allows us to support multiple commercially available instruments.
 The strength of molecular backscattering is usually lower than
@@ -429,7 +415,7 @@ The lidar signal at visible or near IR wavelengths is scattered by
 atmospheric constituents of similar size in the Mie scattering regime \citep{mie1908}.
 In the most simple approximation,
 one can assume spherical dielectric particles. The scattering from these particles depends on the
-relative size of the wavelength and the particle size, expressed by the
+relative size of the wavelength and the (spherical) particle radius $r$, expressed by the
 dimensionless size parameter $x$:
 
 \begin{align}
@@ -554,7 +540,7 @@ Q_e \frac{3q\rho_\text{air}}{4\rho r_\text{eff}} ,
 \end{equation}
 
 assuming approximately constant extinction efficiency $Q_e \approx 2$ (which is approximately true for the interesting range of $r_\text{eff}$ and laser wavelengths), and using the
-relationship between the cloud liquid/ice mass mixing ratio $q$
+relationship between the cloud liquid (or ice) mass mixing ratio $q$
 and $\int_0^\infty r^2 n(r) \mathrm{d}r$:
 
 \begin{equation}
@@ -563,7 +549,7 @@ q\rho_\text{air} = \int_0^\infty \frac{4}{3}\pi r^3 \rho n(r)\mathrm{d}r =
 \frac{4}{3}\pi\rho r_\text{eff}\int_0^\infty r^2 n(r) \mathrm{d}r ,
 \end{equation}
 
-where $\rho$ and $\rho_\text{air}$ are the densities of liquid water/ice
+where $\rho$ and $\rho_\text{air}$ are the densities of liquid water (or ice)
 and air, respectively.
 
 Likewise, the volume backscatter coefficient
@@ -575,6 +561,8 @@ individual particles over the particle size distribution:
 \int_0^\infty Q_s \pi r^2 \frac{P_\pi(\pi)}{4\pi} n(r) \mathrm{d}r .
 \end{equation}
 
+where $Q_s$ is scattering efficiency and $P_\pi(\pi)$ is scattering phase function
+at 180$^\circ$.
 Since the normalisation of $n(r)$ is not known until the online phase of calculation,
 the backscatter-to-extinction ratio from particles $k_p = \beta/\alpha_e$ can be
 calculated offline instead (the requirement for normalisation of $n(r)$ is
@@ -588,9 +576,8 @@ We pre-calculate this integral numerically for a permissible interval of
 $r_\text{eff}$ (5--50 \unit{\mu m}) at 500 evenly spaced wavelengths,
 and store the result as a lookup table for the online phase.
 The integral in the numerator is numerically hard to calculate due
-to strong dependency of $P_\pi(\pi)$ on $r$. The MIEV code provides a "spike"
-identification to facilitate such integration, which we use to filter out
-values likely to cause overestimation of the integral. Figure \ref{fig:size-dist}b
+to strong dependency of $P_\pi(\pi)$ on $r$.
+Figure \ref{fig:size-dist}b
 shows LR as a function of $r_\text{eff}$, calculated
 for log-normal and Gamma particle size distributions with $\sigma_\text{eff}
 = 0.25 r_\text{eff}$ and $\sigma_\text{eff} = 0.5 r_\text{eff}$.
@@ -839,7 +826,55 @@ remove the effect of water vapour absorption from the observed lidar backscatter
 to achieve an improved one-to-one comparison between the observations,
 reanalyses and models.
 
-\section{Results}
+\section{Description of case studies}
+\label{sec:case-studies}
+
+The case studies analysed here were selected
+to include all instruments supported by the framework. We compare four different
+instruments (CHM 15k, CL31, CL51, MiniMPL) deployed at three locations in NZ
+(Lauder, Christchurch, Cass) with three reanalyses (MERRA-2, ERA5, JRA-55),
+one NWP model (AMPS) and one GCM (UM).
+These case studies aim to demonstrate capability rather than to comprehensively evaluate cloud simulation in the
+models and reanalyses. The work detailed in \cite{kuma2019} provides a detailed evaluation of the UM and MERRA-2 relative to shipborne ceilometer observations.
+Figure \ref{fig:map} shows the location of the sites and Table \ref{tab:case-studies}
+summarises the case studies, which are also described in greater detail below.
+The sites were chosen from available datasets to demonstrate the use of the
+framework with all supported instruments. Two of the sites also had co-located
+instruments: CL31 and MiniMPL in Lauder, and CHM 15k and MiniMPL in
+Christchurch. The MiniMPL in Lauder and Christchurch were two different units.
+
+Cass is a field station of the University of Canterbury
+located at an altitude of 577 m in the Southern Alps
+of the South Island of NZ. The station is located far from any 
+settlements and likely affected little by anthropogenic aerosol relative to the
+other sites. We have analysed
+13 days of observations with a CL51 at this station performed in September
+and October 2014.
+
+Lauder is a field station of NIWA located
+inland in the Central Otago region on the South Island of NZ.
+The station is situated in a rural area relatively far from large human
+settlements. We have analysed 13 days of co-located MiniMPL and CL31
+observations made in January 2018. The MiniMPL was operated in a fixed
+vertical scanning mode during this period (elevation angle 90\unit{^\circ}).
+
+Observations at the Christchurch site were performed at the
+University of Canterbury campus on the Ernest Rutherford building rooftop.
+Christchurch is located on the east coast of the South Island of NZ.
+Its climate is affected by the ocean, its proximity to the hilly area
+of the Banks Peninsula, the Canterbury Plains and föhn-type winds (Canterbury northwester)
+resulting from its position on the lee side of the Southern Alps. The city is affected by
+significant wintertime air pollution from domestic wood burning and transport.
+The orography of the city and the adjacent Canterbury Plains is very flat,
+making it prone to inversions. The Ernest Rutherford building is a 5 floor
+building situated in an urban area, surrounded by multiple buildings of similar
+height. We have analysed 24 days of co-located MiniMPL and CHM 15k observations
+performed in July and August 2019. The MiniMPL was operated in a fixed vertical
+scanning mode (elevation angle 90\unit{^\circ}).
+The nudged run of the UM was only available up to year 2018. Therefore,
+it was not analysed for this site.
+
+\section{Case study results}
 \label{sec:results}
 
 To demonstrate the ways that the ALCF can be used we compared a total of 50 days of ALC observations with simulated lidar
@@ -863,7 +898,7 @@ that the virtual altitude of the station was 1115 m (AMPS), 1051 m (ERA5),
 401 m (JRA-55), 914 m (MERRA-2) and  428 m (UM). The virtual position, which is the centre
 of the nearest model grid cell to the site location, ranged from relatively
 close in the Southern Alps (AMPS, ERA5, MERRA-2, UM) to relatively far on the West
-Coast of NZ (JRA-55) dependent on the horizontal resolution of the grid. The time period examined was characterised by diverse cloud
+Coast of NZ (JRA-55) depending on the horizontal resolution of the grid. The time period examined was characterised by diverse cloud
 occurrence with periods of low cloud and precipitation, mid-level cloud,
 fog, high cloud and clear skies. Precipitation, currently not simulated by the
 lidar simulator, was present in about 18\% of the observed backscatter profiles,
@@ -879,8 +914,8 @@ might also have contributed to this apparent difference between observed and sim
 cloud. Above 3 km ASL, the reanalyses and models tended to overestimate cloud,
 with only ERA5 and JRA-55 simulating close to the observed cloud occurrence.
 The observed total CF was 62\%. AMPS overestimated this value by 4 percentage points (pp),
-ERA5 and the UM reproduced almost the exact value (within 1 pp), while the other reanalyses (JRA-55 and MERRA-2)
-underestimated CF by about 14 pp.
+ERA5 and the UM reproduced almost the exact value (within 2 pp), while the other reanalyses (JRA-55 and MERRA-2)
+underestimated CF by about 15 pp.
 
 We also analysed 13 days of CL31 and MiniMPL observations at the Lauder station
 in summer. During the time period relatively diverse cloud was observed,
@@ -896,31 +931,27 @@ geographical region (AMPS, ERA5), a nearby location in a more hilly region
 (MERRA-2) and a relatively distant location in Central Otago (UM).
 Figure \ref{fig:case-studies}b shows that the CL31 observed relatively even cloud occurrence between the ground
 and 3 km ASL at 8\%, falling off to about 3\% between 4 and 8 km ASL
-(the maximum lidar range of CL31 is 7.7 km). The MiniMPL observed a much stronger
-peak of cloud occurrence near the ground at 20\%, very likely due to
-overestimation of backscatter (a technical issue), but otherwise the differences between the two dataset were small. Cloud occurrence between
-500 m and 3 km ASL was much lower in the MiniMPL observations than in CL31.
-We expect that this can be attributed to the underestimation of backscatter
-by the MiniMPL in the range due to deficient vendor calibration of dead time,
-afterpulse and overlap. The MiniMPL observed
+(the maximum lidar range of CL31 is 7.7 km). The MiniMPL observed much weaker
+backscatter than CL31 below 3 km ASL, which was identified as an overlap
+calibration issue in the MiniMPL.
+The MiniMPL observed
 substantial amounts of cloud above 8 km, not present in the CL31 observations
 due to its range limitation. Overall, the observed cloud occurrence had two
-peaks at ground to 4 km ASL and at about 9 km ASL. The simulated cloud
+peaks at ground to 3 km ASL and at about 9 km ASL. The simulated cloud
 occurrence was generally underestimated between the ground and 5 km ASL,
 with the exception of the UM which reproduced the lower half of the peak
 accurately, and ERA5 which reproduced the upper half of the peak accurately.
 Above 5 km ASL, the cloud occurrence was well reproduced in ERA5 and JRA-55,
-and strongly overestimated in AMPS and MERRA-2. The reanalyses and models also
+and strongly overestimated in AMPS, MERRA-2 and the UM. The reanalyses and models also
 tended to have two peaks at about 2 km ASL and 11 km ASL, but these were quite
 different from the observed peaks, with the lower peak underestimated by about
 5 pp in the reanalyses and models and the higher peak overestimated by about 5--10 pp.
-The total CF was observed as 44\% and 67\% by CL31 and MiniMPL, respectively.
+The total CF was observed as 44\% and 58\% by CL31 and MiniMPL, respectively.
 CF observed by the MiniMPL was likely higher due to its higher maximum lidar range
-(CL31 missed a substantial amounts of high cloud due to this limitation),
-but also due to the overestimation of backscatter signal at near range.
+(CL31 missed a substantial amounts of high cloud due to this limitation).
 The total CF was strongly underestimated by the reanalyses and models
-by up to 34 pp (CL31) and 47 pp (MiniMPL), with the exception of the UM
-which simulated the correct CF within 9 pp.
+by up to 34 pp (CL31) and 38 pp (MiniMPL), with the exception of the UM
+which simulated the correct CF within 3 pp.
 
 The Christchurch observations were taken during a total of 24 days in mid-
 to late winter. The cloud situations were characterised by the frequent occurrence of low cloud
@@ -948,7 +979,7 @@ CHM 15k and MiniMPL, respectively, while the reanalyses and models strongly
 underestimated CF by up to 36 pp (JRA-55), with
 underestimates around 20 pp common.
 
-Figures \ref{fig:examples}, \ref{fig:examples2}, \ref{fig:examples3} show images of backscatter for three seperate days taken from
+Figures \ref{fig:examples}, \ref{fig:examples2}, \ref{fig:examples3} show images of backscatter for three separate days taken from
 the three case studies. The selected days represent some of the best-matching
 profiles and demonstrate how well the reanalyses and models can simulate cloud under
 favourable conditions. As can be seen in the figures, 
@@ -1016,10 +1047,10 @@ the vertically integrated backscatter, as a proxy for cloud albedo. Clouds which
 are not fully opaque result in LR which is greater than the expected theoretical
 LR based on the Mie theory (Fig. \ref{fig:size-dist}). The inverse of LR (extinction-to-backscatter ratio)
 is therefore approximately proportional to the albedo of the cloud.
-Figure \ref{fig:scatter} shows a scatter plot of the average cloud fraction
+Figure \ref{fig:scatter}a, b shows an absolute and relative (respectively) scatter plot of the average cloud fraction
 and the average of the inverse of LR calculated from cloudy profiles.
 As already shown in Fig. \ref{fig:case-studies}, the reanalyses and models generally underestimate
-CF. However, Fig.\ref{fig:scatter} shows that this is compensated by overestimated albedo (higher LR$^{-1}$
+CF. However, Fig. \ref{fig:scatter} shows that this is compensated by overestimated albedo (higher LR$^{-1}$
 indicates higher cloud albedo), which is higher in all reanalyses and models
 than the corresponding ALC observations. Further examination shows that the UM and ERA5 show the closest
 proximity to the corresponding observations in terms of the average CF and LR$^{-1}$. The Lauder CL31 and MiniMPL
@@ -1029,7 +1060,7 @@ fraction of high cloud to be omitted. The results shown in Fig. \ref{fig:scatter
 suggest that the "too few too bright" model cloud problem identified in
 previous studies \citep{nam2012,klein2013,wall2017,kuma2019} is also observed in the current case studies, whereby the
 simulated CF is too low, but its exaggerated albedo means that
-the top of atmosphere (TOA) shortwave radiative balance is approximately
+the top of atmosphere (TOA) shortwave radiative balance can be approximately
 correct.
 
 Figure \ref{fig:micro-backscatter} shows backscatter histograms as a function of
@@ -1099,17 +1130,17 @@ Figure \ref{fig:backscatter-sd-hist} shows the distribution of standard
 deviation of backscatter noise determined at the highest observable range of each instrument
 and range-scaled
 to 7 km. It can be seen that the CL31 is affected by the greatest amount of noise,
-peaking at about 4\unit{\times 10^{-6}m^{-1}sr^{-1}}. This is above the
+peaking at about 2\unit{\times 10^{-6}m^{-1}sr^{-1}}. This is at the
 threshold of cloud detection of 2\unit{\times 10^{-6}m^{-1}sr^{-1}}. Therefore,
 thin cloud may be obscured by noise at higher ranges with this instrument. The MiniMPL,
 operating in the visible spectral range, shows a bimodal distribution of
 backscatter noise depending on sunlight. During daytime, it peaks at
-about 0.5\unit{\times 10^{-6}m^{-1}sr^{-1}}, which is the second highest
+about 0.7\unit{\times 10^{-6}m^{-1}sr^{-1}}, which is the second highest
 of the analysed instruments. During nighttime, it peaks at about
 0.02\unit{\times 10^{-6}m^{-1}sr^{-1}}, which is the lowest of the analysed
 instruments. The CHM 15k histogram peaks between the nighttime and daytime MiniMPL at 0.2\unit{\times 10^{-6}m^{-1}sr^{-1}}.
 CL51 observed the second lowest amount
-of noise after the nighttime MiniMPL at about 0.05\unit{\times 10^{-6}m^{-1}sr^{-1}}.
+of noise after the nighttime MiniMPL at about 0.04\unit{\times 10^{-6}m^{-1}sr^{-1}}.
 The difference between nighttime and daytime backscatter noise in the MiniMPL
 has been previously analysed by \cite{silber2018} (Fig. S3) and these results confirm their findings.
 
@@ -1128,11 +1159,11 @@ on ALC observations at three different sites in New Zealand,
 and applied the lidar simulator to three reanalyses and two models. We found that while
 some reanalyses and models such as the UM and ERA5 show relatively good correspondence with observed
 cloud, others performed relatively poorly. All reanalyses and models
-underestimated the total CF by up to 44 pp, with underestimation by 20 pp
+underestimated the total CF by up to 38 pp, with underestimation by 20 pp
 common. In some cases, the observed and simulated backscatter profiles matched
 relatively closely in terms of time and altitude, and a better match was observed
 with reanalyses with high output temporal resolution such as the UM and ERA5,
-while reanalyses with low temporal resolution performed relatively poorly.
+while reanalyses with low temporal resolution didn't allow for reliable direct (non-statistical) comparison of cloud.
 However, it is clear that more factors than the horizontal and vertical
 resolution influence the cloud simulation
 accuracy; especially the cloud, boundary layer and convection schemes employed
@@ -1186,7 +1217,7 @@ The presented framework streamlines lidar data processing and tasks related
 to lidar simulation and model comparison. The framework was
 recently used by \cite{kuma2019} for Southern Ocean model cloud evaluation
 in the GA7.1 model and MERRA-2 reanalysis. Considering the existing extensive
-ALC networks worlwide there is a wealth of global data. We therefore think that ALCs should have a greater role
+ALC networks worldwide there is a wealth of global data. We therefore think that ALCs should have a greater role
 in model evaluation. Satellite observations have long been established in this
 respect due to their availability, spatial and temporal coverage and
 their well-developed derived products and tools. ALCs, with their diverse
@@ -1203,7 +1234,11 @@ reanalysis evaluation.
 \section*{Code and data availability}
 
 The \textit{ALCF} is open source
-and available at \url{https://alcf-lidar.github.io}. A tool for converting
+and available at \url{https://alcf-lidar.github.io} and as a permanent archive
+of code and technical documentation on Zenodo at
+\url{https://doi.org/10.5281/zenodo.3779518}. The technical documentation
+is also in the Supplementary information.
+A tool for converting
 Vaisala CL31 and CL51 data files to NetCDF \textit{cl2nc} is open source and available at
 \url{https://github.com/peterkuma/cl2nc}. A tool for converting MiniMPL raw binary data
 files to NetCDF \textit{mpl2nc} is open source and available at 
@@ -1230,13 +1265,336 @@ We would like to acknowledge the New Zealand Deep South National Science Challen
 project which provided funding for our work; the New Zealand eScience
 Infrastructure (NeSI) which provided supercomputing resources to run the Unified
 Model; Vidya Varma, Jonny Williams, Guang Zeng and Wolfgang Hayek for their
-contribution to setting up a nudged run of the Unified Model; the COSP project code which we
-used as the basis for the lidar simulator; the AMPS, JRA-55, ERA5, MERRA-2
+contribution to setting up a nudged run of the Unified Model;
+Graeme Plank and Graeme MacDonald who participated on the installation of
+the Vaisala CL51 at the Cass field station; the COSP project for the code which
+we used as the basis for the lidar simulator; the AMPS, JRA-55, ERA5, MERRA-2
 models and reanalyses which provided public access to their data; the open source libraries numpy \citep{derwalt2011}, scipy \citep{scipy2019}, matplotlib \citep{hunter2007}, netCDF4 \citep{rew1990} and Astropy \citep{astropy2018} and the
 Python programming language \citep{rossum1995} which we used in the
 implementation of our code; the R programming language \citep{r2017}, the Natural Earth
-dataset and the Shuttle Radar Topography Mission (SRTM) digital elevation model \citep{werner2001}
+dataset (\url{https://www.naturalearthdata.com}) and the Shuttle Radar Topography Mission (SRTM) Version 3 Global 1 arc second digital elevation model \citep{werner2001,srtm}
 which we used to produce a map of sites; GitHub which provided free hosting
 of our code; and the Linux-based \citep{torvalds1997} operating systems
 Devuan GNU+Linux and Debian GNU/Linux on which we produced this analysis.
 
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/scheme.pdf}
+\caption{\textbf{(a)} Scheme showing the operation of the ALCF and \textbf{(b)} the processing commands.}
+\label{fig:scheme}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{chapter3/fig/map.png}
+\caption{Map showing the location of sites. Data at three sites in New Zealand
+were analysed: Cass, Lauder and Christchurch.}
+\label{fig:map}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/size_dist.pdf}
+\caption{
+\textbf{(a)} Theoretical distributions of cloud droplet radius based on
+the log-normal and Gamma distributions parametrised
+by multiple choices of the effective radius $r_\text{eff}$ and effective standard deviation
+$\sigma_\text{eff}$. \textbf{(b)} Lidar ratio (LR) as a function of effective
+radius calculated for different theoretical cloud droplet size
+distributions, laser wavelengths and effective standard deviation ratios.
+}
+\label{fig:size-dist}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/case_studies.pdf}
+\caption{
+Cloud occurrence histogram as a function of height above the mean sea level
+observed at three sites and simulated by the lidar simulator based on atmospheric
+fields for five reanalyses and models. Shown is also the total cloud fraction (CF).
+The histogram is calculated from the cloud mask as determined by the cloud
+detection algorithm.
+}
+\label{fig:case-studies}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/examples.pdf}
+\caption{
+Examples of observed (OBS) and simulated backscatter profiles during 24 hours
+taken from the three case studies presented here. The observed backscatter
+was normalised to absolute units and denoised.
+The vertical levels were interpolated based on the
+nearest neighbour assumption. The cloud detection threshold of 2\unit{\times 10^{-6} m^{-1}sr^{-1}}
+corresponds the low end of the colour scale, i.e. all visible backscatter
+in the plots was determined as cloud, unless the difference from the threshold
+was smaller than three noise standard deviations. The first subcolumn of
+10 columns generated by the Subgrid Cloud Overlap Profile Sampler (SCOPS)
+was selected to make the plots. The red line signifies the station altitude.
+}
+\label{fig:examples}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/examples2.pdf}
+\caption{
+The same as Fig. \ref{fig:examples} but for the Lauder site.
+}
+\label{fig:examples2}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/examples3.pdf}
+\caption{
+The same as Fig. \ref{fig:examples} but for the Christchurch site.
+}
+\label{fig:examples3}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/scatter.pdf}
+\caption{
+\textbf{(a)} Scatter plot showing the average cloud fraction calculated from all profiles
+and the average inverse lidar ratio (LR$^{-1}$) calculated from cloudy profiles
+for the case studies. The site and instrument are coded by the shape of the
+marker and the observation (legend in the top left corner), reanalysis or model
+is coded by the colour of the marker (legend in the top right corner).
+\textbf{(b)} The same as (a), but showing relative differences between
+the reanalyses and models relative to the corresponding observations.
+}
+\label{fig:scatter}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/backscatter_hist_micro.png}
+\caption{
+Backscatter histograms as a function of height observed and simulated
+at three different sites of the case studies calculated from all profiles.
+The plots show the distribution
+of backscatter for values which are on the scale of noise, molecular and
+aerosol backscatter ([-0.5, 0.5] for CHM 15k, [-1, 1] for CL31 and CL51 and 
+[-2, 2] \unit{\times 10^{-6}m^{-1}sr^{-1}} for MiniMPL).
+The simulated backscatter is based on the ERA5
+atmospheric fields. Visible in the plots is backscatter caused by molecular
+backscatter (the main "streak"), noise when signal is fully attenuated by cloud
+(the zero-centred "streak"), and the range-dependent noise
+(the zero-centred "cone"). The molecular backscatter is marked by a red dashed
+line on the observed backscatter plots, the shape of which is taken from
+the simulated molecular backscatter for the corresponding instrument and site.
+}
+\label{fig:micro-backscatter}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter3/fig/backscatter_hist_micro_clear.png}
+\caption{
+The same as Fig. \ref{fig:micro-backscatter} but calculated from clear
+sky profiles only.
+}
+\label{fig:micro-backscatter-clear}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{chapter3/fig/backscatter_sd_hist.pdf}
+\caption{
+Backscatter noise standard deviation histogram calculated for each instrument
+at sites of the case studies from clear sky profiles over the whole time period.
+The noise distribution is calculated at the furthest range. Shown is the
+range-scaled noise distribution at a range of 7 km. The MiniMPL nighttime and daytime
+distributions are calculated from nighttime and daytime profiles only, determined
+the by position of the Sun below and above the horizon, respectively, at
+the geographical position of the site and time when the profile was observed.
+}
+\label{fig:backscatter-sd-hist}
+\end{figure}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Table of ALCs and their technical parameters. Power is calculated as Pulse $\times$ Pulse Repetition Frequency (PRF).}
+\label{tab:alcs}
+\centering
+\scalebox{0.75}{
+\begin{tabular}{lllllllllll}
+\hline
+Instrument & $\lambda$ (nm) & Laser & Rate\footnotemark[1] (s) & Res.\footnotemark[2] (m) & Depol.\footnotemark[3] & Pulse\footnotemark[4] ($\mu$J) & Range\footnotemark[5] (km) & PRF (kHz) & Overlap\footnotemark[6] (m) & Power (mW)\\
+\hline
+CHM 15k & 1064 & Nd:YAG & 2--600 & 5 & no & 7--9 & 15.4 & 5--7 & 1000\footnotemark[7] & 48\\
+CL31 & 910 & InGaAs & 2--120 & 10 & no & 1.2 & 7.7 & 10 & 70\footnotemark[7] & 12\\
+CL51 & 910 & InGaAs & 6--120 & 10 & no & 3 & 15.4 & 6.5 & 230\footnotemark[8] & 20\\
+MiniMPL & 532 & Nd:YAG & 1--900 & 5--75 & yes & 3--4 & 30.0 & 2.5 & 2000\footnotemark[8] & 9\\
+\hline
+\end{tabular}
+}
+
+\footnotesize
+$^1$Sampling rate.
+$^2$Vertical (range) resolution.
+$^3$Depolarisation.
+$^4$Pulse energy.
+$^5$Maximum range.
+$^6$Range of full overlap.
+$^7$\cite{hopkin2019}.
+$^8$\cite{madonna2018}.
+\normalsize
+
+\end{table}
+
+\clearpage
+
+\begin{table}
+\caption{
+Reanalyses and models used in the case studies and some of their main
+properties. The temporal and horizontal grid resolution and vertical levels listed is the
+resolution of the model output available. The horizontal grid resolution is determined at 45\unit{^\circ}S.
+The internal resolution of the model may be different
+(see Sect. \ref{sec:reanalyses-and-models} for details). The reanalyses and the
+UM use regular longitude-latitude grids, while the AMPS horizontal grid is
+regular in the South Pole stereographic projection.
+}
+\label{tab:models}
+\centering
+\begin{tabular}{llllllll}
+\hline
+Model/Grid & Type & Time resolution & Horizontal grid resolution & Vertical levels\\
+\hline
+AMPS/D01 & NWP & 3 h & 0.27\unit{^\circ}$\times$ 0.19\unit{^\circ} (21$\times$21 km) & 60\\
+ERA5 & Reanalysis & 1 h & 0.25\unit{^\circ}$\times$0.25\unit{^\circ} (20$\times$28 km) & 37\\
+JRA-55 & Reanalysis & 6 h & 1.25\unit{^\circ}$\times$1.25\unit{^\circ} (98$\times$139 km) & 37 \\
+MERRA-2 & Reanalysis & 3 h & 0.625\unit{^\circ}$\times$0.50\unit{^\circ} (49$\times$56 km) & 72\\
+UM (GA7.1)/N96 & GCM & 20 min. & 1.875\unit{^\circ}$\times$1.25\unit{^\circ} (147$\times$139 km) & 85\\
+\hline
+\end{tabular}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Location of sites and instruments. The time periods are inclusive.}
+\label{tab:case-studies}
+\centering
+\scalebox{0.75}{
+\begin{tabular}{llllllllll}
+\hline
+Site & Coordinates & Surface altitude (m) & Instruments & Time period & Missing period & Days\\
+\hline
+Cass & 43.0346$^\circ$S 171.7594$^\circ$E & 577 & CL51 & 19 Sep--1 Oct 2014 & & 13\\
+Lauder & 45.0379$^\circ$S 169.6831$^\circ$E & 370 & MiniMPL, CL31 & 12--24 Jan 2018 & & 13\\
+Christchurch & 43.5225$^\circ$S 172.5841$^\circ$E & 45 & MiniMPL, CHM 15k & 17 July--19 August 2019 & 22--31 July & 24\\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Table of physical quantities.}
+\label{tab:physical-quantities}
+\centering
+\scalebox{0.75}{
+\begin{tabular}{llll}
+\hline
+Symbol & Name & Units & Expression\\
+\hline
+$\alpha_s$ ($\alpha_e$) & Volume scattering (extinction) coefficient & m$^{-1}$ & \\
+$\Omega$ & Solid angle & sr & \\
+$P_\pi(\theta)$ & Scattering phase function at angle $\theta$ & 1 & $\int_{4\pi} P_\pi (\theta) \mathrm{d}\Omega = 4\pi$\\
+$\beta$ & Volume backscattering coefficient & m$^{-1}$sr$^{-1}$ & $\beta = \alpha_s P_\pi(\pi)/(4\pi)$\\
+$N$ & Particle number concentration & m$^{-3}$ & \\
+$n(r)$ & Number distribution of particle size & m$^{-4}$ & $N = \int_0^\infty n(r) \mathrm{d}r$ \\
+$Q_s$ ($Q_e$) & Scattering (extinction) efficiency of spherical particles & 1 & $\alpha_s = Q_s \pi r^2 N$, $\alpha_e = Q_e \pi r^2 N$ \\
+$Q_b$ & Backscattering efficiency of spherical particles & sr$^{-1}$ & $\beta = Q_b \pi r^2 N$ \\
+$S$ & Lidar ratio (extinction-to-backscatter ratio) & sr & $S = \alpha_e/\beta$\\
+$k$ & Backscatter-to-extinction ratio & sr$^{-1}$ & $k = 1/S$\\
+$r_\text{eff}$ & Effective radius & m & $r_\text{eff} = \int_0^\infty r^3 n(r)\mathrm{d}r/\int_0^\infty r^2 n(r)\mathrm{d}r$\\
+$\sigma_\text{eff}$ & Effective standard deviation & m & $\sigma_\text{eff} = \left(\int_0^\infty (r - r_\text{eff})^2 r^2 n(r) \mathrm{d}r\right)/\left(\int_0^\infty r^2 n(r) \mathrm{d}r\right)$\\
+$k_B$ & Boltzmann constant & \unit{JK^{-1}} & $k_B \approx 1.38\times 10^{-23}$ \unit{JK^{-1}}\\
+$p$ & Atmospheric pressure & Pa & \\
+$T$ & Atmospheric temperature & K & \\
+$\rho$ & Liquid (or ice) density & \unit{kg.m^{-3}} & \\
+$\rho_\text{air}$ & Air density & \unit{kg.m^{-3}} & \\
+$q$ & Cloud liquid (or ice) mass mixing ratio & 1 & \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\clearpage
+
+\begin{table}
+\caption{Table of sensitivity tests of theoretical distribution assumption,
+effective radius $r_\text{eff}$ and effective standard deviation
+$\sigma_\text{eff}$ of the cloud droplet/ice crystal size distribution.
+$\mu$ and $\sigma$ are the mean and standard deviation
+of a normal distribution corresponding to the log-normal distribution,
+calculated numerically from $r_\text{eff}$ and $\sigma_\text{eff}$.
+$\mu_*$ and $\sigma_*$ are the actual mean and standard deviation of the
+distribution (calculated numerically).}
+\label{tab:size-dist}
+\centering
+\begin{tabular}{lllllll}
+\hline
+Distribution & $r_\text{eff}$ ($\mu$m) & $\sigma_\text{eff}$ ($\mu$m) & $\mu$ & $\sigma$ & $\mu_*$ ($\mu$m) & $\sigma_*$ ($\mu$m) \\
+\hline
+log-normal & 20 & 10 & 2.44 & 0.47 & 12.76 & 6.26 \\
+log-normal & 20 & 5 & 2.84 & 0.25 & 17.72 & 4.43 \\
+log-normal & 10 & 5 & 1.74 & 0.47 & 6.40 & 3.20 \\
+Gamma & 20 & 10 & & & 9.98 & 7.00 \\
+Gamma & 20 & 5 & & & 17.50 & 4.68 \\
+Gamma & 10 & 5 & & & 5.00 & 3.54 \\
+\hline
+\end{tabular}
+\end{table}
+
+\clearpage
+
+\begin{table}
+\caption{
+Theoretical molecular backscatter calculated at pressure 1000 hPa and
+temperature 20 \unit{^\circ C} and the calibration coefficient,
+relative to the instrument native units, determined
+for the instrument based on the molecular backscatter and
+stratocumulus lidar ratio calibration methods.
+}
+\label{tab:mol-backscatter}
+\centering
+\begin{tabular}{llllllll}
+\hline
+Instrument & Wavelength (nm) & Molecular backscatter (\unit{\times 10^{-6}m^{-1}sr^{-1}}) & Calibration coefficient\\
+\hline
+CHM 15k & 1064 & 0.0906 & 0.34\\
+CL31 & 910 & 0.172 & 1.45\unit{\times 10^{-3}}\\
+CL51 & 910 & 0.172 & 1.2\unit{\times 10^{-3}}\\
+MiniMPL & 532 & 1.54 & 3.75\unit{\times 10^{-6}}\\
+\hline
+\end{tabular}
+\end{table}
