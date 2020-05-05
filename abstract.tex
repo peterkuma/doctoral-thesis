@@ -22,7 +22,8 @@ understand the source of the problem. Due to the nature of lidar
 observations (the laser signal is quickly attenuated by clouds) they cannot be
 used for 1:1 comparison with a model without using a lidar simulator, which
 performs atmospheric radiative transfer calculations of the laser signal. We
-modify an existing satellite lidar simulator present in the CFMIP
+modify an existing satellite lidar simulator present in the
+Cloud Feedback Model Intercomparison Project (CFMIP)
 Observational Simulator Package (COSP) for use with the ground-based lidars
 used in our observations by modifying the geometry of the radiative transfer
 calculations, Mie and Rayleigh scattering of the laser signal. We document
@@ -34,18 +35,22 @@ noise removal and consistent cloud detection. We apply the lidar simulator
 on NZESM model fields. Significant SW radiation errors in the SO of up to 21
 Wm$^{-2}$ are shown to be present in the model. Using the lidar observations,
 we find that the model underestimates overall cloud cover by about 9\% and
-strongly underestimates boundary layer low-level stratocumulus cloud below
-1 km and fog. The observed cloud was strongly linked to the boundary layer
-stability and sea surface surface, while this relationship is weaker in the
+strongly underestimates boundary layer low-level stratocumulus (Sc) cloud below
+1 km and fog. By using radiosonde observations, we find that the observed cloud was strongly linked to the boundary layer stability and sea surface temperature, while this relationship is weaker in the
 model. We identify that these errors are not due to misrepresentation of
 large-scale circulation, which is prescribed in our model based on global
 satellite observations by nudging. We conclude that the problem is likely in
 the subgrid-scale parametrisation schemes of the boundary layer, convection
 and large-scale could. In order to address the deficiencies identified we
 perform experimental simulations of NZESM with modifications of the
-parametrisation schemes. By comparing high-resolution output produced by
-the lidar simulator with the lidar observations and model atmospheric
-profiles with radiosonde observations, we study boundary layer processes
-which lead to underestimation of stratocumulus cloud and fog in the model,
-with the aim of fixing the schemes based on physically-motivated reasons
-without negatively affecting global cloud simulation in the model.
+parametrisation schemes. We find that a three-layer cloud profiles were common
+in the Ross Sea region, consisting of cumulus (Cu) below Sc, and
+corresponding to local thermodynamic levels: lifting condensation level,
+dry and moist neutral buoyancy levels of parcels lifted from the surface.
+We find that not enough moisture is transported to the top of the boundary
+layer to form Sc clouds. By increasing surface moisture flux and convective mass flux in the model we improve the Sc cloud simulation, but we show that a lack of vertical moisture transport across LCL from the surface layer to the zone of convective mass flux is a likely limiting factor. We show that the modifications had a positive impact on the Southern Ocean and global radiation balance of up to 5 Wm${-2}$ in zonal average over this limited time period. We suggest that
+further research should focus on the weak vertical coupling between the boundary
+layer turbulence and boundary layer convection parametrisation in the model, and that
+lidar simulator framework is used as a cloud evaluation tool in further studies
+due to its benefits over more statistical approaches, which tend to hide
+compensating biases. 
