@@ -62,8 +62,6 @@ accuracy of the models, especially for modelling the Southern Hemisphere
 climate. A model based on the Hadley Centre Global Environmental Model version 3
 (HadGEM3) is currently used in New Zealand for assessing future climate
 \citep{williams2016}.
-%and the proximity of New Zealand to the SO provides a unique opportunity to
-%conduct observations there.
 In this paper we evaluate the atmospheric component of HadGEM3, GA7.1
 \citep{walters2017} and the reanalysis Modern-Era Retrospective analysis for
 Research and Applications, version 2 (MERRA-2) using observations collected in
@@ -100,7 +98,8 @@ is not new, and has recently been used by \cite{sato2018} to evaluate the
 impact of SO radiosonde observations on the accuracy of weather forecasting
 models. \cite{klekociuk2018} contrasted SO cloud observations with the ECMWF
 Interim reanalysis (ERA-Interim) and the Antarctic Mesoscale Prediction
-System--Weather Research and Forecasting Model (AMPS-WRF), and found that these
+System--Weather Research and Forecasting Model (AMPS-WRF) \citep{powers2012},
+and found that these
 models underestimate the coverage of the predominantly low cloud.
 \cite{protat2017} compared ship-based 95 GHz cloud radar measurements at
 43--48$^\circ$S in March 2015 with the Australian Community Climate and
@@ -111,7 +110,7 @@ model. The clouds were also more spread out vertically (especially due to
 km) and more likely to have intermediate cloud fraction rather than very low or
 very high cloud fraction. Previous studies have documented that supercooled
 liquid is often present in the SO cloud in the austral summer months
-\citep{morrison2011,huang2012,chubb2013,huang2016,bodas-salcedo2016,jolly2018}
+\citep{morrison2011,huang2012,chubb2013,huang2016,bodas-salcedo2016,jolly2018,listowski2019}
 and is linked to SO SW radiation biases in GCMs, which underestimate the amount
 of supercooled liquid in clouds in favour of ice. Warm clouds generally reflect
 more SW radiation than cold clouds containing the same amount of water
@@ -189,10 +188,8 @@ collected. Geographically, the voyages mostly cover the Ross Sea sector of the
 SO, with only AA15 covering the Indian Ocean sector (Figure \ref{fig:map}). This
 sampling emphasises the Ross Sea sector over other parts of the SO, although the
 SO SW radiation bias is present at all longitudes in the SO (Section
-\ref{sec:sw-radiation-balance}), affected by atmospheric circulation in the SO
+\ref{sec:sw-radiation-balance}), affected by the atmospheric circulation
 \citep{jones1993,sinclair1994,sinclair1995,simmonds2000,simmonds2003,simmonds2003a,hoskins2005,hodges2011}.
-%A paper describing the TAN1802 voyage is in preparation and a paper
-%documenting the entire voyage dataset is planned.
 The voyage observations were performed using a range of instruments (described
 below). Table \ref{tab:deployments} details which instruments were deployed on
 each voyage.
@@ -223,7 +220,7 @@ spaced bins (about 15 m resolution). The sampling rate of the instrument is 2
 \unit{km}, producing 770 regularly spaced bins (10 m resolution).
 
 Radiosonde observations were performed on the TAN1802 and NBP1704 voyages south
-of 60$^\circ$S.  Temperature, pressure, relative humidity and GNSS coordinates
+of 60$^\circ$S.  Temperature, pressure, relative humidity and Global Navigation Satellite System (GNSS) coordinates
 (from which wind speed and direction are derived) were retrieved to altitudes
 of about 10--20 \unit{km}, terminated by a loss of radio communication or
 balloon burst.
@@ -240,14 +237,12 @@ software for further processing.
 Automatic weather station (AWS) data were available on the TAN1502, TAN1802 and
 NBP1704 voyages. These included variables such as air temperature, pressure,
 sea surface temperature, wind speed and wind direction. Voyage track
-coordinates were obtained from the ships' Global Navigation Satellite System
-(GNSS) receivers.
+coordinates were obtained from the ships' GNSS receivers.
 
 \subsection{HadGEM3}
 \label{sec:hadgem3}
 HadGEM3 \citep{walters2017} is a general circulation model developed by the UK
 Met Office and the Unified Model Partnership.
-%, with input from collaborators such as the New Zealand Deep South National Challenge (DSC) project \citep{hewitt2011}.
 It can be used in a ``nudging'' \citep{telford2008} mode, in which winds and
 potential temperature are relaxed towards the ERA-Interim reanalysis
 \citep{dee2011}. The Met Office Global Atmosphere 7.1 (GA7.1) is the atmospheric
@@ -331,7 +326,6 @@ diurnal land heating. The CERES EBAF-TOA Edition 4.1 product is a Level 3B
 product, which means it has been globally balanced by ocean heat measurements
 using the Argo network \citep{roemmich2009}.
 
-% Include here a link for download / documentation of the data.
 \subsection{NSIDC sea ice concentration}
 
 We used the Near-Real-Time Defense Meteorological Satellite Program (DMPS)
@@ -342,7 +336,6 @@ those affected and unaffected by sea ice. The sea ice concentration product has
 a resolution of 25 $\times$ 25 \unit{km}. We used a cutoff value of 15\% of sea
 ice concentration for the binary classification of sea ice, in line with
 previous studies \citep{comiso2008}.
-% Here too.
 
 \section{Methods}
 
@@ -600,7 +593,7 @@ in the evaluated geographical regions and seasons.
 
 Examination of the vertical distributions in Figure \ref{fig:cloud-occurrence}
 shows that observations have a strong predominance of cloud below 2 \unit{km}
-and peaking below 500 \unit{km} in most subsets, including a substantial amount
+and peaking below 500 m in most subsets, including a substantial amount
 of surface-level fog in some subsets. In contrast, GA7.1N and MERRA-2 simulate
 clouds at a higher altitude, peaking at about 500 \unit{m} and generally the
 peak is higher than in observed clouds. Especially, clouds below 500 m and fog
@@ -690,8 +683,8 @@ derived from radiosonde observations and model fields. In observations, the
 quantity almost consistently peaks near the ground and reaches up to 1.5 km in
 ice-free cases (Figure \ref{fig:sll-distribution}a1--a5, b4). GA7.1N represents
 this distribution relatively well. This is not the case with MERRA-2, which is
-less likely to peak near the ground and the distribution is less consistent
-with observations.  The sea-ice cases (Figure \ref{fig:sll-distribution}b5, b6)
+less likely to peak near the ground (Figure \ref{fig:sll-distribution}a3, a5, c4).
+The sea-ice cases (Figure \ref{fig:sll-distribution}b5, b6)
 show markedly different observed distribution of the quantity, with peak at
 about 300 m.  GA7.1N and MERRA-2 represent the distribution over sea ice
 relatively poorely.
@@ -721,8 +714,8 @@ simulating higher RH by about 10\%.
 Pehaps most interestngly, the vertically integrated liquid and ice content
 (Figure \ref{fig:zone-panel}i, j) is very different between the models. Both
 models simulate almost the same liquid + ice total, but the phase composition
-of cloud in GA7.1N is majority liquid, while in MERRA-2 it is almost entirely
-ice.
+of cloud in GA7.1N is majority ice, while in MERRA-2 it is almost entirely
+liquid.
 
 \section{Discussion}
 
@@ -731,13 +724,13 @@ average biases of up to 39 \unit{W m^{-2}} (MERRA-2, 50--55$^\circ$S in
 December), and that these biases have a significant latitudinal dependency,
 with the opposite sign of bias between different latitude bands. In GA7.1N the
 bias is predominantly negative, while in MERRA-2 the bias is predominanly
-positive. Similar pattern of bias is present both models. The bias is positive
+positive. Similar pattern of bias is present in both models. The bias is positive
 north of 55$^\circ$S (65$^\circ$S) in GA7.1N (MERRA-2) and negative south of
 this latitude.
 This finding is consistent with \cite{schuddeboom2019}, who observed opposite
 sign of SW cloud radiative effect south and north of 55$^\circ$S in GA7.1.
 
- Very simlar geographical pattern of bias is present in DJF and
+A very similar geographical pattern of bias is present in DJF and
 MAM, suggesting that similar cloud biases are present in both seasons. This
 is also supported by Figure \ref{fig:cloud-occurrence}, which does not display
 a significant difference in observed cloud occurrence and bias in the models
@@ -777,10 +770,21 @@ This effect is visible on the daily scale in Figure
 \ref{fig:sw_up_toa_geo}j--l, where the individual clouds in MERRA-2 appear
 significantly brighter than on satellite observations.
 
-Remarkably, the observed and simulated cloud ocurrence profiles do not appear
-to be significantly different between the DJF and MAM seasons or different
-latitude bands between 55 and 70$^\circ$S (Figure \ref{fig:cloud-occurrence}).
-This is in contrast with the SW radiation bias analysis, which showed a strong
+Remarkably, the observed cloud ocurrence profiles appear
+to be similar between the DJF and MAM seasons and
+latitude bands between 55 and 70$^\circ$S (Figure \ref{fig:cloud-occurrence}):
+if we focus on the subsets with more than 10 days (Figure \ref{fig:cloud-occurrence}a4, b4, c2, c4, f1),
+i.e. not heavily skewed toward a single weather situation,
+we find that they are
+all characterised by a peak below 500 m of 25--60\% and falling to near-zero
+above 2--3 km, sometimes with a minor secondary peak between 1 and 2 km.
+The simulated profiles show a slightly higher altitude of the primary peak
+between 0 and 1 km, underestimated in MERRA-2 by up about two thirds,
+falling to near-zero between 2 and 3 km, without any substantial secondary peak.
+The total cloud fraction appears to be more strongly underestimated at high
+latitudes in GA7.1N in DJF, by 8--28\% (Figure \ref{fig:cloud-occurrence}c2, c4)
+vs. 8\% (Figure \ref{fig:cloud-occurrence}b4).
+This is an important consideration in connection with the SW radiation bias, which shows a strong
 latitudinal gradient of the TOA outgoing SW radiation bias in the models
 (Figure \ref{fig:sw_up_toa_geo}, \ref{fig:sw_up_toa_time}). Based on the the
 presented results a plausible explanation for the SW radiation bias could be
@@ -822,10 +826,9 @@ simulation.
 Considering the strong observed relationship between min\{SLL,LCL\} and CBH
 (CBH tends to occur at the same level as min\{SLL,LCL\}), we evaluated the
 distribution of min\{SLL,LCL\} in the models in comparison with radiosonde
-observations (Figure \ref{fig:sll-distribution}).  We found that GA7.1N
+observations (Figure \ref{fig:sll-distribution}). We found that GA7.1N
 represents this distribution relatively well in sea-ice-free cases, while
-MERRA-2 represents this distribution relatively poorly. MERRA-2, however, tends
-to underestimate the distribution of min\{SLL,LCL\} near the ground. This may
+MERRA-2 underestimates cases when min\{SLL,LCL\} was near the surface. This may
 be the reason for the underestimation of very low cloud and fog in this model
 identified in the comparison with lidar observations. Therefore, improving the
 distribution of the quantity in MERRA-2 may lead to improvement of low cloud
@@ -856,13 +859,13 @@ representation when near-surface air temperature is greater than SST is
 relatively more accurate, this case occurring predominantly north of
 55$^\circ$S and in the warm sector of cyclones.  As shown in Figure
 \ref{fig:sw-bias-scatter}, the negative TOA outgoing SW radiation bias in the
-models is clustered at zero and sub-zero temperatures.  This suggests a
-possible explanation that subzero air mass advecting from Antarctica or from
-sea ice covered areas over warm water could be inducing low cloud and fog, and
-this process is not well represented in the models.
+models is clustered at zero and sub-zero temperatures. This suggests a
+possible explanation that sub-zero air mass advecting from Antarctica or from
+sea ice covered areas over warm water (cold-air outbreaks) could be inducing low cloud and fog, and
+this process is not well represented in the models \citep{bodas-salcedo2012}.
 
 Previous studies have documented that supercooled liquid is often present in
-the SO cloud in summer months. We cannot substantially add to these findings
+the SO cloud in summer months \citep{morrison2011,huang2012,chubb2013,huang2016,bodas-salcedo2016,jolly2018,listowski2019}. We cannot substantially add to these findings
 with our observations, although preliminary analysis of a polarising lidar
 Sigma Space MiniMPL profiles from the TAN1802 voyage suggests supercooled
 liquid was commonly present in the ubiquitous stratocumulus cloud. The
@@ -879,7 +882,7 @@ radiation with CERES.
 The 2016--2018 voyages may have been affected by the unusually low sea ice
 extent (discussed below), which can have a significant effect on cloud
 \citep{frey2018,taylor2015}. The modulating effect of sea ice on cloud in the
-SO has previously been shown by \cite{listowski2018} and there is an apparent
+SO has previously been shown by \cite{listowski2019} and there is an apparent
 difference in cloud between the Ross Sea and Ross Ice Shelf as shown by
 \cite{jolly2018}, with cloud over the ice shelf having smaller cloud cover, a
 greater amount of altostratus cloud and a smaller amount of deep convective
@@ -903,9 +906,10 @@ voyage in February and March 2018 to the Ross Sea experienced no sea ice during
 the entire voyage. Because sea ice is an important factor influencing the
 atmospheric boundary-layer stability and radiation balance, a significant
 secondary effect on cloud cover, cloud phase and opacity is expected. Sea ice
-is, however, not expected to be responsible for the SO SW radiation bias in
-models, because the bias is present even when sea ice concentration is
-prescribed from satellite observations. Given that few of the ship-based
+is, however, not expected to be responsible for the SO SW radiation bias described
+here, because the bias is present even when sea ice concentration is
+prescribed from satellite observations, as is the case in the nudged run GA7.1
+and the MERRA-2 reanalysis. Given that few of the ship-based
 observations were collected before 2016, we cannot reliably estimate how
 the anomalous sea ice extent affected our results. 
 
@@ -971,6 +975,16 @@ the SO, and this relationship is not well represented in the models,
 atmospheric temperature is lower or close to SST are responsible for the cloud
 misrepresentation.
 \end{itemize}
+
+Here, we introduced a new quantity (a thermodynamic level) called SST lifting
+level (SLL), which is the level of neutral buoyancy of an adiabatically lifted
+parcel with temperature equal to SST. The motivation for introducing this level
+was the frequently observed occurrence of cloud base at this height, together with
+LCL. We think that this is explained by the strongly thermodynamically-driven
+cloud in the Soutern Ocean boundary layer and is linked to the particular
+conditions of the summertime Southern Ocean: sub-zero temperature of the
+near-surface atmosphere, destabilised by the relatively warmer (near-zero)
+sea surface.
 
 Future studies of SO cloud representation in the GA model could focus on
 specific details of the model subgrid-scale cloud processes (such as the large
@@ -1040,3 +1054,227 @@ Aerosols'' project.  We acknowledge the software tools Python, R \citep{r},
 numpy \citep{oliphant2006}, scipy \citep{scipy}, matplotlib \citep{hunter2007},
 Climate Data Operators (CDO) \citep{schulzweida2018} and parallel
 \citep{tange2011}, which we used in our data analysis.
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{chapter2/fig/map_rev2.pdf}
+\caption{
+Map showing tracks of voyages used in this study. The ship observational dataset
+comprises 5 voyages between 2015 and 2018, spanning months from November to June
+and latitudes between 40$^\circ$S and 78$^\circ$S, of which data between
+50$^\circ$S and 70$^\circ$S are used in this study.
+}
+\label{fig:map}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/schematic.pdf}
+\caption{
+Schematic of the processing pipeline utilised in this study to produce lidar and
+radiosonde statistics from observations and model data.
+}
+\label{fig:schematic}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/sw_up_toa_geo_rev1.png}
+\caption{
+Geographical distribution of the TOA outgoing SW radiation in CERES, GA7.1N and
+MERRA-2. The plots show\ global all sky SW radiation as annual (2015--2018;
+a--c), seasonal (2015--2018 DJF, MAM; d--i) and daily (1 January 2018; j--l)
+mean. The blue--red colormap shows bias relative to CERES (b, c, e, f, h, i),
+while the grayscale colormap shows absolute values (a, d, g, j, k, l).
+}
+\label{fig:sw_up_toa_geo}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/sw_up_toa_time_rev1.pdf}
+\caption{
+Zonal means of the TOA outgoing SW radiation in CERES, GA7.1N and MERRA-2
+during the years 2015--2018 in 5-degree latitude bands between 50 and
+70$^\circ$S. The plots show monthly zonal mean TOA outgoing SW radiation
+(blue) and its difference relative to CERES (red) as a function of month. Shown
+are also the maxima ("max") and the difference from CERES ("max $\Delta$").
+}
+\label{fig:sw_up_toa_time}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/sw_bias_scatter_rev1.png}
+\caption{
+Scatter plot of SW radiation bias in (a) GA7.1N and (b) MERRA-2 grid cells
+between 55$^\circ$S and 70$^\circ$S in January 2018. Each point represents a
+daily average of SW radiation bias as a function of near-surface air temperature
+and near-surface relative humidity. The bias is expressed as a percentage of the
+incoming solar radiation in the grid cell. The points are a random sample of
+100000 points.
+}
+\label{fig:sw-bias-scatter}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/cloud_occurrence_panel_rev1.pdf}
+\caption{
+Cloud occurrence frequency as a function of height derived from ceilometer
+observations (OBS) and model fields (GA7.1N and MERRA-2). The observational and
+model data were subsetted by latitude and season (DJF, MAM) along the voyage
+track. The numbers at the top of each panel show total (vertically integrated)
+cloud cover and the number of days the ship spent passing through the
+spatiotemporal subset. The height in the plots is limited to 6 \unit{km}. There
+was no significant amount of cloud detected above this level.
+}
+\label{fig:cloud-occurrence}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{chapter2/fig/cloud_cover_hist_rev1.pdf}
+\caption{
+Cloud cover bias in models relative to observations. The points represent
+subsets as in Figure \ref{fig:cloud-occurrence}. The size of the circles is
+proportional to the number of days of observations in the subset. The solid
+lines are averages, and dashed lines are averages weighted by the number of days
+the ship spent passing through the spatiotemporal subset.
+}
+\label{fig:cloud-cover-hist}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{chapter2/fig/rs_scatter_rev1.pdf}
+\caption{
+Scatter plots of radiosonde measurements on the TAN1802 and NBP1704 voyages
+between February and May and 60--70$^\circ$S latitude. Corresponding profiles
+from GA7.1N and MERRA-2 are selected, i.e. having the same geographical
+coordinates and the same time of the year. Each point on the scatter plots
+represents a radiosonde profile. The plots compare three datasets: observations
+(OBS), GA7.1N and MERRA-2. The radiosonde observations are matched with
+ceilometer (OBS) and COSP-based CBH (GA7.1N and MERRA-2). (a) shows the
+points as a function of min\{SLL, LCL\} and CBH. The inset histogram shows
+distribution of the difference of CBH and min\{SLL, LCL\} in bins of 100
+\unit{m}, where each bin contains three bars for the three datasets.
+(b, c, d) show the points as a function of LTS, SLL and LCL,
+respectively.
+}
+\label{fig:rs-scatter}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{chapter2/fig/sst_lifting_level_panel_rev2.pdf}
+\caption{
+Histogram of min\{SLL,LCL\} derived from radiosonde observations (OBS) on
+TAN1802 and NBP1704, and the equivalent profiles in GA7.1N and MERRA-2.  Shown
+are subsets by latitude between 60 and 75$^\circ$S and seasons DJF and MAM.
+The numbers at the top of each panel indicate the number of profiles which make
+up the histogram and the percentage of sea ice cases determined from NSIDC
+satellite-derived sea ice concentration.
+}
+\label{fig:sll-distribution}
+\end{figure*}
+
+\clearpage
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{chapter2/fig/zone_panel_rev2.png}
+\caption{
+Zonal plane plot of cloud liquid and ice mixing ratios in GA7.1N and MERRA-2 at
+60$^\circ$S. The cloud liquid and ice mixing ratios are plotted as contours on
+top of the potential temperature fields (a--d) and relative humidity
+fields (e--h). SLL is indicated by a white line. (a, b, e, f)
+show a seasonal average in DJF 2017/2018 and (c, d, g, h)
+show a daily average on 1 January 2018. (i, j) show the
+column-integrated values of cloud liquid and ice water as a function of
+longitude corresponding to the plots above. All liquid shown in the plots
+is supercooled (air temperature is less than 0 $^\circ$C everywhere).
+}
+\label{fig:zone-panel}
+\end{figure*}
+
+\clearpage
+\begin{table*}[t]
+\footnotesize
+\caption{
+Table of voyages. The table lists voyages analysed in this study. Listed is  the
+voyage name (Voyage), which is the official name of the voyage or an
+abbreviation for the purpose of this study, ship name (Ship), organisation
+(Org.), start and end dates of the voyage (Start, End), number of days spent at
+sea (Days), target region of the SO (Region), maximum and minimum geographical
+coordinates of the voyage track (Lat., Lon.). }
+\label{tab:voyages}
+\centering
+\scalebox{0.85}{
+\begin{tabular}[t]{lllllllll}
+\hline
+\textbf{Voyage} & \textbf{Ship} & \textbf{Org.} & \textbf{Start} & \textbf{End} & \textbf{Days} & \textbf{Region} & \textbf{Lat.} & \textbf{Lon.}\\
+\hline
+TAN1502 & RV \textit{Tangaroa} & NIWA & 2015-01-20 & 2015-03-12 & 51 & Ross Sea & 41$^\circ$S--75$^\circ$S & 162$^\circ$E--174$^\circ$W\\
+TAN1802 & RV \textit{Tangaroa} & NIWA & 2018-02-08 & 2018-03-21 & 41 & Ross Sea & 41$^\circ$S--74$^\circ$S & 170$^\circ$E--175$^\circ$W\\
+HMNZSW16 & HMNZS \textit{Wellington} & RNZN & 2016-11-20 & 2016-12-20 & 20 & Ross Sea & 36$^\circ$S--68$^\circ$S & 166$^\circ$E--180$^\circ$E\\
+NBP1704 & RV \textit{Nathaniel B. Palmer} & NSF & 2017-04-11 & 2017-06-13 & 63 & Ross Sea & 53$^\circ$S--78$^\circ$S & 163$^\circ$E--174$^\circ$W\\
+AA15 (AA V1--V3) & \textit{Aurora Australis} & AAD & 2015-10-22 & 2016-02-22 & 123 & Indian O. sector & 42$^\circ$S--69$^\circ$S & 62$^\circ$E--160$^\circ$E\\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+\clearpage
+\begin{table*}[t]
+\footnotesize
+\caption{
+Table of deployments. The table cells indicate if data from a given instrument
+(row) was available from a voyage (column).
+}
+\label{tab:deployments}
+\centering
+\begin{tabular}[t]{lccccc}
+\hline
+Instrument/Voyage & AA15 & TAN1502 & HMNZSW16 & NBP1704 & TAN1802\\
+\hline
+Lufft CHM 15k & & & \checkmark & \checkmark & \checkmark\\
+Vaisala CL51 & \checkmark & \checkmark & & & \\
+iMet radiosondes & & & & & \checkmark\\
+Radiosondes (other) & & & & \checkmark & \\
+\hline
+\end{tabular}
+\end{table*}
+
+\clearpage
+\begin{table*}[t]
+\footnotesize
+\caption{
+A table showing a "back-of-the-envelope" calculation how the GA7.1N peak TOA
+outgoing SW radiation bias (Figure \ref{fig:sw_up_toa_time}) would change if
+the cloud cover were increased by 5\% (Figure \ref{fig:cloud-cover-hist}),
+asssuming the cloud albedo does not change. The "corrected" TOA outgoing SW
+radiation is calculated by multiplying the original value by 1.05.
+}
+\label{tab:bias-correction}
+\centering
+\scalebox{0.85}{
+\begin{tabular}[t]{lcccc}
+\hline
+Latitude & TOA out. SW at max. $\Delta$ (Wm$^{-2}$) & Max. $\Delta$ TOA out. SW (Wm$^{-2}$) & Corrected Max. $\Delta$ TOA out. SW (Wm$^{-2}$) & Explained error \\
+\hline
+55--60$^\circ$S & 199 & -9 & 0.95 & 111\% \\
+60--65$^\circ$S & 214 & -21 & -10.3 & 51\% \\
+65--70$^\circ$S & 243 & -16 & 3.85 & 76\% \\
+\hline
+\end{tabular}
+}
+\end{table*}
