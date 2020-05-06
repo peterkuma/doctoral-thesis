@@ -1,4 +1,4 @@
-\chapter{Improving Southern Ocean boundary layer cloud parametrisation in the general circulation model HadGEM3-GA7.1/UM11.4}
+\chapter{Improving Southern Ocean boundary layer cloud para\-metrisation in the general circulation model HadGEM3-GA7.1/UM11.4}
 
 \section*{Abstract}
 
@@ -650,7 +650,8 @@ netCDF4, Linux and Devuan GNU/Linux.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.5\textwidth]{img/map.pdf}
+\centering
+\includegraphics[width=0.5\textwidth]{chapter4/fig/map.pdf}
 \caption{A map showing the track of the TAN1802 voyage and the region
 between 60$^\circ$S and 73$^\circ$S of the TAN1802 ceilometer, radiosonde
 and AWS data analysed here.
@@ -661,7 +662,8 @@ and AWS data analysed here.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.7\textwidth]{img/scheme.pdf}
+\centering
+\includegraphics[width=0.7\textwidth]{chapter4/fig/scheme.pdf}
 \caption{A scheme showing the operation of the boundary layer (BL)
 and convection schemes in a cumulus (Cu) below stratocumulus (Sc) profile
 commonly observed in the summertime Southern Ocean. Surface mixed layer (SML),
@@ -673,7 +675,8 @@ lifting condensation level (LCL).
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.75\textwidth]{img/backscatter_rs.pdf}
+\centering
+\includegraphics[width=0.75\textwidth]{chapter4/fig/backscatter_rs.pdf}
 \caption{Selected daily backscatter profiles collected on the TAN1802 voyage
 and radiosonde profiles. Shown are lifting condensation level (LCL),
 SST lifting level (SLL) and SST lifting level for a saturated parcel (SLL$_s$).
@@ -686,7 +689,8 @@ plots and the height of LCL, SLL and SLL$_s$ is indicated by a coloured dot.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=\textwidth]{img/examples.pdf}
+\centering
+\includegraphics[width=\textwidth]{chapter4/fig/examples.pdf}
 \caption{Selected daily observed and simulated backscatter profile plots.
 The observations (OBS) were collected on the TAN1802 voyage and the
 simulations are based on the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs
@@ -700,7 +704,8 @@ updraft detrainment rate (DTRU). The vertical extent is limited to 5 km ASL.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=\textwidth]{img/examples_cont.pdf}
+\centering
+\includegraphics[width=\textwidth]{chapter4/fig/examples_cont.pdf}
 \caption{Figure \ref{fig:examples} continued.
 }
 \label{fig:examples-cont}
@@ -709,7 +714,8 @@ updraft detrainment rate (DTRU). The vertical extent is limited to 5 km ASL.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.85\textwidth]{img/examples_hur_mcu.pdf}
+\centering
+\includegraphics[width=0.85\textwidth]{chapter4/fig/examples_hur_mcu.pdf}
 \caption{Mass flux (odd rows) and relative humidity (even rows) profiles in the UM11.4 control (UM11.4cnt)
 and experimental (UM11.4exp) runs, corresponding to the plots in Fig. \ref{fig:examples}.
 }
@@ -719,7 +725,8 @@ and experimental (UM11.4exp) runs, corresponding to the plots in Fig. \ref{fig:e
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.85\textwidth]{img/examples_hur_mcu_cont.pdf}
+\centering
+\includegraphics[width=0.85\textwidth]{chapter4/fig/examples_hur_mcu_cont.pdf}
 \caption{Figure \ref{fig:examples-hur-mcu} continued.
 }
 \label{fig:examples-hur-mcu-cont}
@@ -728,7 +735,8 @@ and experimental (UM11.4exp) runs, corresponding to the plots in Fig. \ref{fig:e
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.5\textwidth]{img/cloud_occurrence.png}
+\centering
+\includegraphics[width=0.5\textwidth]{chapter4/fig/cloud_occurrence.png}
 \caption{
 Cloud occurrence histogram as a function of height calculated from
 28 days of the TAN1802 voyage calculated from ceilometer observations (OBS),
@@ -742,7 +750,8 @@ Shown is also the total cloud fraction.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=\textwidth]{img/sw.png}
+\centering
+\includegraphics[width=\textwidth]{chapter4/fig/sw.png}
 \caption{Top of atmosphere outgoing shortwave radiation in CERES SYN (OBS) and
 bias in the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs relative
 to CERES SYN during the period of TAN1802 observations 16 February--15 March 2018.
@@ -756,7 +765,8 @@ row \textbf{(d--f)} shows the Southern Ocean specifically.
 \clearpage
 
 \begin{figure}[t]
-%\includegraphics[width=0.75\textwidth]{img/sw_zonal.pdf}
+\centering
+\includegraphics[width=0.75\textwidth]{chapter4/fig/sw_zonal.pdf}
 \caption{
 Zonal average of top of atmosphere outgoing shortwave radiation in
 the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs relative
@@ -769,7 +779,8 @@ to CERES SYN during the period of TAN1802 observations 16 February--15 March 201
 
 
 \begin{figure}[t]
-%\includegraphics[width=\textwidth]{img/bdyt.png}
+\centering
+\includegraphics[width=\textwidth]{chapter4/fig/bdyt.png}
 \caption{Boundary layer type histograms of types I.--VI. \citep{lock2000} in the UM11.4cnt
 \textbf{(a--f)} and UM11.4exp relative to the UM11.4cnt \textbf{(g--l)} expressed as percentage point (pp)
 difference.
@@ -784,10 +795,12 @@ difference.
 Summary of the cloud-related subgrid-scale parametrisations in the UM11.4.
 }
 \label{tab:parametrisations}
+\centering
+\scalebox{0.75}{
 \begin{tabular}{lll}
-%\tophline
+\hline
 Parametrisation & Principle & References\\
-%\middlehline
+\hline
 Convection scheme & Mass flux with CAPE or surface buoyancy flux closure. & \cite{gregory1990}\\
 & & \cite{grant1999}\\
 & & \cite{grant2001}\\
@@ -795,9 +808,12 @@ Boundary layer scheme & First-order closure turbulence. &\cite{lock2000}\\
 & & \cite{martin2000}\\
 Large-scale cloud scheme (PC2) & Prognostic cloud liquid and ice. & \cite{wilson2008a,wilson2008b}\\
 JULES surface flux parametrisation & The COARE algorithm. & \cite{fairall2003}\\
-%\bottomhline
+\hline
 \end{tabular}
+}
 \end{table}
+
+\clearpage
 
 \begin{table}
 \caption{
@@ -805,16 +821,18 @@ Diagnostic model levels and layers relevant to shallow boundary layer convection
 and cloud, listed from the lowest to the highest.
 }
 \label{tab:levels}
+\centering
+\scalebox{0.75}{
 \begin{tabular}{llllllll}
-%\tophline
+\hline
 Level & Description\\
-%\middlehline
+\hline
 SL (surface layer) & Layer between the surface and the lower of 0.1$z_h$ and level where $\theta_{vl}$ starts to increase with height.\\
 SML (surface mixed layer) & Turbulently well-mixed layer between the surface and LCL.\\
 LCL (lifting condensation level) & Traditional definition (e.g. \cite{wallace2006}).\\
 $z_h$ & Level equal to LCL if cumulus-capped, or $z_{par}$ if not.\\
 $z_{par}$ & Top of a diagnostic moist parcel ascent.\\
-%\bottomhline
+\hline
 \end{tabular}
+}
 \end{table}
-
