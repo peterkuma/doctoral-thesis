@@ -12,12 +12,15 @@ most other places on the globe, it is largely unaffected by sources of
 continental and anthropogenic aerosols, is dominated by a strong circumpolar
 vortex, and its southern boundary is a permanently ice-covered continent,
 which could mean that global parametrisations do not apply very well in this
-region. Observations in the SO are sparse, which limits the accuracy
+region.
+SO south of 30$^\circ$S accounts for about 43\% of anthropogenic CO$_2$ and 75%
+of excess heat uptake \citep{frolicher2015}.
+Observations in the SO are sparse, which limits the accuracy
 of simulations by numerical weather prediction (NWP) models and general
 circulation models (GCMs).
 Globally, clouds have a predominantly cooling effect on the climate due to reflection
 of sunlight, which exceeds the warming effect due to absorption of thermal
-radiation from the surface, stimates identify 18 Wm$^{-2}$ of cooling relative to a cloud-free atmosphere
+radiation from the surface, estimates identify 18 Wm$^{-2}$ of cooling relative to a cloud-free atmosphere
 \citep{zelinka2017}. This effect is about 5 times as large as heating from
 a doubling of CO$_2$, which highlights the importance of cloud cover in modulating
 global climate. Nearly all climate models predict cloud feedback to be positive,
@@ -26,7 +29,7 @@ i.e. amplification of warming with increasing CO$_2$ concentration.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig/trenberth-fassulo-sw-bias.png}
-\caption{
+\caption[Biases in the TOA net radiation down]{
 Biases in the TOA net radiation down relative to observations regionally for
 1990--99
 in $Wm^{-2}$, where stippled (hatched) regions correspond to regions
@@ -54,7 +57,10 @@ large-scale model errors such as a double-intertropical
 convergence zone \citep{hwang2013}, position of the midlatitude jet and
 meridional energy transport \citep{mason2014}.
 The reasons for the observed SW radiation bias
-can be numerous, concurrent and compensating. To summarise, they can range
+can be numerous, concurrent and compensating.
+As noted by \cite{kelleher2019}, cloud biases in the SO can arise either
+as a result of biases in large-scale dynamics, or cloud parametrisation.
+To summarise, they can range
 from microphysical to large-scale dynamics and be due to misrepresentation of:
 cloud fraction, cloud optical depth, frequency of cloud regimes or types,
 cloud vertical distribution and overlap, cloud horizontal distribution
@@ -110,15 +116,72 @@ in the model.
 \cite{bodas-salcedo2016} found supercooled liquid to be abundant in
 the SO in summer and contribute about 30\% to the reflected
 SW radiation.
+\cite{noh2019} developed an algorithm for detecting mixed-phase cloud with
+liquid top in the SO using Himawari geosynchronous (GEO) satellite data, which are thought
+to be common in the region, but difficult to detect with passive satellite
+instruments. They focused on liquid‐top mixed‐phase clouds. In their case studies, they found both supercooled liquid
+and mixed clouds with liquid top over the SO south of Australia and
+New Zealand and noted that their algorithm may complement active instruments
+in detecting mixed cloud.
 
-Multiple observational datasets are available for assessing SO biases.
+Several field campaigns were performed in the SO in recent years:
+Clouds, Aerosols, Precipitation, Radiation, and Atmospheric Composition over the Southern Ocean (CAPRICORN) \citep{mace2018a,mace2018b}, Measurements of Aerosols, Radiation and Clouds over the Southern Ocean (MARCUS) \citep{mcfarquhar2016},
+the Southern Ocean Clouds, Radiation, Aerosol Transport Experimental Study (SOCRATES) \citep{mcfarquhar2014} and the Macquarie Island Cloud and Radiation Experiment (MICRE) \citep{demott2018}.
+The SOCRATES campaign consisted of 15 flights of GV HIAPER and a voyage
+of R/V Investigator from Hobart, Tasmania in January--February 2018,
+organised by the National Science Foundation (NSF) and the
+National Center for Atmospheric Research (NCAR). \cite{gettelman2020}
+analysed cloud microphysical observations from these flights compared
+to nudged CAM6 simulations, and found that CAM6 represents cloud properties
+relatively well, and observed supercooled liquid clouds extensively in cold
+sectors of cyclones. They found the representation of supercooled liquid
+better than in CAM5 due to a scheme dependence on the available ice nuclei.
+They found 50\% differences in ice water path (IWP) and liquid water path (LWP)
+between CAM5 and CAM6. Their model simulates cloud droplet size distribution
+prognostically and they found a satisfactory agreement with the in situ
+airborne observations.
+\cite{mace2018a} analysed cloud observations collected on the second CAPRICORN
+voyage of R/V Investigator from Hobart, Tasmania to 53$^\circ$ S in March--April 2016.
+In their radar and lidar observations, low cloud below 2 km was predominant
+during the voyage and the total lidar cloud fraction was 76\%, compared to 87\%
+in CloudSat--CALIPSO in the region and time of year in 2007--11, with
+more high clouds identified by CloudSat--CALIPSO.
+They also found that about 30\% of cloud is detected by a ship-based lidar but not
+a radar due to low sensitivity of the radar. In terms of cloud phase,
+they found that ice-phase processes occur 20-40\% more often than implied
+by CALIPSO due to attenuation of the signal at the cloud top. Thus, one should
+perhaps be cautious when using active satellite
+products as a reference for supercooled liquid cloud evaluation in GCMs
+in this region. They performed 1--2 daily soundings and found MERRA-2 about
+1.2 K warmer and 8\% drier. They note that unlike the lidar, the radar is unable
+to reliably detecect cloud base height due to frequent precipitation, which
+cannot be distinguished from cloud.
+\cite{mace2018b} studied stratocumulus clouds occurring during the CAPRICORN
+voyage. They characterise them as tenuous, supercooled, rarely drizzling
+and present in cold air advection. They quantify their water path at 15--25 \unit{gm^{-2}},
+effective radius at 8 \unit{\mu m}, number concentration at 20 \unit{cm^{-2}} and optical
+depth 3--4. It is probably notable, however, that these values can be different
+in the high-latitude SO, not reached by the CAPRICORN voyage. They hypothesise
+that these non-precipitating stratocumulus clouds are responsible for majority
+of the SO shortwave radiation biases identified in GCMs.
+The MARCUS field campaign was conducted between November 2017 and March 2018
+on \textit{Aurora Australis}. It was focused on collecting biogenic INP concentrations in the region,
+but a range of ARM instruments were deployed on this ship.
+\cite{zheng2019} analysed warm air advection events on the voyages and found
+that they induce highly-stratified cloud-topped marine boundary layer with
+stratiform clouds.
+
+Multiple observational datasets are available for assessing the SO biases,
+largely consisting of satellite datasets, and a relatively few ship- and
+land-based datasets due to the very large costs and operational difficulties
+of field campaigns in this remote and extreme-weather region. 
 Satellite observations provide the most complete record both spatially and
 temporally, although they do not provide historical records prior to
 1960s and past observations are limited by instrument capabilities and
 the availability of derived products. They have been utilised by most studies
 of clouds in the SO and globally. Satellite instruments are very diverse, though only a few
 datasets are readily available for studying clouds.
-Operational geosynchronous (GEO) satellites provide near-continuous temporal
+Operational GEO satellites provide near-continuous temporal
 coverage,
 which makes them ideal for studying clouds, but they have a limited use in
 high-latitude regions such as the SO. In combination with operational polar-orbiting
@@ -159,7 +222,7 @@ mid-level clouds \citep{haynes2011}.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig/space_vs_surface_lidar.png}
-\caption{
+\caption[Spaceborne vs. surface lidar scattering ratio]{
 \textbf{(a), (a')} Spaceborne vs. \textbf{(b), (b')} surface lidar scattering ratio
 (SR) simulated based on the New Zealand Earth System Model (NZESM) output in
 year 2017 at a lidar wavelength of 532 nm.
@@ -173,7 +236,7 @@ Active satellite instruments are affected by signal attenuation by
 optically thick
 clouds (lidar), ground clutter (radar), and compared to passive instruments they have smaller spatial coverage,
 shorter historical record and a small number of spectral bands, limiting their
-ability to determine cloud microphysical properties.
+ability to determine cloud microphysical properties \citep{noh2017,mace2018a,mace2018b,gettelman2020}.
 In addition to spaceborne observations, ground-based and in situ
 observations can provide an important complementary view of clouds from below.
 Figure \ref{fig:surface-vs-spaceborne-lidar} shows that scattering ratio (SR)
@@ -196,10 +259,10 @@ of observations more cost-efficient and common.
 Different processing of observations from the same instrument can lead
 to different results, for example the
 GCM-Oriented CALIPSO Cloud Product (GOCCP) relative to the standard
-Cloudsat-CALIPSO products \citep{chepfer2010}.
+Cloudsat--CALIPSO products \citep{chepfer2010}.
 Different thresholds can be applied which define what 'cloud' is,
 and cloud detection is affected by targeting a particular false alarm ratio,
-such as 5\% as in the CloudSat-CALIPSO dataset \citep{hagihara2010}.
+such as 5\% as in the CloudSat--CALIPSO dataset \citep{hagihara2010}.
 Probability of detection (sensitivity) then depends on the receiver operating
 characteristic (ROC) curve, which in turn depends on instrument
 noise. Instrument noise and bias can vary over lifetime of the instrument,
@@ -240,6 +303,8 @@ Satellite simulators such as the Cloud Feedback Model Intercomparison Project (C
 by transforming model fields to observed fields, which can then
 be compared directly or statistically.
 
+We provide a further literature review in Chapter 2.
+
 \section{Objectives}
 \label{sec:objectives}
 
@@ -255,11 +320,11 @@ but also taking into consideration the Southern Hemisphere and global processes,
 with a particular focus on utilising in situ measurements
 available from intensive observation periods (IOPs), complemented by land-based
 stations. For this
-purpose the COSP simulator will need to be extended to support these
-instruments. It is foreseen that ground-based observations will need to be
+purpose the COSP simulator needs to be extended to support these
+instruments. A ground-based observations need to be
 complemented by satellite observations, especially the global radiation budget
 measurements by CERES.
-Other diagnostic means may include
+Other diagnostic means include
 case studies, by which we can ensure that any improvements are due to
 the right physical reasons rather than just improving statistics by mutually
 compensating model errors. Our particular focus is therefore on linking
@@ -416,7 +481,7 @@ Aotearoa/New Zealand:
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{fig/chm15k_profile.png}
-\caption{
+\caption[Lufft CHM 15k ceilometer volume backscattering coefficient profile plot]{
 A Lufft CHM 15k ceilometer volume backscattering coefficient profile plot
 and corresponding sky camera images collected on the TAN1702 voyage
 on 23 March 2017.
@@ -484,7 +549,9 @@ Figure \ref{fig:chm15k-profile} shows an example backscatter profile plot
 from the TAN1702 voyage, combined with sky camera images. 
 In addition to CBH, these measurements provide a wealth
 of information about the cloud type, the vertical extent, optical thickness,
-precipitation, fog and boundary layer aerosol.
+precipitation, fog and boundary layer aerosol. Some of these, as well
+as satellite cloud observations in the Ross Sea region, were analysed
+by co-authored studies: \cite{klekociuk2018,jolly2018,hartery2020a,hartery2020b}.
 
 Preliminary analysis of multiple voyage datasets indicates that low cloud
 below 2 km constitutes the majority of cloud in the summertime in the SO
@@ -499,7 +566,7 @@ low stratus and stratocumulus cloud.
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{fig/cbh.pdf}
-\caption{
+\caption[Cloud base height distribution]{
 Cloud base height distribution on the HMNZS \textit{Wellington} 2016, TAN702 and NBP1704
 voyages derived with a Lufft CHM 15k ceilometer observations (as determined by
 the instrument's firmware).
@@ -509,7 +576,7 @@ the instrument's firmware).
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{fig/tan1802_stats.pdf}
-\caption{
+\caption[Statistics calculated from observations collected on the TAN1802 voyage]{
 Statistics calculated from observations collected on the TAN1802 voyage.
 \textbf{(a)} cloud occurrence as a function of height, the 68-th and
 90-th percentiles and the total cloud fraction (CF) calculated from a Lufft CHM 15k ceilometer observations.
@@ -554,8 +621,9 @@ TRMM (1997--2015), Terra (2000--present), Aqua (2002--present), Suomi NPP (2011-
 considered to provide the most reliable measurements of radiation budget,
 although they are limited by the necessity of temporal (diurnal) and angular
 interpolation \citep{smith2011}.
-Recent version of the CERES dataset (Edition 4.0) has been found to decrease
-clear-sky TOA SW flux in the SO region by up to 15 Wm$^{-2}$
+Recent version of the CERES Energy Balanced and
+Filled (EBAF) dataset (Edition 4.0) has been found to decrease
+clear-sky TOA SW flux in the SO region in January by up to 15 Wm$^{-2}$
 in summer compared to the previous version \citep{loeb2017},
 which may affect previous results and should be taken into consideration in
 future analysis.
@@ -614,17 +682,25 @@ dead time, overlap and afterpulse calibration.
 These tools were made publicly available on the code collaboration network
 GitHub.
 
-\section{Outline of the thesis}
+\section{Outline of the thesis and author's contributions}
 
-This thesis is organised as follows. In Chapter 2 we evaluate
+This thesis consists of the Introduction (Chapter 1), three research chapters
+(Chapter 2, 3 and 4) and Conclusions and futher work (Chapter 5). The three
+research chapters are accepted for publication (Chapter 2),
+in review (Chapter 3) and a manuscript in preparation (Chapter 4).
+The author of this thesis is the primary author of the three manuscripts.
+Chapter 2 provides a comprehensive litarature review on the central topic
+of this thesis: model cloud biases in the SO. In Chapter 2 we evaluate
 SO cloud in a nudged run of the GA7.1 and MERRA-2 in comparison
 with a collection of SO voyage observations. In Chapter 3 we
 describe a new ground based lidar processing and simulator framework.
 In Chapter 4 we describe and evaluate an experimental run of the UM11.4 aimed at
 improving representation of boundary layer cloud in the SO.
-
-As of 13 April 2020, Chapter 2 was submitted to the Atmospheric
-Chemistry and Physics (ACP) journal and is in a second round of review
-with minor comments from two referees. Chapter 3 was submitted to the
-Geoscientific Model Development (GMD) journal. Chapter 4 is a manuscript
-in preparation with a planned submission in May 2020.
+As of May 2020, Chapter 2 was accepted for publication in the Atmospheric
+Chemistry and Physics (ACP) \citep{kuma2020a}. Chapter 3 was submitted to the
+Geoscientific Model Development (GMD) and is due to be in review
+in Geoscientific Model Development Discussions (GMDD) after a minor revision \citep{kuma2020b}.
+Co-authored published studies related to this thesis are: \cite{jolly2018}
+(published in ACP), \cite{klekociuk2018} (published in Deep Sea Research Part II: Topical Studies in Oceanography), \cite{hartery2020a}
+(published in Journal of Geophysical Research: Atmospheres) and
+\cite{hartery2020b} (submitted to Geophysical Research Letters).
