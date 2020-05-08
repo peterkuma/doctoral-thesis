@@ -10,7 +10,9 @@
 \usepackage{pdfpages}
 \usepackage{microtype}
 \usepackage{amsfonts}
-\usepackage[labelfont={bf,sf,small}]{caption}
+\usepackage[labelfont={bf,sf,small},labelsep=quad]{caption}
+\DeclareCaptionLabelSeparator{pipe}{ | }
+\captionsetup{labelsep=pipe}
 \setmainfont{Crimson Text}
 \setsansfont{Open Sans}
 \titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
@@ -42,7 +44,9 @@
 \begin{document}
 \input{title.tex}
 \clearpage
-\fontsize{12pt}{16pt}\selectfont
+\renewcommand{\normalsize}{\fontsize{12pt}{16pt}\selectfont}
+\renewcommand{\small}{\fontsize{11pt}{15pt}\selectfont}
+\normalsize
 \input{abstract.tex}
 \clearpage
 \includepdf[pages=-]{coauthorship_form_signed.pdf}
