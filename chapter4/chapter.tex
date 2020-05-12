@@ -55,15 +55,16 @@ Here, we focus on the Southern Ocean (SO) boundary layer parameterisations in th
 Global Atmosphere 7.1 (GA7.1)/Unified Model 11.4 (UM11.4) component of the
 Hadley Centre Global Environment Model 3 (HadGEM3) \citep{walters2019},
 with the aim of improving the simulation of stratocumulus clouds.
-This follows the findings of \cite{kuma2019} of underestimated cloud occurrence
+This follows the findings of \cite{kuma2020a} of underestimated cloud occurrence
 below 2 km above sea level (ASL) in GA7.1 relative to a comprenesive set of
 ship-based observations.
 The GA7.1 model is based the  UK Met Office
 Unified Model (UM), which is also used for operational numerical weather
-prediction (NWP). HadGEM3 (GC3.1) has participated in the 6$^{\rm th}$ Coupled Model Intercomparison Project (CMIP6). As shown by \cite{kuma2019}, cloud
+prediction (NWP). HadGEM3 (GC3.1) has participated in the 6$^{\rm th}$ Coupled
+Model Intercomparison Project (CMIP6). As shown by \cite{kuma2020a}, cloud
 fraction in a previous version of the model is underestimated in the SO by about 6--8\%, with low cloud below 1 km
 and fog particularly underestimated compared to ship-based ceilometer
-observations. \cite{schuddeboom2019} and \cite{kuma2019} noted that there is a clear division at a latitude of 55$^\circ$S between positive and negative shortwave (SW) radiation biases in HadGEM3-GA7.1 and that the positive vs. negative bias appears to be linked to near--surface air temperature, with negative bias strongly associated with
+observations. \cite{schuddeboom2019} and \cite{kuma2020a} noted that there is a clear division at a latitude of 55$^\circ$S between positive and negative shortwave (SW) radiation biases in HadGEM3-GA7.1 and that the positive vs. negative bias appears to be linked to near--surface air temperature, with negative bias strongly associated with
 close to zero near--surface air temperature. Therefore, we expect that
 near--surface temperature and sea surface temperature (SST) have a significant role in the cloud bias, potentially by destabilisation of the relatively cold Antarctic air in the surface
 layer by near--zero SST. \cite{loveridge2019} also implicated quiescent conditions in the
@@ -118,7 +119,7 @@ the ALCF (Sect. \ref{sec:alcf}). In addition, we use radiosonde profiles
 sampled during the voyage at between 1--3 times daily intervals
 using the iMet-1 ABx radiosondes. Near-surface air temperature, relative humidity (RH) and SST were sampled continuously during the voyage. The TAN8102
 voyage atmospheric measurements are also described in greater detail by
-\cite{kuma2019} and \cite{hartery2020}. The track of the voyage
+\cite{kuma2020a} and \cite{hartery2020a}. The track of the voyage
 is shown in Fig. \ref{fig:map}.
 
 \subsection{HadGEM3-GA7.1/UM11.4}
@@ -148,7 +149,7 @@ The parameterisations in the HadGEM3-GA7.1/UM11.4 are described in Sect. \ref{se
 \subsection{ALCF}
 \label{sec:alcf}
 
-The Automatic Lidar and Ceilometer Framework (ALCF) \citep{kuma2020} is a lidar
+The Automatic Lidar and Ceilometer Framework (ALCF) \citep{kuma2020b} is a lidar
 simulator and lidar processing tool, based on the Cloud
 Feedback and Model Intercomparison Project (CFMIP) Observation Simulator Package
 (COSP) \citep{bodas-salcedo2011}. We use the ALCF package to process the ceilometer
@@ -344,7 +345,7 @@ In this section we compare the experimental run UM11.4exp described in Sec. \ref
 
 \subsection{Cloud observations}
 
-As shown previously by \cite{kuma2019}, the BL cloud base in the SO commonly
+As shown previously by \cite{kuma2020a}, the BL cloud base in the SO commonly
 corresponds to either the LCL or the SST lifting level (SLL). Here, we show
 that in the TAN1802 voyage observations, three clouds layers were often observed
 and corresponded to three different thermodynamic levels. Figure
@@ -388,12 +389,12 @@ and we omitted days which were dominated by clear sky, fog and precipitation.
 We note that
 temporal and cloud height correspondence between the observations and simulations
 is generally very good, partly due to the high temporal output resolution of
-the model of 20 min \citep{kuma2020}. Both are characterised by boundary
+the model of 20 min \citep{kuma2020b}. Both are characterised by boundary
 layer cloud below 2 km ASL, and this altitude corresponds very well with
 the $z_{par}$ level diagnosed by the model, i.e. the highest level reached
 by convection. Likewise, LCL corresponds relatively well between the
 radiosonde observations and the model (red dot in OBS vs. red line in the UM
-in Fig. \ref{fig:examples} and \ref{fig:examples-cont}; see also \cite{kuma2019}).
+in Fig. \ref{fig:examples} and \ref{fig:examples-cont}; see also \cite{kuma2020a}).
 However, clouds simulated by the
 UM11.4cnt are clearly different from observations in a number of ways.
 While the periods of fog are relatively well simulated, the Cu fractus
@@ -506,10 +507,10 @@ While the case-based comparison of observed and simulated backscatter
 shows an improvement of Sc cloud simulation, it is important that the impact
 on the long--term cloud occurrence statistics is positive. We analysed
 cloud occurrence by height as determined by a cloud masking algorithm
-applied to the backscatter profiles \citep{kuma2020}.
+applied to the backscatter profiles \citep{kuma2020b}.
 Figure \ref{fig:cloud-occurrence} compares cloud occurrence in observations,
 the UM11.4cnt and UM11.4exp runs. The observed cloud peaked near the surface due to
-the frequent fog occurrence previously discussed in \cite{kuma2019},
+the frequent fog occurrence previously discussed in \cite{kuma2020a},
 with two smaller peaks at about 500 m a 1 km ASL due to Sc cloud.
 Mid-level and high cloud above 2 km ASL was insignificant, probably due
 to observational constraints (lidar signal fully attenuated by fog and low
@@ -536,12 +537,12 @@ result in an improved TOA radiation balance due to the strong effect of
 clouds on the planetary albedo. Figure \ref{fig:sw} shows the absolute
 and relative reflected SW radiation in CERES, the UM11.4cnt and UM11.4exp
 during the time period of in--situ observations. Similar to previous
-versions of the UM \citep{kuma2019,schuddeboom2019}, the bias in the UM11.4cnt
+versions of the UM \citep{kuma2020a,schuddeboom2019}, the bias in the UM11.4cnt
 in the SO is characterised by a bipolar zonally-symmetric pattern of negative
 biases in the high-latitude SO
 and positive bias in the low-latitude SO (Fig. \ref{fig:sw}e).
 As shown in our previous multi--voyage ceilometer
-evaluation \citep{kuma2019}, this is likely caused by the "too few, too bright"
+evaluation \citep{kuma2020a}, this is likely caused by the "too few, too bright"
 cloud problem. The experimental run displays an improved SO SW radiation
 bias, especially by unexpectedly reducing the positive bias in the low-latitude SO
 (Fig. \ref{fig:sw}f). Globally, the bias in the UM11.4cnt was positive in most
