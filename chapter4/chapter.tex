@@ -1,4 +1,4 @@
-\chapter{Improving Southern Ocean boundary layer cloud parameterisation in the HadGEM3-GA7.1/UM11.4 general circulation model}
+\chapter{Improving Southern Ocean boundary layer cloud parametrisation in the HadGEM3-GA7.1/UM11.4 general circulation model}
 
 \section*{Abstract}
 
@@ -12,7 +12,7 @@ schemes on cloud simulation in a set of representative case studies. We use the 
 currently strongly underestimated in the model. We show that two- and three-layer cloud
 profiles of cumulus (Cu) below Sc corresponding to local thermodynamic levels were a common occurrence, where
 the Cu cloud base height coincides with the lifting condensation level (LCL)
-and the two Sc cloud heights coincides with the neutral buoyancy level of a dry and moist (respectively) air
+and the two Sc cloud heights coincides with the neutral buoyancy level of dry and moist (respectively) air
 parcels lifted from the surface.
 While the thermodynamic state of the atmosphere is simulated
 well by the model, too little moisture appears to be transported to the top of the boundary layer. By increasing surface moisture flux and convective mass flux in the model we can improve the Sc cloud simulation in case studies, but demonstrate that a lack of vertical moisture transport
@@ -29,34 +29,34 @@ Cloud biases in general circulation models (GCMs) are a long-standing problem
 to its strong effect on the planetary albedo and longwave emissivity as well as
 being a latent heat source and the source of precipitation. Cloud biases are a key contributor to the error in the
 simulation of the radiation balance 
-in contemporary GCMs \citep{li2013}. Clouds in these models are parameterised by subgrid--scale parameterisation schemes. Cloud typically varies at scales much smaller
+in contemporary GCMs \citep{li2013}. Clouds in these models are parametrised by subgrid--scale parametrisation schemes. Cloud typically varies at scales much smaller
 than the resolution of the models, which is typically on the order of 10--200 km in the horizontal. Therefore, many of the physical
 processes responsible for cloud formation and removal, such as convection and cloud microphysics, are not resolved at the
-model resolution and have to be parameterised. The nature of these parameterisations means that they inevitably lead to large uncertainties. An alternative to such schemes are cloud resolving models
+model resolution and have to be parametrised. The nature of these parametrisations means that they inevitably lead to large uncertainties. An alternative to such schemes are cloud resolving models
 (CRMs), which operate at a much higher horizontal spatial resolution (on the order of 1 km)
 \citep{guichard2017,satoh2019}.
-However, at present it is unfeasible to use these models for long-term climate
+However, at present it is not feasible to use these models for long-term climate
 projections due to their computational demands. Therefore, a continued improvement of
 existing cloud schemes is needed.
 
-Cloud parameterisation in GCMs is traditionally improved by intercomparing with
+Cloud parametrisation in GCMs is traditionally improved by intercomparing with
 observations such as the ISCCP satellite-based cloud dataset \citep{rossow1991}
-or more recently the CloudSat-CALIPSO datasets
+or more recently the CloudSat--CALIPSO datasets
 \citep{stephens2002,winker2003}. By accomplishing a good match with past and
 present observations of cloud it is assumed that cloud representation in
 simulations of future climate will be reasonable. However, the physical
 processes responsible for any cloud bias are not necessarily obvious from a simple
 intercomparison, which may be due to processes outside of the cloud
-parameterisation scheme \citep{morcrette2010}. The presence of compensating
+parametrisation scheme \citep{morcrette2010}. The presence of compensating
 errors can also make the model perform worse when only one of the errors is
 corrected \citep{hourdin2017,schuddeboom2019}.
 
-Here, we focus on the Southern Ocean (SO) boundary layer parameterisations in the
+Here, we focus on the Southern Ocean (SO) boundary layer parametrisations in the
 Global Atmosphere 7.1 (GA7.1)/Unified Model 11.4 (UM11.4) component of the
 Hadley Centre Global Environment Model 3 (HadGEM3) \citep{walters2019},
 with the aim of improving the simulation of stratocumulus clouds.
 This follows the findings of \cite{kuma2020a} of underestimated cloud occurrence
-below 2 km above sea level (ASL) in GA7.1 relative to a comprenesive set of
+below 2 km above sea level (ASL) in GA7.1 relative to a comprehensive set of
 ship-based observations.
 The GA7.1 model is based the  UK Met Office
 Unified Model (UM), which is also used for operational numerical weather
@@ -72,7 +72,7 @@ SO BL cloud bias in GA7.0. Considering these past findings, here we focus
 on BL cloud south of 60$^\circ$S, which we will identify as
 "high-latitude SO", as opposed to "low-latitude SO" north of 60$^\circ$S.
 
-The UM parameterises clouds using the prognostic PC2 scheme
+The UM parametrises clouds using the prognostic PC2 scheme
 \citep{wilson2008a,wilson2008b}, in which the cloud condensate (liquid and ice)
 and cloud fraction are prognostic variables defined on every grid cell. The prognostic variables can be advected with the
 large-scale flow, which is in contrast to earlier schemes which were purely
@@ -140,11 +140,11 @@ lidar data corresponding to the TAN1802 voyage. We use UM11.4 in a ``nudged"
 configuration in which SST and sea ice concentration are prescribed from
 the HadISST dataset \citep{rayner2003} and atmospheric fields are nudged towards the
 ERA-Interim reanalysis \citep{dee2011}. In this configuration the large--scale
-dynamics is effectively prescribed while parameterised fields
+dynamics is effectively prescribed while parametrised fields
 such as cloud are the result of the model's physics. Here, we analyse
 two simulations produced by the UM11.4: (1) an unmodified control run "UM11.4cnt"
 and (2) an experimental run "UM11.4ext" (Sect. \ref{sec:experimental-run}).
-The parameterisations in the HadGEM3-GA7.1/UM11.4 are described in Sect. \ref{sec:parametrisations}.
+The parametrisations in the HadGEM3-GA7.1/UM11.4 are described in Sect. \ref{sec:parametrisations}.
 
 \subsection{ALCF}
 \label{sec:alcf}
@@ -156,23 +156,23 @@ Feedback and Model Intercomparison Project (CFMIP) Observation Simulator Package
 observations collected on TAN1802 and to simulate backscatter profiles from
 the UM11.4 model output.
 
-\section{Parameterisations}
+\section{parametrisations}
 \label{sec:parametrisations}
 
-The UM11.4 relies on the parameterisation of subgrid-scale
+The UM11.4 relies on the parametrisation of subgrid-scale
 processes,
 which cannot be represented by the atmospheric dynamics on the relatively
-coarse grid of the model. The parameterisations directly affecting cloud
+coarse grid of the model. The parametrisations directly affecting cloud
 are the convection, boundary layer, and large-scale cloud (PC2) schemes
-and the related parameterisation of surface fluxes in the surface component of
+and the related parametrisation of surface fluxes in the surface component of
 HadGEM3 called the Joint UK Land Environment Simulator (JULES) \citep{best2011,clark2011}. The formation
 and destruction of cloud is therefore an interplay between a number
-of parameterised processes. This interplay means that it is typically not obvious from model
+of parametrised processes. This interplay means that it is typically not obvious from model
 evaluation studies which process is responsible for a bias in cloud occurrence
-or TOA radiation balance. The parameterisations outlined above operate independently
+or TOA radiation balance. The parametrisations outlined above operate independently
 on each individual horizontal grid cell of the model.
 Table \ref{tab:parametrisations} summarises the cloud-related
-parameterisation schemes, described in a greater detail below with a specific
+parametrisation schemes, described in a greater detail below with a specific
 focus on aspects important to BL cloud.
 
 \subsection{Large-scale cloud scheme (PC2)}
@@ -184,7 +184,7 @@ fraction and break the diagnostic link between cloud fraction and condensate
 convective cloud, both of which contribute to the cloud condensate and cloud
 fraction by detraining moisture and condensate. Moisture in the PC2 scheme
 within a grid cell is assumed to have a probability distribution function around
-the grid mean, parameterised by a critical Relative Humidity (RH) \citep{gregory2002}.
+the grid mean, parametrised by a critical Relative Humidity (RH) \citep{gregory2002}.
 Therefore, supersaturation within the grid cell can occur before the mean
 RH reaches 100\%. This probability density function (PDF) is defined explicitly in PC2, in
 contrast with previous schemes \citep{tiedtke1993}, which assumed an implicit
@@ -218,15 +218,15 @@ The turbulent locally-mixed layers are characterised by diffusion coefficients
 $K_h$ and $K_m$. Depending on conditions, these are based on the surface wind
 shear, surface buoyancy gradient, Richardson number ($Ri$),
 cloud--top radiative cooling and cloud--top buoyancy reversal. This is in contrast
-with non--local mixing performed by the mass flux parameterisation in the
+with non--local mixing performed by the mass flux parametrisation in the
 convection scheme.
 
 \subsection{Convection scheme}
 \label{sec:convection-scheme}
 
 UM11.4 offers several versions of the convection scheme. We use the standard
-version 6, which is based on a mass flux parameterisation described by \cite{gregory1990}.
-The convection scheme parameterises convective plumes covering a fraction of the grid cell,
+version 6, which is based on a mass flux parametrisation described by \cite{gregory1990}.
+The convection scheme parametrises convective plumes covering a fraction of the grid cell,
 consisting of updrafts and downdrafts which transport scalar quantities,
 such as heat and moisture, and vector quantities, such as momentum, vertically
 across model levels. The updrafts and downdrafts exchange air with the
@@ -254,11 +254,11 @@ observed during the Barbados Oceanographic and Meteorological Experiment (BOMEX)
 Experiment (ATEX). Currently a new convection scheme ``CoMorph" is in development by the UK Met Office
 with the intention to eventually replace the existing convection scheme.
 
-\subsection{JULES surface flux parameterisation}
+\subsection{JULES surface flux parametrisation}
 \label{sec:jules}
 
-JULES is the surface parameterisation model used in conjunction with the UM.
-Among other processes, JULES parameterises fluxes of momentum, heat and moisture from
+JULES is the surface parametrisation model used in conjunction with the UM.
+Among other processes, JULES parametrises fluxes of momentum, heat and moisture from
 the sea surface to the the surface layer of the atmosphere. The fluxes are
 determined by surface transfer coefficients for momentum and scalars $C_D$ and
 $C_M$ (respectively), which in turn are determined by the sea surface roughness
@@ -268,7 +268,7 @@ describe here. The standard option is based on the
 Coupled Ocean--Atmosphere Response Experiment (COARE) algorithm
 \citep{fairall2003}. The momentum roughness length is based on
 a generalised Charnock's formula which accounts for low wind speeds.
-Charnock's coefficient $a$ is parameterised by a linear
+Charnock's coefficient $a$ is parametrised by a linear
 relationship with 10-m wind speed, subject to minimum and maximum bounds.
 The scalar roughness length is based on an empirical dependence on the
 roughness Reynolds number $R_r$ determined by a set of field campaigns (COARE-plus).
@@ -282,19 +282,19 @@ which uses a fixed Charnock's coefficient and a fixed scalar roughness length.
 \subsection{Southern Ocean boundary layer}
 \label{sec:schemes}
 
-Figure \ref{fig:scheme} show a schematic of the UM11.4 boundary layer and convection
-parameterisation operation most
+Figure \ref{fig:scheme} show a schematic of operation of the UM11.4 boundary layer and convection
+parametrisation most
 commonly occurring during the TAN1802 voyage in situations with Sc cloud,
 and Table \ref{tab:levels} summarises the BL diagnostic levels of the model.
 This situation corresponds to the BL type V. in \cite{lock2000} (decoupled Sc over Cu).
-In the UM11.4 this is parameterised by the BL scheme first-order turbulence scheme
-in the surface and Sc layers and the convection scheme mass flux parameterisation
+In the UM11.4 this is parametrised by the BL scheme first-order turbulence scheme
+in the surface and Sc layers and the convection scheme mass flux parametrisation
 between these two layers. The level separating the surface turbulence and
 mass flux is LCL, above which moist convection is expected to occur.
-As noted by \cite{lock2000}, this vertical separation of the parameterisation
+As noted by \cite{lock2000}, this vertical separation of the parametrisation
 schemes is undesirable, but also unavoidable due to the BL scheme partially
 accounting for the vertical transport by convection. As we will show later,
-this vertical separation of the two parameterisation schemes may be responsible for the
+this vertical separation of the two parametrisation schemes may be responsible for the
 lack of Sc in the model compared to observations (Sect. \ref{sec:bl-mass-flux-and-rh}). For the purpose of BL
 cloud simulation, we are chiefly concerned with the vertical moisture and air
 mass transport from the sea surface to the Sc layer. This process is simulated
@@ -452,7 +452,7 @@ layer, liquid or ice cloud condensation happens. We examined the BL mass
 flux and RH in the UM11.4cnt and UM11.4exp on a number of days during the TAN1802
 voyage (Fig. \ref{fig:examples-hur-mcu} and \ref{fig:examples-hur-mcu-cont}),
 corresponding to days analysed in Sect. \ref{sec:cloud-representation}.
-As explained in Sect. \ref{sec:schemes}, the mass flux parameterisation
+As explained in Sect. \ref{sec:schemes}, the mass flux parametrisation
 extends vertically between LCL and $z_{par}$. In this convective layer mass
 flux is positive and transports air from LCL to $z_{par}$ in updrafts
 and from $z_{par}$ to LCL in downdrafts. 
@@ -462,8 +462,8 @@ simulated by the UM11.4cnt (e.g. Fig. \ref{fig:examples-hur-mcu-cont}c1). This
 is most likely related to the stabilisation of the layer by compensating
 downdrafts, effectively shutting down convection until sufficient warm
 and moist air is replenished from the surface layer. We hypothesise that this
-may be an indication that the mass flux parameterisation operates more quickly 
-than the surface turbulence with respect to moisture transport and therefore these two processes are not currently well-tuned to operate together. This is happening in the unmodified
+may be an indication that the mass flux parametrisation operates more quickly 
+than the surface turbulence with respect to moisture transport and therefore these two processes are not currently well-tuned to operate together. This appears to be the case in the unmodified
 model, but is intensified further in the experimental run.
 
 RH in the UM11.4cnt was characterised by two local peaks at the LCL and $z_{par}$
@@ -484,11 +484,11 @@ However, the modifications in the UM11.4exp
 did not appear to be sufficient to fully address the problem of underestimated
 Sc cloud. RH at $z_{par}$ was still too low to enhance cloud formation in many cases, and our experiments with
 increasing mass flux further (not shown) indicate that the mass flux
-parameterisation cannot by itself solve the problem further. By a more extreme
+parametrisation cannot by itself solve the problem further. By a more extreme
 tuning we also risk increasing mass flux to unphysical values.
 
 Instead, the problem appears to be with the coupling of the surface layer
-turbulence with the mass flux parameterisation, whereby not enough air mass
+turbulence with the mass flux parametrisation, whereby not enough air mass
 and moisture is transported across the LCL from the SML to the convection layer. In
 other words, the BL scheme mixes moisture within the surface layer (up to LCL)
 by turbulence and the convection scheme transports air between LCL and
@@ -651,7 +651,7 @@ Mike Harvey organised the deployment of instruments on the TAN1802 voyage;
 Simon Parsons and Graeme Plank participated on the deployment of instruments on the TAN1802
 voyage. All authors reviewed the manuscript.
 
-\subsection*{Acknowledgments}
+\subsection*{Acknowledgements}
 
 We would like to acknowledge the contributions of those who participated on
 the TAN1802 voyage and deployment, especially the crew of the voyage; the UK Met

@@ -4,7 +4,7 @@ We conducted ship-based observations on the 2-week long voyage TAN1702 of
 RV \textit{Tangaroa} to the Campbell Plateau
 in March 2017 and the 6-week long voyage TAN1802 of RV \textit{Tangaroa} to the Ross Sea
 in February--March 2018. These included ceilometer, lidar, radar, radiosonde,
-sky camera, automatic and human weather observations and aerosol measurements.
+all sky camera, automatic and human weather observations and aerosol measurements.
 We deployed ceilometers, radar and a sky cameras on additional voyages:
 the December 2016 voyages of HMNZS \textit{Wellington} and an 
 April--May voyage NBP1704 of RV \textit{Nathaniel B. Palmer} to the Ross Sea.
@@ -40,7 +40,8 @@ Even though we did not use an observational reference for cloud phase,
 we can say that the cloud phase was most likely behind the difference in
 cloud biases between the GA7.1 and MERRA-2 (in addition to the identified cloud occurrence biases), which were much more positive
 in MERRA-2 (liquid cloud reflects more SW radiation for the same amount of water
-path). We conclude that cloud geometry biases play at least an equally
+path). We conclude that cloud geometry (vertial distribution of cloud fraction)
+biases play at least an equally
 significant role in radiation biases as cloud phase and these two can be
 compensating biases, a fact which was not given enough recognition in previous
 studies. The source of the bipolar biases and its strong relationship with
@@ -65,6 +66,7 @@ scattering at different laser wavelengths depending on droplet size distribution
 parameters, absolute calibration by utilising Sc clouds and molecular
 backscattering, backscatter noise removal, cloud mask/cloud base determination 
 and evaluation of noise characteristics of various common lidars. We demonstrated
+the
 usefulness of this new tool on several case studies. Several common atmospheric
 models and reanalyses are supported by this framework, which allowed us to compare
 a range of publicly-available model output with ceilometer and lidar observations
@@ -96,7 +98,12 @@ with observations. We identified the coupling between the turbulence and convect
 parametrisations across LCL as the most likely bottleneck. Therefore, it seems
 that the separation of parametrisation into turbulence and convection driven
 vertical regions appears to limit the formation of Sc clouds in the BL in the
-summertime SO. Our experimental run showed promising results in terms of
+summertime SO. As noted by \cite{lock2000}, "although this use of two discrete 
+mixing schemes is to some extent undesirable, it has been found to be essential,
+as allowing the eddy-viscosity-based scheme to act in steady
+cumulus layers can rapidly result in them erroneously
+evolving into well-mixed stratocumulus, \ldots".
+Our experimental run showed promising results in terms of
 SW radiation biases globally (evaluated on a short monthly time period in February--March 2018),
 where the zonal means were reduced by up to 5 Wm$^{-2}$. We conclude that
 further modifications to the BL schemes are needed to improve
