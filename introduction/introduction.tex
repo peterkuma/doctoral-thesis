@@ -13,7 +13,7 @@ continental and anthropogenic aerosols, is dominated by a strong circumpolar
 vortex, and its southern boundary is a permanently ice-covered continent,
 which could mean that global parametrisations do not apply very well in this
 region.
-SO south of 30$^\circ$S accounts for about 43\% of anthropogenic CO$_2$ and 75%
+SO south of 30$^\circ$S accounts for about 43\% of anthropogenic CO$_2$ and 75\%
 of excess heat uptake \citep{frolicher2015}.
 Observations in the SO are sparse, which limits the accuracy
 of simulations by numerical weather prediction (NWP) models and general
@@ -32,22 +32,22 @@ i.e. amplification of warming with increasing CO$_2$ concentration.
 \caption[Biases in the TOA net radiation down]{
 Biases in the TOA net radiation down relative to observations regionally for
 1990--99
-in $Wm^{-2}$, where stippled (hatched) regions correspond to regions
+in Wm$^{-2}$, where stippled (hatched) regions correspond to regions
 in which at least three quarters of the models share a common
 positive (negative) bias. (right) The model zonal mean is given
 (dots) with the 25th to 75th percentile range (lines) over land (red),
-ocean (blue), and all (black) surfaces. \textbf{Adopted from
+ocean (blue), and all (black) surfaces. \textit{Adopted from
 \cite{trenberth2010}.}
 }
-\label{fig:trenberth-fassulo-sw-bias}
+\label{fig:1:trenberth-fassulo-sw-bias}
 \end{figure}
 
 Shortwave (SW) radiation bias over the SO of up to 30 Wm$^{-2}$ is a
 well-documented problem in current NWP models and GCMs
-\citep{trenberth2010} (Fig. \ref{fig:trenberth-fassulo-sw-bias}),
+\citep{trenberth2010} (Fig. \ref{fig:1:trenberth-fassulo-sw-bias}),
 and it has been the subject of many studies.
 It manifests both as a bias in SW radiation reaching the surface and as a
-SW reflectivity bias at the top of atmosphere (TOA).
+SW reflectivity bias at the top of the atmosphere (TOA).
 \cite{bodas-salcedo2014} evaluated SW bias in a number
 of GCMs and found a strong SW bias is a very common problem, leading to
 overestimated sea surface temperature (SST) in the SO.
@@ -102,10 +102,10 @@ of ice particles (in terms of mixing ratio), it has a positive effect on cloud a
 \cite{morrison2011} studied the occurrence of supercooled liquid in clouds
 over the SO using observations by MODIS and
 found that it is present year-round in low clouds at temperature as low as
---40 $^{\circ}$C.
+--40$^{\circ}$C.
 \cite{lawson2014} noted that supercooled liquid is often
 underestimated in the Antarctic in GCMs, and mixed-phase clouds can occur at
---32 $^{\circ}$C.
+--32$^{\circ}$C.
 They showed that increasing supercooled liquid in the
 Community Earth System Model (CESM) leads to a cloud radiative effect (CRE)
 increase of 7.4 Wm$^{-2}$ over Antarctica. More recently, \cite{kay2016}
@@ -148,7 +148,7 @@ in CloudSat--CALIPSO in the region and time of year in 2007--11, with
 more high clouds identified by CloudSat--CALIPSO.
 They also found that about 30\% of cloud is detected by a ship-based lidar but not
 a radar due to low sensitivity of the radar. In terms of cloud phase,
-they found that ice-phase processes occur 20-40\% more often than implied
+they found that ice-phase processes occur 20--40\% more often than implied
 by CALIPSO due to attenuation of the signal at the cloud top. Thus, one should
 perhaps be cautious when using active satellite
 products as a reference for supercooled liquid cloud evaluation in GCMs
@@ -229,7 +229,7 @@ year 2017 at a lidar wavelength of 532 nm.
 \textbf{(a), (b)} show SR at a model level corresponding to approximately 300 m
 above sea level (ASL) over the sea, and \textbf{(a'), (b')} show an SR histogram by height.
 }
-\label{fig:surface-vs-spaceborne-lidar}
+\label{fig:1:surface-vs-spaceborne-lidar}
 \end{figure}
 
 Active satellite instruments are affected by signal attenuation by
@@ -239,7 +239,7 @@ shorter historical record and a small number of spectral bands, limiting their
 ability to determine cloud microphysical properties \citep{noh2017,mace2018a,mace2018b,gettelman2020}.
 In addition to spaceborne observations, ground-based and in situ
 observations can provide an important complementary view of clouds from below.
-Figure \ref{fig:surface-vs-spaceborne-lidar} shows that scattering ratio (SR)
+Figure \ref{fig:1:surface-vs-spaceborne-lidar} shows that scattering ratio (SR)
 (the ratio of total backscatter to molecular backscatter)
 in the boundary layer measured by a lidar is much higher when measured by 
 a ground-based lidar than a spaceborne lidar due to obscuration by higher-level
@@ -260,7 +260,7 @@ Different processing of observations from the same instrument can lead
 to different results, for example the
 GCM-Oriented CALIPSO Cloud Product (GOCCP) relative to the standard
 CloudSat--CALIPSO products \citep{chepfer2010}.
-Different thresholds can be applied which define what 'cloud' is,
+Different thresholds can be applied which define what "cloud" is,
 and cloud detection is affected by targeting a particular false alarm ratio,
 such as 5\% as in the CloudSat--CALIPSO dataset \citep{hagihara2010}.
 Probability of detection (sensitivity) then depends on the receiver operating
@@ -306,22 +306,21 @@ be compared directly or statistically.
 We provide a further literature review in Chapter 2.
 
 \section{Objectives}
-\label{sec:objectives}
+\label{sec:1:objectives}
 
 Our objectives are aligned with the New Zealand Deep South National
-Science Challenge (DSC), whose mission is to \textit{`enable New Zealanders to adapt,
-manage risk, and thrive in a changing climate'}, and is
+Science Challenge (DSC), whose mission is to "enable New Zealanders to adapt,
+manage risk, and thrive in a changing climate", and is
 broadly in line with the current international research in the area
-such as the Southern Ocean Clouds
-Radiation Aerosol Transport Experimental Study (SOCRATES) \citep{mcfarquhar2014}.
+such SOCRATES \citep{mcfarquhar2014}.
 Here, we focus on complementing other studies evaluating
-representation of clouds, aerosols and cloud-aerosol interaction in the SO,
+representation of clouds, aerosols and cloud--aerosol interaction in the SO,
 but also taking into consideration the Southern Hemisphere and global processes,
 with a particular focus on utilising in situ measurements
 available from intensive observation periods (IOPs), complemented by land-based
 stations. For this
 purpose the COSP simulator needs to be extended to support these
-instruments. A ground-based observations need to be
+instruments. Ground-based observations need to be
 complemented by satellite observations, especially the global radiation budget
 measurements by CERES.
 Other diagnostic means include
@@ -375,7 +374,7 @@ aim of improving the atmosphere, ocean and cryosphere simulation affecting
 Aotearoa/New Zealand
 \citep{williams2016}. Development is done by the National Institute of Water and
 Atmospheric Research (NIWA) in Wellington and the University of Canterbury.
-The NZESM is a fully coupled atmosphere-ocean model, including land surface
+The NZESM is a fully coupled atmosphere--ocean model, including land surface
 and sea ice. The parent model UKESM \citep{walters2017} is planned to participate
 in the 6th Climate Model Intercomparison Project (CMIP6) \citep{eyring2016,meehl2014},
 which shall eventually contribute to the upcoming
@@ -417,7 +416,7 @@ to be tuned for any particular instrument being simulated due to different
 wavelengths, signal modulation, view and error characteristics.
 COSP allows for comparison of instrument quantities
 (backscatter, radar reflectivity), or derived products
-(cloud top/base, cloud phase, ...) between the model and observations.
+(cloud top/base, cloud phase, \ldots) between the model and observations.
 An exact co-located comparison is limited by the relatively low spatial and
 temporal resolution
 of GCMs, and pseudo-observations need to be made on subcolumns generated by
@@ -430,7 +429,7 @@ when fields from a model are provided to COSP after completing the simulation.
 Running the simulator offline allows for rapid modification
 and testing of code. Cloud overlap in COSP is treated by the Subgrid Cloud Overlap Profile Sampler
 (SCOPS) \citep{webb2001}, which generates subcolumns based on the grid cell
-cloud fraction and precipitation fluxes. Either random or maximum-random cloud overlap
+cloud fraction and precipitation fluxes. Either random or maximum--random cloud overlap
 \citep{geleyn1979,ritter1992} is assumed,
 whereby cloud in the adjacent layers overlaps maximally, and cloud separated
 by clear layers overlaps randomly.
@@ -448,15 +447,6 @@ wavelength of our instruments is different from CALIOP (1064 nm and 910 nm),
 which requires re-calculation of the Mie and Rayleigh scattering coefficients.
 
 \subsection{In situ observations in the Southern Ocean}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{fig/instruments.jpg}
-\caption{
-Instruments deployed on Southern Ocean voyages and stations.
-}
-\label{fig:instruments}
-\end{figure}
 
 In situ SO observations are essential for improving the model SO biases.
 A set of SO datasets have been collected by the University of Canterbury
@@ -479,16 +469,6 @@ In addition to the datasets outlined above we have access to a set of
 ceilometer and lidar observations from the following land-based locations in
 Aotearoa/New Zealand:
 
-\begin{figure}[t]
-\includegraphics[width=\textwidth]{fig/chm15k_profile.png}
-\caption[Lufft CHM 15k ceilometer volume backscattering coefficient profile plot]{
-A Lufft CHM 15k ceilometer volume backscattering coefficient profile plot
-and corresponding sky camera images collected on the TAN1702 voyage
-on 23 March 2017.
-}
-\label{fig:chm15k-profile}
-\end{figure}
-
 \begin{itemize}
 \item \textbf{Cass}, a deployment of a Vaisala CL51 ceilometer at a station in the
 Southern Alps, Aotearoa/New Zealand.
@@ -501,9 +481,18 @@ Zealand.
 
 Observations collected on the voyages include remote sensing with ceilometers and lidars,
 a micro rain radar, radiosonde profiles, automatic weather station (AWS) data (temperature, relative humidity,
-wind, SST, radiometer...), UAV and tethered balloon soundings and
-aerosol concentration (Fig. \ref{fig:instruments}.
+wind, SST, radiometer, \ldots), unmanned aerial vehicle (UAV) and tethered balloon soundings and
+aerosol concentration (Fig. \ref{fig:1:instruments}).
 Below, we briefly describe the instruments.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig/instruments.jpg}
+\caption{
+Instruments deployed on Southern Ocean voyages and stations.
+}
+\label{fig:1:instruments}
+\end{figure}
 
 \textit{Lufft CHM 15k} is an IR ceilometer operating at a single wavelength of
 1064 nm, which makes it suitable for observation of cloud droplets and
@@ -522,6 +511,16 @@ which makes it easy
 for processing by various data analysis tools.
 The averaging period of the instrument is 2 s. This provides spatiotemporal
 resolution much greater than a GCM. Averaging over longer time periods can be applied to improve the signal-to-noise ratio (SNR).
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{fig/chm15k_profile.png}
+\caption[Lufft CHM 15k ceilometer volume backscattering coefficient profile plot]{
+A Lufft CHM 15k ceilometer volume backscattering coefficient profile plot
+and corresponding sky camera images collected on the TAN1702 voyage
+on 23 March 2017.
+}
+\label{fig:1:chm15k-profile}
+\end{figure}
 
 \textit{Vaisala CL51} is an IR ceilometer operating a
 wavelength of 910 nm. Similar to Lufft CHM 15k, it is suitable for observation
@@ -545,7 +544,7 @@ an off-the-shelf time lapse camera Brinno BCC200 (as a low-cost but
 satisfactory solution) and a fisheye-lens camera.
 The sampling period can be chosen from a wide range of values; we have
 determined that a 5-minute interval is sufficient.
-Figure \ref{fig:chm15k-profile} shows an example backscatter profile plot
+Figure \ref{fig:1:chm15k-profile} shows an example backscatter profile plot
 from the TAN1702 voyage, combined with sky camera images. 
 In addition to CBH, these measurements provide a wealth
 of information about the cloud type, the vertical extent, optical thickness,
@@ -555,12 +554,12 @@ by co-authored studies: \cite{klekociuk2018,jolly2018,hartery2020a,hartery2020b}
 
 Preliminary analysis of multiple voyage datasets indicates that low cloud
 below 2 km constitutes the majority of cloud in the summertime in the SO
-(Fig. \ref{fig:cbh}). Preliminary results from the TAN1802 voyage also
+(Fig. \ref{fig:1:cbh}). Preliminary results from the TAN1802 voyage also
 show a very high cloud fraction of 94\% and a strong peak of boundary layer
-cloud below 1 km above sea level (ASL) (Fig. \ref{fig:tan1802-stats}a), the predominance
-of stratus (52\%) and stratocumulus (30\%) clouds (Fig. \ref{fig:tan1802-stats}b), predominantly
-near-zero SST (Fig. \ref{fig:tan1802-stats}c) and near-surface air temperature below SST
-(Fig. \ref{fig:tan1802-stats}d, e). These results suggest a cold boundary layer
+cloud below 1 km above sea level (ASL) (Fig. \ref{fig:1:tan1802-stats}a), the predominance
+of stratus (52\%) and stratocumulus (30\%) clouds (Fig. \ref{fig:1:tan1802-stats}b), predominantly
+near-zero SST (Fig. \ref{fig:1:tan1802-stats}c) and near-surface air temperature below SST
+(Fig. \ref{fig:1:tan1802-stats}d, e). These results suggest a cold boundary layer
 destabilised by relatively warm SST and subsequent formation of
 low stratus and stratocumulus cloud.
 
@@ -571,7 +570,7 @@ Cloud base height distribution on the HMNZS \textit{Wellington} 2016, TAN702 and
 voyages derived with a Lufft CHM 15k ceilometer observations (as determined by
 the instrument's firmware).
 }
-\label{fig:cbh}
+\label{fig:1:cbh}
 \end{figure}
 
 \begin{figure}[t]
@@ -585,7 +584,7 @@ in \% calculated from human observations. Histograms of \textbf{(c)} sea surface
 and \textbf{(e)} SST - air temperature calculated from the automatic
 weather station (AWS) data.
 }
-\label{fig:tan1802-stats}
+\label{fig:1:tan1802-stats}
 \end{figure}
 
 \subsection{Satellite radiation budget observations}
@@ -659,7 +658,7 @@ frequency of the CERES-carrying satellites at the poles.
 %\textbf{a,} Surface lidar (532 nm),
 %\textbf{b,} Spaceborne lidar (532 nm).
 %}
-%\label{fig:hist}
+%\label{fig:1:hist}
 %\end{figure}
 
 \subsection{Auxiliary software}
@@ -697,9 +696,9 @@ describe a new ground based lidar processing and simulator framework.
 In Chapter 4 we describe and evaluate an experimental run of the UM11.4 aimed at
 improving representation of boundary layer cloud in the SO.
 As of May 2020, Chapter 2 was accepted for publication in the Atmospheric
-Chemistry and Physics (ACP) \citep{kuma2020a}. Chapter 3 is in review in the
+Chemistry and Physics (ACP) \citep{kuma2020a}, and Chapter 3 is in review in the
 Geoscientific Model Development Discussions (GMDD) \citep{kuma2020b}.
 Co-authored published studies related to this thesis are: \cite{jolly2018}
-(published in ACP), \cite{klekociuk2018} (published in Deep Sea Research Part II: Topical Studies in Oceanography), \cite{hartery2020a}
-(published in Journal of Geophysical Research: Atmospheres) and
-\cite{hartery2020b} (submitted to Geophysical Research Letters).
+(published in the ACP), \cite{klekociuk2018} (published in the Deep Sea Research Part II: Topical Studies in Oceanography), \cite{hartery2020a}
+(published in the Journal of Geophysical Research: Atmospheres) and
+\cite{hartery2020b} (submitted to the Geophysical Research Letters).

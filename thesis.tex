@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper]{book}
 \usepackage[inner=2.5cm,outer=2.5cm,top=3cm,bottom=3cm]{geometry}
 \usepackage{setspace}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks,pdfauthor={Peter Kuma},pdftitle={Comparing remotely sensed observations of clouds and aerosols in the Southern Ocean with climate model simulations}]{hyperref}
 \usepackage[round]{natbib}
 \usepackage{amsmath}
 \usepackage{fontspec}
@@ -10,12 +10,12 @@
 \usepackage{pdfpages}
 \usepackage{microtype}
 \usepackage{amsfonts}
-\usepackage[labelfont={bf,sf,small},labelsep=quad]{caption}
-\DeclareCaptionLabelSeparator{pipe}{ | }
+\usepackage[labelfont={bf,sf,small},font={sf,small},labelsep=quad]{caption}
+\DeclareCaptionLabelSeparator{pipe}{ \,|\, }
 \captionsetup{labelsep=pipe}
 \setmainfont{Crimson Text}
-\setsansfont{Open Sans}
-\titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
+\setsansfont{Source Sans Pro}
+\titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\raggedright\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
 \titleformat*{\section}{\Large\bfseries\sffamily}
 \titleformat*{\subsection}{\large\bfseries\sffamily}
 \titleformat*{\subsubsection}{\bfseries\sffamily}
@@ -24,43 +24,49 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\quad #1}}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
 \fancyhf{}
-\fancyhead[LE,RO]{\sffamily\thepage}
-\fancyhead[RE]{\sffamily\leftmark}
-\fancyhead[LO]{\sffamily\rightmark}
+\fancyhead[LE,RO]{\footnotesize\sffamily\thepage}
+\fancyhead[RE]{\footnotesize\sffamily\leftmark}
+\fancyhead[LO]{\footnotesize\sffamily\rightmark}
 \fancypagestyle{plain}{%
 \fancyhf{}%
-\fancyfoot[R]{\sffamily\thepage}%
+\fancyfoot[R]{\footnotesize\sffamily\thepage}%
 \renewcommand{\headrulewidth}{0pt}
 }
 \renewcommand{\listfigurename}{List of figures}
 \renewcommand{\listtablename}{List of tables}
 \bibliographystyle{copernicus}
-%\setstretch{1.1}
 \DeclareRobustCommand*\unit[1]
  {\ensuremath{%
    {\thinmuskip3mu\relax
     \def\mu{\text{\textmu}}\def~{\,}%
     \ifx\f@series\testbx\mathbf{#1}\else\mathrm{#1}\fi}}}
+\setlength{\bibsep}{0pt plus 0.3ex}
 \begin{document}
+\pagenumbering{roman}
 \input{title.tex}
 \clearpage
 \renewcommand{\normalsize}{\fontsize{12pt}{16pt}\selectfont}
-\renewcommand{\small}{\fontsize{11pt}{15pt}\selectfont}
+\renewcommand{\small}{\fontsize{10pt}{14pt}\selectfont}
 \normalsize
 \input{abstract.tex}
 \clearpage
 \includepdf[pages=-]{coauthorship_form_signed.pdf}
 \clearpage
 \input{acknowledgments.tex}
+\sffamily
 \tableofcontents
 \listoffigures 
 \listoftables
+\normalfont
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \input{introduction/introduction.tex}
 \input{chapter2/chapter.tex}
 \input{chapter3/chapter.tex}
 \input{chapter4/chapter.tex}
 \input{conclusions/conclusions.tex}
-\footnotesize
-%\bibliography{introduction/bibliography,chapter2/bibliography,chapter3/bibliography,chapter4/bibliography,conclusions/bibliography}
+\sffamily
+\fontsize{8pt}{12pt}\selectfont
 \bibliography{bibliography}
 \end{document}
