@@ -1,5 +1,21 @@
 \chapter{Improving Southern Ocean boundary layer cloud para\-metrisation in the HadGEM3-GA7.1/UM11.4 general circulation model}
 
+\vspace{-0.1cm}
+\sffamily
+\linespread{1.6}
+\raggedright
+Peter Kuma$^1$, Adrian J. McDonald$^1$, Olaf Morgenstern$^2$, Sean Hartery$^1$, Jonny Williams$^2$, Vidya Varma$^2$, Guang Zeng$^2$, Mike Harvey$^2$, Simon Parsons$^1$, Graeme Plank$^1$
+\footnotesize
+
+\linespread{1}
+\vspace{0.2cm}
+\noindent
+$^1$University of Canterbury, Christchurch, Aotearoa/New Zealand\\
+$^2$NIWA, Wellington, Aotearoa/New Zealand
+\normalsize
+\normalfont
+\justify
+
 \section*{Abstract}
 
 Southern Ocean cloud biases and the corresponding shortwave and longwave radiation
@@ -334,7 +350,7 @@ lifting condensation level (LCL).
 \label{fig:4:scheme}
 \end{figure}
 
-Figure \ref{fig:4:scheme} show a schematic of operation of the UM11.4 boundary layer and convection
+Figure \ref{fig:4:scheme} shows a schematic of operation of the UM11.4 boundary layer and convection
 parametrisation most
 commonly occurring during the TAN1802 voyage in situations with Sc cloud,
 and Table \ref{tab:4:levels} summarises the BL diagnostic levels of the model.
@@ -366,28 +382,6 @@ If these processes are sufficient, enough moisture (saturated air) is detrained
 below the capping inversion to increase RH above the critical RH and condense the
 excess water vapour into Sc cloud. Deficiencies in any of above processes or their interconnections can result in a deficiency in RH and a lack of Sc compared to observations. Our aim is therefore to identify which of these processes or interconnections are underestimated.
 
-\begin{table}
-\caption[Diagnostic model levels and layers]{
-Diagnostic model levels and layers relevant to shallow boundary layer convection, turbulence
-and cloud, listed from the lowest to the highest.
-}
-\label{tab:4:levels}
-\centering
-\scalebox{0.71}{
-\begin{tabular}{llllllll}
-\hline
-Level & Description\\
-\hline
-SL (surface layer) & Layer between the surface and the lower of 0.1$z_h$ and level where $\theta_{vl}$ starts to increase with height.\\
-SML (surface mixed layer) & Turbulently well-mixed layer between the surface and the LCL.\\
-LCL (lifting condensation level) & Traditional definition (e.g. \cite{wallace2006}).\\
-$z_h$ & Level equal to the LCL if cumulus-capped, or $z_{par}$ if not.\\
-$z_{par}$ & Top of a diagnostic moist parcel ascent.\\
-\hline
-\end{tabular}
-}
-\end{table}
-
 \subsection{Experimental run}
 \label{sec:4:experimental-run}
 
@@ -411,6 +405,29 @@ of increasing the initial mass flux by 50\%. The motivation for this change
 is to increase the speed of convective updrafts, by which the forced
 detrainment of saturated air below the capping inversion is increased.
 \end{itemize}
+
+\begin{table}
+\caption[Diagnostic model levels and layers]{
+Diagnostic model levels and layers relevant to shallow boundary layer convection, turbulence
+and cloud, listed from the lowest to the highest.
+}
+\label{tab:4:levels}
+\centering
+\scalebox{0.71}{
+\begin{tabular}{llllllll}
+\hline
+Level & Description\\
+\hline
+SL (surface layer) & Layer between the surface and the lower of 0.1$z_h$ and level where $\theta_{vl}$ starts to increase with height.\\
+SML (surface mixed layer) & Turbulently well-mixed layer between the surface and the LCL.\\
+LCL (lifting condensation level) & Traditional definition (e.g. \cite{wallace2006}).\\
+$z_h$ & Level equal to the LCL if cumulus-capped, or $z_{par}$ if not.\\
+$z_{par}$ & Top of a diagnostic moist parcel ascent.\\
+\hline
+\end{tabular}
+}
+\end{table}
+
 
 \section{Results}
 \label{sec:4:results}

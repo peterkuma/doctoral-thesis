@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{book}
 \usepackage[inner=2.5cm,outer=2.5cm,top=3cm,bottom=3cm]{geometry}
 \usepackage{setspace}
+\usepackage{ragged2e}
 \usepackage[hidelinks,pdfauthor={Peter Kuma},pdftitle={Comparing remotely sensed observations of clouds and aerosols in the Southern Ocean with climate model simulations}]{hyperref}
 \usepackage[round]{natbib}
 \usepackage{amsmath}
@@ -15,7 +16,7 @@
 \captionsetup{labelsep=pipe}
 \setmainfont{Crimson Text}
 \setsansfont{Source Sans Pro}
-\titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.5cm}{\normalfont\raggedright\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule]
+\titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.3cm}{\normalfont\raggedright\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule\vspace{-0.7cm}]
 \titleformat*{\section}{\Large\bfseries\sffamily}
 \titleformat*{\subsection}{\large\bfseries\sffamily}
 \titleformat*{\subsubsection}{\bfseries\sffamily}
@@ -52,12 +53,14 @@
 \clearpage
 \includepdf[pages=-]{coauthorship_form_signed.pdf}
 \clearpage
-\input{acknowledgments.tex}
+\input{acknowledgements.tex}
 \sffamily
+\small
 \tableofcontents
 \listoffigures 
 \listoftables
 \normalfont
+\normalsize
 \cleardoublepage
 \pagenumbering{arabic}
 \setcounter{page}{1}
