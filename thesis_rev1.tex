@@ -1,0 +1,113 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage[inner=1.5cm,outer=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage[hidelinks,pdfauthor={Peter Kuma},pdftitle={Comparing remotely sensed observations of clouds and aerosols in the Southern Ocean with climate model simulations}]{hyperref}
+\usepackage[round]{natbib}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{pdfpages}
+\usepackage[protrusion=true,stretch=30,shrink=30]{microtype}
+\usepackage{amsfonts}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{babel}
+\usepackage[english=british,style=english]{csquotes}
+\MakeOuterQuote{"}
+\usepackage[labelfont={bf,sf,small},font={sf,small},labelsep=quad]{caption}
+\DeclareCaptionLabelSeparator{pipe}{ \,|\, }
+\captionsetup{labelsep=pipe}
+\setmainfont{Crimson Text}
+\setsansfont{Source Sans Pro}
+\titleformat{\chapter}[display]{\Large\sffamily}{\chaptertitlename\ \thechapter}{0.3cm}{\normalfont\raggedright\LARGE\bfseries\sffamily}[\vspace{0.5cm}\titlerule\vspace{-0.7cm}]
+\titlespacing*{\chapter}{0cm}{0cm}{1.4cm}
+\titleformat*{\section}{\Large\bfseries\sffamily}
+\titleformat*{\subsection}{\large\bfseries\sffamily}
+\titleformat*{\subsubsection}{\bfseries\sffamily}
+\setcounter{secnumdepth}{5}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\quad #1}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter}{}}
+\fancyhf{}
+\fancyhead[LE,RO]{\footnotesize\sffamily\thepage}
+\fancyhead[RE]{\footnotesize\sffamily\nouppercase{\leftmark}}
+\fancyhead[LO]{\footnotesize\sffamily\nouppercase{\rightmark}}
+\fancypagestyle{plain}{%
+\fancyhf{}%
+\fancyfoot[R]{\footnotesize\sffamily\thepage}%
+\renewcommand{\headrulewidth}{0pt}
+}
+\renewcommand{\listfigurename}{List of figures}
+\renewcommand{\listtablename}{List of tables}
+%\renewcommand{\baselinestretch}{1.1}
+\bibliographystyle{copernicus}
+\DeclareRobustCommand*\unit[1]
+ {\ensuremath{%
+   {\thinmuskip3mu\relax
+    \def\mu{\text{\textmu}}\def~{\,}%
+    \ifx\f@series\testbx\mathbf{#1}\else\mathrm{#1}\fi}}}
+\setlength{\bibsep}{0pt plus 0.3ex}
+\renewcommand{\baselinestretch}{1.111111}
+
+\titlecontents{chapter}[0em]{\vskip 3pt\bfseries\small\sffamily}{\thecontentslabel\enspace}{\hspace{1.05em}}{\hfill\contentspage}[\vskip 3pt]
+\titlecontents{section}[1em]{\small\sffamily}{\thecontentslabel\enspace}{}{\titlerule*[1pc]{.}\quad\contentspage}[]
+\titlecontents{subsection}[2.7em]{\small\sffamily}{\thecontentslabel\enspace}{}{\titlerule*[1pc]{.}\quad\contentspage}[]
+\titlecontents{figure}[0em]{\small\sffamily}{\thecontentslabel\enspace}{}{\titlerule*[1pc]{.}\quad\contentspage}
+\titlecontents{table}[0em]{\small\sffamily}{\thecontentslabel\enspace}{}{\titlerule*[1pc]{.}\quad\contentspage}
+
+\emergencystretch 3em
+
+\usepackage{etoolbox}
+\pretocmd{\contentsname}{\sffamily}{}{}
+
+\begin{document}
+\pagenumbering{roman}
+\input{title_rev1.tex}
+\clearpage
+%\renewcommand{\normalsize}{\fontsize{12pt}{16pt}\selectfont}
+%\renewcommand{\small}{\fontsize{10pt}{14pt}\selectfont}
+\newcommand{\linelabel}[1]{}
+\newcommand{\tophline}{\hline}
+\newcommand{\middlehline}{\hline}
+\newcommand{\bottomhline}{\hline}
+\normalfont
+\normalsize
+\cleardoublepage
+\newgeometry{margin=0cm}
+\thispagestyle{empty}
+\centerline{\includegraphics[page=1,clip,trim={0 3.6cm 0 0},width=\paperwidth]{coauthorship_form_signed.pdf}}
+
+\centerline{\includegraphics[page=2,clip,trim={0 25cm 0 2cm},width=\paperwidth]{coauthorship_form_signed.pdf}}
+\restoregeometry
+\clearpage
+\normalfont
+\normalsize
+\input{abstract_rev1.tex}
+\clearpage
+\input{acknowledgements_rev1.tex}
+\tableofcontents
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\fontsize{8pt}{12pt}\selectfont
+\input{glossary.tex}
+\normalfont
+\normalsize
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{introduction/introduction_rev1.tex}
+\input{chapter2/chapter_rev1.tex}
+\input{chapter3/chapter_rev1.tex}
+\input{chapter4/chapter_rev1.tex}
+\input{conclusions/conclusions_rev1.tex}
+\clearpage
+\addcontentsline{toc}{chapter}{Bibliography}
+\sffamily
+\fontsize{9pt}{12pt}\selectfont
+\bibliography{bibliography_rev1}
+\end{document}

@@ -1,0 +1,857 @@
+\chapter{Improving Southern Ocean boundary layer cloud para\-metrisation in the HadGEM3-GA7.1/UM11.4 general circulation model}
+
+\vspace{-0.1cm}\begin{spacing}{1.2}\sffamily\raggedright
+Peter~Kuma$^1$, Adrian~J.~McDonald$^1$, Olaf~Morgenstern$^2$, Sean~Hartery$^1$, Jonny~Williams$^2$, Vidya~Varma$^2$, Guang~Zeng$^2$, Mike~Harvey$^2$, Simon~Parsons$^1$ and~Graeme~Plank$^1$
+\end{spacing}
+
+\vspace{0.4cm}\begin{spacing}{1.2}\footnotesize\sffamily\noindent\raggedright
+$^1$University of Canterbury, Christchurch, Aotearoa/New Zealand\\
+$^2$NIWA, Wellington, Aotearoa/New Zealand
+\end{spacing}
+
+\section*{Abstract}
+
+Southern Ocean cloud biases and the corresponding shortwave and longwave radiation
+biases are a longstanding problem in general circulation models. We use one month of high-resolution summertime
+Southern Ocean voyage ceilometer and radiosonde observations collected on the Aotearoa/New Zealand research vessel Tangaroa in February--March
+2018 in the Ross Sea region
+and a nudged run of HadGEM3-GA7.1/UM11.4 to
+evaluate the impact of modifications in the convection and boundary layer
+schemes on cloud simulation in a set of representative case studies. We use the recently-developed Automatic Lidar and Ceilometer Framework (ALCF) to assess and improve the representation of stratocumulus (Sc) cloud,
+currently strongly underestimated in the model. We show that two- and three-layer cloud
+profiles of cumulus (Cu) below Sc corresponding to local thermodynamic levels were a common occurrence, where
+the Cu cloud base height coincides with the lifting condensation level (LCL)
+and the Sc cloud heights coincide with the neutral buoyancy level of dry and moist (respectively) air
+parcels lifted from the surface.
+While the thermodynamic state of the atmosphere is simulated
+well by the model, too little moisture appears to be transported to the top of the boundary layer. By increasing surface moisture flux and convective mass flux in the model we can improve the Sc cloud simulation in case studies, but we demonstrate that a lack of vertical moisture transport
+across the LCL from the surface layer to the zone of convective mass flux remains a likely limiting factor.
+We also show that the modifications made have a positive impact on the Southern Ocean and
+global radiation balance of up to 5 \unit{Wm^{-2}} based on zonal averages over the time period examined.
+
+%\copyrightstatement{TEXT}
+
+\section{Introduction}
+
+Cloud biases in general circulation models (GCMs) are a long-standing problem
+\citep{trenberth2010,vignesh2020}. Correct cloud representation in GCMs is critical due
+to the large impact of clouds on the planetary albedo and longwave emissivity as well as
+being a latent heat source and the source of precipitation. Cloud biases are a key contributor to the error in the
+simulation of the radiation balance
+in contemporary GCMs \citep{li2013}. Clouds in these models are parametrised by subgrid-scale parametrisation schemes. Cloud typically varies at scales much smaller
+than the resolution of the models, which is typically on the order of 10--200 km in the horizontal. Therefore, many of the physical
+processes responsible for cloud formation and removal, such as convection and cloud microphysics, are not resolved at the
+model resolution and have to be parametrised. The nature of these parametrisations means that they inevitably lead to large uncertainties. An alternative to such schemes are cloud resolving models
+(CRMs), which operate at a much higher horizontal spatial resolution (on the order of 1 km)
+\citep{guichard2017,satoh2019}.
+However, at present it is not feasible to use these models for long-term climate
+projections due to their computational demands. Therefore, a continued improvement of
+existing cloud schemes is needed.
+
+Cloud parametrisation in GCMs is traditionally improved by intercomparing with
+observations such as the ISCCP satellite-based cloud dataset \citep{rossow1991}
+or more recently the CloudSat--CALIPSO datasets
+\citep{stephens2002,winker2003}. By accomplishing a good match with past and
+present observations of cloud it is assumed that cloud representation in
+simulations of future climate will be reasonable. However, the physical
+processes responsible for any cloud bias are not necessarily obvious from a simple
+intercomparison, which may be due to processes outside of the cloud
+parametrisation scheme \citep{morcrette2010}. The presence of compensating
+errors can also make the model perform worse when only one of the errors is
+corrected \citep{hourdin2017,schuddeboom2019}.
+
+Here, we focus on the Southern Ocean (SO) boundary layer parametrisations in the
+Global Atmosphere 7.1 (GA7.1)/Unified Model 11.4 (UM11.4) component of the
+Hadley Centre Global Environment Model 3 (HadGEM3) \citep{walters2019},
+with the aim of improving the simulation of stratocumulus clouds.
+This follows the findings of \cite{kuma2020a} of underestimated cloud occurrence
+below 2 km above sea level (ASL) in GA7.1 relative to a comprehensive set of
+ship-based observations.
+The GA7.1 model is based the  UK Met Office
+Unified Model (UM), which is also used for operational numerical weather
+prediction (NWP). HadGEM3 (GC3.1) has participated in the 6$^{\rm th}$ Coupled
+Model Intercomparison Project (CMIP6). As shown by \cite{kuma2020a}, cloud
+fraction in a previous version of the model is underestimated in the SO by about 6--8\%, with low cloud below 1 km
+and fog particularly underestimated compared to ship-based ceilometer
+observations. \cite{schuddeboom2019} and \cite{kuma2020a} noted that there is a clear division at a latitude of 55$^\circ$S between positive and negative shortwave (SW) radiation biases in HadGEM3-GA7.1 and that the positive vs.~negative bias appears to be linked to near-surface air temperature, with negative bias strongly associated with
+close to zero near-surface air temperature. Therefore, we expect that
+near-surface temperature and sea surface temperature (SST) have a significant role in the cloud bias, potentially by destabilisation of the relatively cold Antarctic air in the surface
+layer by near-zero SST. \cite{loveridge2019} also implicated quiescent conditions in the
+SO boundary layer (BL) cloud bias in GA7.0. Considering these past findings, here we focus
+on BL cloud south of 60$^\circ$S, which we will identify as
+"high-latitude SO", as opposed to "low-latitude SO" north of 60$^\circ$S.
+
+The UM parametrises clouds using the prognostic cloud fraction and prognostic condensate scheme (PC2) scheme
+\citep{wilson2008a,wilson2008b}, in which the cloud condensate (liquid and ice)
+and cloud fraction are prognostic variables defined on every grid cell. The prognostic variables can be advected with the
+large-scale flow, which is in contrast to earlier schemes which were purely
+diagnostic \citep{smith1990} and based on the assumption that any
+supersaturation is turned into cloud condensate \citep{jakob2000}. Cloud
+condensate and cloud fraction originating in the convection scheme are
+added to the prognostic fields.
+injected
+into the condensate and cloud fraction of the cloud scheme and thus become
+prognostic.
+Schemes which
+used prognostic condensate and diagnostic cloud fraction also exist
+\citep{sundqvist1978,sundqvist1989}.
+
+An improvement in the SO cloud representation in the Meteorological Research Institute Earth System Model version 2 (MRI-ESM2) GCM has recently been
+reported by \cite{kawai2019}. This model uses a cloud scheme based on
+\cite{tiedtke1993}. This is also the basis of the PC2 scheme, although both
+schemes contain many modifications from the original scheme. Therefore, it may be
+possible to gain insight from this study on improvements in the PC2 scheme which would enhance the simulation of clouds in this region. \cite{kawai2019} reported that their updated stratocumulus scheme resulted in about
+a 10\% increase in SO cloud cover and a 10 Wm$^{-2}$ increase in top of the atmosphere
+(TOA) outgoing SW radiation over the SO, reducing the model bias.
+
+This paper is structured as follows.
+In Sect.~\ref{sec:4:methods} we briefly describe the TAN1802 voyage dataset,
+the HadGEM3-GA7.1/UM11.4, and the lidar processing and simulator framework ALCF.
+In Sect.~\ref{sec:4:parametrisations} we describe the
+relevant characteristics of the cloud-related parametrisation schemes in the UM
+and an experimental run of the HadGEM3-GA7.1/UM11.4. Finally, in Sect.
+\ref{sec:4:results} we contrast the results
+of the experimental run with the control run and observations.
+
+\section{Methods}
+\label{sec:4:methods}
+
+\subsection{The TAN1802 voyage}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{chapter4/fig/map.pdf}
+\caption[A map showing the track of the TAN1802 voyage]{A map showing the track of the TAN1802 voyage and the region
+between 60$^\circ$S and 73$^\circ$S of the TAN1802 ceilometer, radiosonde
+and AWS data analysed here.
+}
+\label{fig:4:map}
+\end{figure}
+
+
+In our analysis we use ceilometer, radiosonde, and AWS data collected on the TAN1802 voyage
+of RV Tangaroa in the Ross Sea. The data were collected
+between 16 February and 15 March 2018 UTC (inclusive), when the ship was south of
+60$^\circ$S. The deployed ceilometer was a Lufft CHM 15k operating at an
+infrared wavelength of 1064 nm and directed vertically between the surface and 15 km above
+sea level (ASL). We process the raw backscatter profiles with
+the ALCF (Sect.~\ref{sec:4:alcf}). In addition, we use radiosonde profiles
+sampled during the voyage at between 1--3 times daily intervals
+using the iMet-1 ABx radiosondes. Near-surface air temperature, relative humidity (RH) and SST were sampled continuously during the voyage. The TAN8102
+voyage atmospheric measurements are also described in greater detail by
+\cite{kuma2020a} and \cite{hartery2020a}. The track of the voyage
+is shown in Fig.~\ref{fig:4:map}.
+
+\subsection{HadGEM3-GA7.1/UM11.4}
+
+The GA7.1 model is based on the UK Met Office Unified Model (UM), which is an
+atmospheric model used for both NWP and climate-modelling purposes in global and regional
+configurations \citep{walters2019}. HadGEM3 is a proprietary model developed by the UK Met Office
+and partner organisations in a number of countries. We analyse data from a relatively
+recent version UM11.4 released on 21 Jun 2019. The experiments were performed on the NeSI
+supercomputer in Wellington, Aotearoa/New Zealand \citep{williams2016}.
+The horizontal grid scale of the model is N96,
+corresponding to about 100$\times$140 km horizontal grid cells at
+60$^\circ$S. The time step of the model is 20 minutes to aid comparison with observations.  % This could be shortened and tabulated, for easier readability. OM.
+We use instantaneous 3-dimensional atmospheric fields exported from the model at each time
+step and process these with the ALCF (Sect.~\ref{sec:4:alcf}) to obtain simulated
+lidar data corresponding to the TAN1802 voyage. We use UM11.4 in a "nudged"
+configuration in which SST and sea ice concentration are prescribed from
+the HadISST dataset \citep{rayner2003} and atmospheric fields are nudged towards the
+ERA-Interim reanalysis \citep{dee2011}. In this configuration the large-scale
+dynamics is effectively prescribed while parametrised fields
+such as cloud are the result of the model's physics. Here, we analyse
+two simulations produced by the UM11.4: (1) an unmodified control run "UM11.4cnt"
+and (2) an experimental run "UM11.4ext" (Sect.~\ref{sec:4:experimental-run}).
+The cloud- and BL-related parametrisations in the HadGEM3-GA7.1/UM11.4 are described in Sect.~\ref{sec:4:parametrisations}.
+
+\subsection{ALCF}
+\label{sec:4:alcf}
+
+The Automatic Lidar and Ceilometer Framework (ALCF) \citep{kuma2020b} is a lidar
+simulator and lidar processing tool, based on the Cloud
+Feedback and Model Intercomparison Project (CFMIP) Observation Simulator Package
+(COSP) \citep{bodas-salcedo2011}. The ALCF enables consistent comparison
+between ground-based lidar observations and atmospheric models.
+We use the ALCF package to process the ceilometer
+observations collected on TAN1802 and to simulate backscatter profiles from
+the UM11.4 model output. Using this tool, we derive a cloud mask from
+the observations, calculate simulated backscatter from 20-min resolution
+model data and derive a cloud mask from the simulated backscatter.
+The resulting backscatter can be compared statistically as well as on co-located
+diagrams thanks to the model nudging, which means it represents real
+weather sitations (unlike a free-running model).
+
+\section{Parametrisations}
+\label{sec:4:parametrisations}
+
+\begin{table}
+\caption[Summary of the cloud-related subgrid-scale parametrisations in the UM11.4]{
+Summary of the cloud-related subgrid-scale parametrisations in the UM11.4.
+}
+\label{tab:4:parametrisations}
+\centering
+\centerline{\scalebox{0.9}{
+\begin{tabular}{lll}
+\hline
+Parametrisation & Principle & References\\
+\hline
+Convection scheme & Mass flux with CAPE or surface buoyancy flux closure. & \cite{gregory1990}\\
+& & \cite{grant1999}\\
+& & \cite{grant2001}\\
+Boundary layer scheme & First-order closure turbulence. &\cite{lock2000}\\
+& & \cite{martin2000}\\
+Large-scale cloud scheme (PC2) & Prognostic cloud liquid and ice. & \cite{wilson2008a,wilson2008b}\\
+JULES surface flux parametrisation & The COARE algorithm. & \cite{fairall2003}\\
+\hline
+\end{tabular}
+}}
+\end{table}
+
+
+The UM11.4 relies on the parametrisation of subgrid-scale
+processes,
+which cannot be represented by the atmospheric dynamics on the relatively
+coarse grid of the model. The parametrisations directly affecting cloud
+are the convection, boundary layer, and large-scale cloud (PC2) schemes
+and the related parametrisation of surface fluxes in the surface component of
+HadGEM3 called the Joint UK Land Environment Simulator (JULES) \citep{best2011,clark2011}. The formation
+and destruction of cloud is therefore an interplay between a number
+of parametrised processes. This interplay means that it is typically not obvious from model
+evaluation studies which process is responsible for a bias in cloud occurrence
+or TOA radiation balance. The parametrisations outlined above operate independently
+on each individual horizontal grid cell of the model.
+Table~\ref{tab:4:parametrisations} summarises the cloud-related
+parametrisation schemes, described in a greater detail below with a specific
+focus on aspects important to BL cloud.
+
+\subsection{Large-scale cloud scheme (PC2)}
+
+The PC2 scheme is based on \cite{tiedtke1993}. The motivation to
+develop a new scheme was to allow for detrainment of convection into cloud
+fraction and break the diagnostic link between cloud fraction and condensate
+\citep{umdp030}. The scheme contains a separate treatment of large-scale (stratiform) and
+convective cloud, both of which contribute to the cloud condensate and cloud
+fraction by detraining moisture and condensate. Moisture in the PC2 scheme
+within a grid cell is assumed to have a probability distribution function around
+the grid mean, parametrised by a critical RH \citep{gregory2002}.
+Therefore, supersaturation within the grid cell can occur before mean
+RH reaches 100\%. This probability density function (PDF) is defined explicitly in PC2, in
+contrast with previous schemes \citep{tiedtke1993}, which assumed an implicit
+PDF \citep{wilson2008a}.
+The PC2 scheme calculates the evolution of condensate and cloud fraction by summing the
+contributions of a number of sources and sinks in each model time step:
+advection,  boundary layer (Sect.~\ref{sec:4:bl-scheme}),
+convection (Sect.~\ref{sec:4:convection-scheme}) and precipitation.
+The convection scheme can be a
+source of condensate, cloud fraction, water vapour and heat via "inhomogeneous
+forcing" in PC2. Condensate and cloud fraction are injected from the convective
+plumes into the prognostic fields. Water vapour and heat changes can generate additional
+condensate if supersaturation occurs.
+
+\subsection{Boundary layer scheme}
+\label{sec:4:bl-scheme}
+
+The BL scheme in UM11.4 is a first-order closure turbulence
+scheme described by \cite{lock2000} and \cite{martin2000}. We use the standard
+version 9C in our analysis.
+At an initial stage, the BL scheme diagnoses the BL type
+into one of six types depending on the liquid--frozen virtual potential
+temperature ($\theta_{vl}$) profile \cite[Fig. 1]{lock2000}. Turbulence and convection
+are then applied selectively in the relevant layers, while turbulence is applied in the unstable surface mixed layer (SML), and convection is applied in the layer between
+the LCL and the capping inversion, and cloud-top driven turbulence just below
+the capping inversion in the Sc cloud layer. Our particular focus is on
+the BL Type V (i.e. decoupled Cu below Sc), which is the type most commonly
+associated with Sc biases in UM11.4 compared to our observational dataset,
+and also the most prevalent type in the high-latitude SO (Sect.~\ref{sec:4:bl-types}).
+The turbulent locally-mixed layers are characterised by diffusion coefficients
+$K_h$ and $K_m$. Depending on conditions, these are based on the surface wind
+shear, surface buoyancy gradient, Richardson number ($Ri$),
+cloud-top radiative cooling and cloud-top buoyancy reversal. This is in contrast
+with non-local mixing performed by the mass flux parametrisation in the
+convection scheme.
+
+\subsection{Convection scheme}
+\label{sec:4:convection-scheme}
+
+UM11.4 offers several versions of the convection scheme. We use the standard
+version 6, which is based on a mass flux parametrisation described by \cite{gregory1990}.
+The convection scheme parametrises convective plumes covering a fraction of the grid cell,
+consisting of updrafts and downdrafts which transport scalar quantities,
+such as heat and moisture, and vector quantities, such as momentum, vertically
+across model levels. The updrafts and downdrafts exchange air with the
+environment (i.e. the remaining part of the grid cell) by entrainment and
+detrainment. Air ascending in the updraft can undergo condensation due to
+moist adiabatic cooling, forming cumulus (Cu) cloud, and also detraining cloud
+condensate into the environment. An updraft generally terminates at the capping
+inversion, which is diagnosed by the $z_{par}$ level at the beginning of the
+model time step. At this level, the updraft
+is detrained completely into the environment by a so-called "forced detrainment".
+Mass flux, in the units of \unit{Pa.s^{-1}}, is determined by
+conservation of mass at each model level \citep{gregory1990}. This, however,
+requires a closure at the bottom level of the convective region. The scheme implements
+two types of closure: a closure based on the
+convective available potential energy (CAPE) and on surface buoyancy flux.
+The choice of closure is based of the diagnosed type of convection, which can be
+shallow, mid-level or deep. In our analysis we focus on shallow convection,
+which was predominant in our case study. Shallow convection in the scheme is based on the
+surface buoyancy flux closure. As described by \cite{grant1999} and \cite{grant2001},
+this closure is based on a similarity
+theory linking surface buoyancy flux to the initial mass flux at the cloud
+base, as determined computationally by large eddy simulations (LES) of profiles
+observed during the Barbados Oceanographic and Meteorological Experiment (BOMEX)
+\citep{davidson1968}, a North Sea field campaign \citep{smith1995} and the Atlantic Trade-wind
+Experiment (ATEX). Currently a new convection scheme "CoMorph" is in development by the UK Met Office
+with the intention to eventually replace the existing convection scheme.
+
+\subsection{JULES surface flux parametrisation}
+\label{sec:4:jules}
+
+JULES is the surface parametrisation model used in conjunction with the UM \citep{best2011,clark2011}.
+Among other processes, JULES parametrises fluxes of momentum, heat and moisture from
+the sea surface to the the surface layer of the atmosphere. The fluxes are
+determined by surface transfer coefficients for momentum and scalars $C_D$ and
+$C_M$ (respectively), which in turn are determined by the sea surface roughness
+for momentum and scalars $z_{0m}$ and $z_{0h}$ (respectively). Multiple options
+of surface roughness calculation are available \citep{umdp024}, two of which we will briefly
+describe here. The standard option is based on the
+Coupled Ocean--Atmosphere Response Experiment (COARE) algorithm
+\citep{fairall2003}. The momentum roughness length is based on
+a generalised Charnock's formula which accounts for low wind speeds.
+Charnock's coefficient $a$ is parametrised by a linear
+relationship with 10-m wind speed, subject to minimum and maximum bounds.
+The scalar roughness length is based on an empirical dependence on the
+roughness Reynolds number $R_r$ determined by a set of field campaigns (COARE-plus).
+$R_r$, in turn, is derived from the momentum roughness length, friction velocity
+and kinematic viscosity \citep{fairall2003}.
+A simpler second option of surface roughness length calculation is available
+which uses a fixed Charnock's coefficient and a fixed scalar roughness length.
+
+% When reading this I wandered whether this section would benefit from a set of key equations to help the description. This clearly can't be comprehensive,
+
+\subsection{Southern Ocean boundary layer}
+\label{sec:4:schemes}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{chapter4/fig/scheme_rev1.pdf}
+\caption[A scheme showing the operation of the boundary layer and convection schemes]{A scheme showing the operation of the boundary layer (BL)
+and convection schemes in a cumulus (Cu) below stratocumulus (Sc) profile
+commonly observed in the summertime Southern Ocean. Surface mixed layer (SML),
+lifting condensation level (LCL).
+}
+\label{fig:4:scheme}
+\end{figure}
+
+Figure~\ref{fig:4:scheme} shows a schematic of operation of the UM11.4 boundary layer and convection
+parametrisation most
+commonly occurring during the TAN1802 voyage in situations with Sc cloud,
+and Table~\ref{tab:4:levels} summarises the BL diagnostic levels of the model.
+This situation corresponds to the BL Type V in \cite{lock2000} (decoupled Sc over Cu).
+In the UM11.4 this is parametrised by the BL scheme first-order turbulence scheme
+in the surface and Sc layers and the convection scheme mass flux parametrisation
+between these two layers. The level separating the surface turbulence and
+mass flux is the LCL, above which moist convection is expected to occur.
+As noted by \cite{lock2000}, this vertical separation of the parametrisation
+schemes is undesirable, but also unavoidable due to the BL scheme partially
+accounting for the vertical transport by convection. As we will show later,
+this vertical separation of the two parametrisation schemes may be responsible for the
+lack of Sc in the model compared to observations (Sect.~\ref{sec:4:bl-mass-flux-and-rh}). For the purpose of BL
+cloud simulation, we are chiefly concerned with the vertical moisture and air
+mass transport from the sea surface to the Sc layer. This process is simulated
+by:
+
+\begin{enumerate}
+\item A flux of moisture from the sea surface to the surface layer, determined
+by the sea surface roughness in the surface scheme (JULES) (Figure~\ref{fig:4:scheme}, "surface fluxes").
+\item Mixing of moisture and heat in the SML by turbulence up to the LCL (Figure~\ref{fig:4:scheme}, "$\mathrm{K}_\mathrm{surf}$").
+\item Flux of mass and moisture by convection from the LCL to the capping inversion (Figure~\ref{fig:4:scheme}, "mass flux").
+\item Forced detrainment of air mass from the convective updraft into the environment
+below the capping inversion (corresponding to the $z_{par}$ level),
+identified in the model as the capping level for a moist lifted parcel (Figure~\ref{fig:4:scheme}, "$\mathrm{K}_\mathrm{Sc}$").
+\end{enumerate}
+
+If these processes are sufficient, enough moisture (saturated air) is detrained
+below the capping inversion to increase RH above the critical RH and condense the
+excess water vapour into Sc cloud. Deficiencies in any of above processes or their interconnections can result in a deficiency in RH and a lack of Sc compared to observations. Our aim is therefore to identify which of these processes or interconnections are underestimated.
+
+\subsection{Experimental run}
+\label{sec:4:experimental-run}
+
+We prepared an experimental run of the UM11.4 ("UM11.4exp") in order
+to evaluate the effect of tuning of the processes outlined in Sect.
+\ref{sec:4:schemes} on the simulation of Sc in the Ross Sea to compare
+with the TAN1802 voyage observations.
+In order to increase the moisture transport from the surface to the sub-capping-inversion layer, we applied the configuration and code modifications described below:
+
+\begin{itemize}
+\item We used the fixed sea surface roughness length option
+(Sect.~\ref{sec:4:jules}) with a fixed scalar surface roughness length of $10^{-4}$
+m. This value is approximately equal to the maximum in the empirical
+fit of COARE data \citep{fairall2003}. The motivation for this change is to increase
+the surface flux of moisture to the greatest physically meaningful value.
+\item We increased a coefficient relating sub-cloud convective velocity scale
+to cumulus mass flux for shallow convection ($c_\text{mass}$) by 50\%.
+$c_\text{mass}$ determines the initial mass flux in the surface buoyancy
+flux closure (Sect.~\ref{sec:4:convection-scheme}). This has the effect
+of increasing the initial mass flux by 50\%. The motivation for this change
+is to increase the speed of convective updrafts, by which the forced
+detrainment of saturated air below the capping inversion is increased.
+\end{itemize}
+
+The modifications above were chosen so that the flux through the LCL
+into the convection layer is maximised, while not overshooting the boundary
+layer top by convective plumes. We found that at higher values, the capping
+inversion tends to be degraded by convective plumes, leading to reduction
+of Sc cloud formation.
+
+\begin{table}
+\caption[Diagnostic model levels and layers]{
+Diagnostic model levels and layers relevant to shallow boundary layer convection, turbulence
+and cloud, listed from the lowest to the highest.
+}
+\label{tab:4:levels}
+\centering
+\centerline{\scalebox{0.85}{
+\begin{tabular}{llllllll}
+\hline
+Level & Description\\
+\hline
+SL (surface layer) & Layer between the surface and the lower of 0.1$z_h$ and level where $\theta_{vl}$ starts to increase with height.\\
+SML (surface mixed layer) & Turbulently well-mixed layer between the surface and the LCL.\\
+LCL (lifting condensation level) & Traditional definition (e.g. \cite{wallace2006}).\\
+$z_h$ & Level equal to the LCL if cumulus-capped, or $z_{par}$ if not.\\
+$z_{par}$ & Top of a diagnostic moist parcel ascent.\\
+\hline
+\end{tabular}
+}}
+\end{table}
+
+
+\section{Results}
+\label{sec:4:results}
+
+In this section we compare the experimental run UM11.4exp described in Sec.~\ref{sec:4:experimental-run} with the control run UM11.4cnt, in-situ observations on TAN1802 and satellite observations from the CERES instruments' synoptic (SYN) product \citep{loeb2018} in the time period between 16 February 2018 and 15 March 2018.
+
+\subsection{Cloud observations}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{chapter4/fig/backscatter_rs.pdf}
+\caption[Selected daily backscatter profiles collected on the TAN1802 voyage
+and radiosonde profiles]{Selected daily backscatter profiles collected on the TAN1802 voyage
+and radiosonde profiles. Shown are the lifting condensation level (LCL),
+sea surface temperature (SST) lifting level (SLL) and SST lifting level for a saturated parcel (SLL$_s$).
+Radiosonde launch times are indicated by a vertical line on the backscatter
+plots and the height of the LCL, SLL and SLL$_s$ is indicated by a coloured dot.
+}
+\label{fig:4:backscatter-rs}
+\end{figure}
+
+As shown previously by \cite{kuma2020a}, the BL cloud base in the SO commonly
+corresponds to either the LCL or the SST lifting level (SLL). Here, we show
+that in the TAN1802 voyage observations, three clouds layers were often observed
+and corresponded to three different thermodynamic levels. Figure
+\ref{fig:4:backscatter-rs} shows several days of co-located ceilometer and
+radiosonde observations. Based on the radiosonde profiles, we calculated the
+following thermodynamic levels: the LCL, SLL and saturated SLL (SLL$_s$), which
+uses the same assumption as SSL, but allows the parcel to ascend by moist
+adiabatic processes above the LCL. On a majority of days with Sc cloud, we observed
+that the LCL corresponded with the cloud base of relatively thin Cu fractus
+below 1 km ASL (visible on all days in Fig.~\ref{fig:4:backscatter-rs}). The much thicker
+layer of Sc corresponded with SLL between 1 and 2 km ASL, i.e. due to parcels lifted by dry convection.
+In several cases, SSL$_s$ corresponded with a third layer of cloud above Sc
+(Fig.~\ref{fig:4:backscatter-rs}a, d, e), i.e. due to parcels lifted by moist
+convection. The third layer was, however, intermittent and much less significant
+than the Sc cloud based identified near SLL. Examination of radiosonde profiles, shows that SLL and SLL$_s$ were both characterised by an inversion (most clearly visible in Fig.
+\ref{fig:4:backscatter-rs}e'). Physically, this inversion would act to prevent
+further ascent of a parcel and cause a forced detrainment of convective updrafts,
+thus leading to accumulation of moisture below the inversion and the gradual
+formation of Sc cloud. As discussed later, we think that this process is
+underestimated in the UM11.4, which explains the absence of Sc layers in the model compared to observations.
+
+\subsection{Cloud representation}
+\label{sec:4:cloud-representation}
+
+\begin{figure}[p]
+\centering
+\centerline{\includegraphics[width=1.12\textwidth]{chapter4/fig/examples.pdf}}
+\caption[Selected daily observed and simulated backscatter profile plots]{Selected daily observed and simulated backscatter profile plots.
+The observations (OBS) were collected on the TAN1802 voyage and the
+simulations are based on the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs
+at the same time and geographical location as corresponding the observations.
+The plots also show the radiosonde lifting condensation level (LCL), sea surface temperature (SST) lifting level (SLL), saturated SST lifting level (SSL$_s$), the model LCL, diagnostic parcel height (z$_{par}$) and
+updraft detrainment rate (DTRU). The vertical extent is limited to 5 km ASL.
+}
+\label{fig:4:examples}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\centerline{\includegraphics[width=1.12\textwidth]{chapter4/fig/examples_cont.pdf}}
+\caption{Figure~\ref{fig:4:examples} continued.
+}
+\label{fig:4:examples-cont}
+\end{figure}
+
+A characteristic feature of the SO cloud observed on the TAN1802 voyage
+by a ceilometer
+were layers of relatively optically thick, but geometrically thin Sc
+at between 1 and 3 km ASL (Fig.~\ref{fig:4:backscatter-rs},~\ref{fig:4:examples}
+and
+\ref{fig:4:examples-cont}; in particular Fig.~\ref{fig:4:examples}a1 17:00--0:00, b1 0:00--12:00, c1
+4:00--9:00, e1 12:00--20:00, Fig.~\ref{fig:4:examples-cont}a1 0:00--4:00).
+These were commonly accompanied by Cu fractus
+below the Sc layer.
+Apart from these two types of cloud, a significant amount
+of fog was observed on the voyage (Sect.~\ref{sec:4:cloud-occurrence-statistics}).
+In Fig.~\ref{fig:4:examples} and~\ref{fig:4:examples-cont} we compare the
+observed and simulated backscatter in the UM11.4cnt and UM11.4exp on
+multiple days of the voyage, as well as the thermodynamic levels.
+The selected days contain substantial amount of Sc cloud layers,
+and we omitted days which were dominated by clear sky, fog and precipitation.
+We note that
+temporal and cloud height correspondence between the observations and simulations
+is generally very good, partly due to the high temporal output resolution of
+the model of 20 min \citep{kuma2020b}. Both are characterised by boundary
+layer cloud below 2 km ASL, and this altitude corresponds very well with
+the $z_{par}$ level diagnosed by the model, i.e. the highest level reached
+by convection. Likewise, the LCL corresponds relatively well between the
+radiosonde observations and the model (red dot in OBS vs.~red line in the UM
+in Fig.~\ref{fig:4:examples} and~\ref{fig:4:examples-cont}; see also \cite{kuma2020a}).
+However, clouds simulated by the
+UM11.4cnt are clearly different from observations in a number of ways.
+While the periods of fog are relatively well simulated, the Cu fractus
+cloud layers forming at and above the LCL are clearly overestimated in the
+UM11.4cnt. Most seriously, the very well-defined Sc cloud layers are
+completely absent in the UM11.4cnt, and are only represented by
+intermittent vertical streaks of cloud instead of a coherent horizontal
+"stratiform" development. We can expect this factor to have a strong
+impact on the SW radiation balance due to overestimated Cu reflectivity
+and underestimated Sc reflectivity. Our aim with the experimental run is
+therefore to improve
+the simulation of Sc cloud as a major deficiency of the control run.
+
+By increasing surface moisture flux in the UM11.4exp we increase
+the amount of moisture in the surface layer, and by increasing mass
+flux we in turn increase the amount of air mass and moisture transported
+from the SML to $z_{par}$. The impact on the simulated
+cloud backscatter is an increase in the amount of cloud just below $z_{par}$ (Fig.
+\ref{fig:4:examples} and~\ref{fig:4:examples-cont}),
+which is more consistent with observations. Some of the more
+prominent examples of an improved Sc are~\ref{fig:4:examples}b3 3:00--9:00, c3 17:00--0:00,
+e3 12:00--21:00 and Fig.~\ref{fig:4:examples-cont}b3. A secondary effect
+of the increased mass flux is a decrease of the simulated Cu fractus as
+compensating convective downdrafts detrain warmer and drier air at the bottom
+of the plumes near the LCL (for example Fig.~\ref{fig:4:examples}b3 3:00--9:00, e3 12:00-20:00
+and Fig.~\ref{fig:4:examples-cont}a3, b3). This is potentially a positive
+development considering the overestimated Cu fractus in the UM11.4cnt compared
+to TAN1802 observations.
+
+Figures~\ref{fig:4:examples} and~\ref{fig:4:examples-cont} also show contour lines
+of the convective detrainment rate (DTRU) as diagnosed by the model's
+convection scheme. These largely signify the forced detrainment from convective
+updrafts of the mass flux scheme, whereby saturated air is removed from the
+updraft and detrained into the environment, thus increasing RH.
+Importantly, in the UM11.4cnt DTRU is locally concentrated in the vertical layer
+where we expect Sc cloud. However, this is apparently not enough to raise RH beyond the critical RH to initiate sufficient Sc cloud formation (also discussed later in Sect.
+\ref{sec:4:bl-mass-flux-and-rh}).
+This indicates that the model is qualitatively correct in its representation
+of the BL, but that the magnitude of the change is too small. In the UM11.4exp DTRU was expanded and intensified.
+This was likely the key contributor to the increased
+Sc cloud, although a deficiency of this type of cloud persists in the
+UM11.4exp.
+
+% the difference between DTRU in the two runs is hard to see in the figures and is only visible (in my opinion) as an increase in the area and partially as a focusing in the region of DTRU contours. Can this be quantified better. Would changing the threshold for the contours help?  AJM
+
+\subsection{Boundary layer mass flux and relative humidity}
+\label{sec:4:bl-mass-flux-and-rh}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.75\textwidth]{chapter4/fig/examples_hur_mcu.pdf}
+\caption[Mass flux and relative humidity profiles]{Mass flux (odd rows) and relative humidity (even rows) profiles in the UM11.4 control (UM11.4cnt)
+and experimental (UM11.4exp) runs, corresponding to the plots in Fig.~\ref{fig:4:examples}.
+}
+\label{fig:4:examples-hur-mcu}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{chapter4/fig/examples_hur_mcu_cont.pdf}
+\caption[Figure~\ref{fig:4:examples-hur-mcu} continued]{Figure~\ref{fig:4:examples-hur-mcu} continued.}
+\label{fig:4:examples-hur-mcu-cont}
+\end{figure}
+
+Model BL cloud in the UM11.4 is driven by the underlying process
+of vertical moisture and air mass transport due to turbulence and convection
+(which can in turn be driven by large-scale dynamics). The large-scale cloud
+(PC2) scheme ensures that if enough RH is present in a particular model
+layer, liquid or ice cloud condensation happens. We examined the BL mass
+flux and RH in the UM11.4cnt and UM11.4exp on a number of days during the TAN1802
+voyage (Fig.~\ref{fig:4:examples-hur-mcu} and~\ref{fig:4:examples-hur-mcu-cont}),
+corresponding to days analysed in Sect.~\ref{sec:4:cloud-representation}.
+As explained in Sect.~\ref{sec:4:schemes}, the mass flux parametrisation
+extends vertically between the LCL and $z_{par}$. In this convective layer mass
+flux is positive and transports air from the LCL to $z_{par}$ in updrafts
+and from $z_{par}$ to the LCL in downdrafts.
+This corresponds with positive
+DTRU just below $z_{par}$. In some instances, intermittent mass flux was
+simulated by the UM11.4cnt (e.g. Fig.~\ref{fig:4:examples-hur-mcu-cont}c1). This
+is most likely related to the stabilisation of the layer by compensating
+downdrafts, effectively shutting down convection until sufficient warm
+and moist air is replenished from the surface layer. We hypothesise that this
+may be an indication that the mass flux parametrisation operates more quickly
+than the surface turbulence with respect to moisture transport and therefore these two processes are not currently well-tuned to operate together. This appears to be the case in the unmodified
+model, but is intensified further in the experimental run.
+
+RH in the UM11.4cnt was characterised by two local peaks at the LCL and $z_{par}$
+during periods when Sc clouds were observed (Fig.~\ref{fig:4:examples-hur-mcu}b1, d1, f1, h1, j1). This is partially consistent
+with the expectation of Sc occurring preferentially at $z_{par}$. This was, however, apparently not enough for sufficient cloud formation in this layer since RH is typically below 85\%.
+In the UM11.4exp run, the positive mass flux extent was increased and intensified,
+which resulted in a greater extent and intensity of DTRU. The problem of
+mass flux intermittency was still present in the experimental run. The increased
+mass flux had an obvious impact on RH, which separated the LCL and $z_{par}$
+levels more clearly as two local peaks of RH, with a relatively dry
+convective layer between these two levels. RH at $z_{par}$ was also increased,
+and this lead to a greater formation of Sc cloud (Sect.
+\ref{sec:4:cloud-representation}).  %Can we quantify this relative to observations or plot differences to highlight this point? AJM
+However, the modifications in the UM11.4exp
+did not appear to be sufficient to fully address the problem of underestimated
+Sc cloud. RH at $z_{par}$ was still too low to enhance cloud formation in many cases, and our experiments with
+increasing mass flux further (not shown) indicate that the mass flux
+parametrisation cannot by itself solve the problem further. By a more extreme
+tuning we also risk increasing mass flux to unphysical values.
+Instead, the problem appears to be with the coupling of the surface layer
+turbulence with the mass flux parametrisation, whereby not enough air mass
+and moisture is transported across the LCL from the SML to the convection layer. In
+other words, the BL scheme mixes moisture within the surface layer (up to the LCL)
+by turbulence and the convection scheme transports air between the LCL and
+$z_{par}$ by updrafts and downdrafts, but there is too little flux across the LCL,
+effectively decoupling the two schemes. Compared to our
+radiosonde observations, the peak of RH in the SML seems unphysical and
+produced artificially by the separation of the BL and convection schemes
+into two distinct vertical sections.
+
+% I would like to see a figure that quantifies the RH vertical distribution AJM
+
+\subsection{Cloud occurrence statistics}
+\label{sec:4:cloud-occurrence-statistics}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{chapter4/fig/cloud_occurrence.png}
+\caption[Cloud occurrence histogram as a function of height]{
+Cloud occurrence histogram as a function of height calculated from
+28 days of the TAN1802 voyage calculated from ceilometer observations (OBS),
+simulated lidar data in the control run of the UM11.4 (CNT) and
+the experimental run of the UM11.4 (EXP).
+Shown is also the total cloud fraction.
+}
+\label{fig:4:cloud-occurrence}
+\end{figure}
+
+While the case-based comparison of observed and simulated backscatter
+shows an improvement of Sc cloud simulation, it is important that the impact
+on the long-term cloud occurrence statistics is positive. We analysed
+cloud occurrence by height as determined by a cloud masking algorithm
+applied to the backscatter profiles \citep{kuma2020b}.
+Figure~\ref{fig:4:cloud-occurrence} compares cloud occurrence in observations,
+the UM11.4cnt and UM11.4exp runs. The observed cloud peaked near the surface due to
+the frequent fog occurrence previously discussed in \cite{kuma2020a},
+with two smaller peaks at about 500 m a 1 km ASL due to Sc cloud.
+Mid-level and high cloud above 2 km ASL was insignificant, probably due
+to observational constraints (lidar signal fully attenuated by fog and low
+cloud). The total cloud (+fog) fraction was observed to be 95\%.
+The UM11.4cnt represented the statistical cloud occurrence remarkably well,
+especially of fog, but possibly overestimated cloud below 2 km ASL. Considering
+the results of the case study approach (Sect.~\ref{sec:4:cloud-representation}), we think this is related to the
+overestimation of Cu cloud in the model. The peaks related to Sc cloud were not present in the UM11.4cnt, as one would expect from the lack of Sc cloud
+visible on the daily backscatter plots. The UM11.4exp showed a very similar
+cloud occurrence as the UM11.cnt, with the exception of a much stronger peak which we believe is  associated with the Sc cloud at about 1.5 km ASL. Therefore, the modifications
+in the UM11.4ext had the desirable effect of increasing Sc cloud statistically,
+but the overall pattern of vertical cloud occurrence is not substantially better
+than in the UM11.4cnt simulation. The total cloud fraction in the UM11.4exp was marginally
+improved at 93\% (relative to observed 95\% and control of 91\%).
+
+% I think highlighting that this was an aim would be useful. I also think identifying that previous work by Schuddeboom et al. (2019) and many others has highlighted that the cloud type is often wrong even if the cloud fraction is right. So this increase in cloud associated with enhancements in the SC type is actually potentially also partially removing a compensating error might be useful.
+
+\subsection{Shortwave radiation bias}
+\label{sec:4:sw-bias}
+
+\begin{figure}[t]
+\centering
+\centerline{\includegraphics[width=1.12\textwidth]{chapter4/fig/sw.png}}
+\caption[Top of atmosphere outgoing shortwave radiation]{Top of atmosphere outgoing shortwave radiation in CERES SYN (OBS) and
+bias in the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs relative
+to CERES SYN during the period of TAN1802 observations 16 February--15 March 2018.
+\textbf{(a, d)} show absolute values and \textbf{(b, c, e, f)} show values relative
+to CERES SYN. The top row \textbf{(a--c)} shows the whole globe, the bottom
+row \textbf{(d--f)} shows the Southern Ocean specifically.
+}
+\label{fig:4:sw}
+\end{figure}
+
+While the modifications in the UM11.4exp were aimed at achieving a better
+match with lidar observations of BL cloud, these are also expected to
+result in an improved TOA radiation balance due to the strong effect of
+clouds on the planetary albedo. Figure~\ref{fig:4:sw} shows the absolute
+and relative reflected SW radiation in CERES, the UM11.4cnt and UM11.4exp
+during the time period of in-situ observations. Similar to previous
+versions of the UM \citep{kuma2020a,schuddeboom2019}, the bias in the UM11.4cnt
+in the SO is characterised by a bipolar zonally-symmetric pattern of negative
+biases in the high-latitude SO
+and positive bias in the low-latitude SO (Fig.~\ref{fig:4:sw}e).
+As shown in our previous multi-voyage ceilometer
+evaluation \citep{kuma2020a}, this is likely caused by the "too few, too bright"
+cloud problem. The experimental run displays an improved SO SW radiation
+bias, especially by unexpectedly reducing the positive bias in the low-latitude SO
+(Fig.~\ref{fig:4:sw}f). Globally, the bias in the UM11.4cnt was positive in most
+regions (Fig.~\ref{fig:4:sw}b). This has been reduced in the UM11.4exp, without
+a significant deleterious impact on the existing regions of negative bias. We stress,
+however, the limited time period of the comparison (16 February--15 March 2018).
+
+The zonal average of the TOA SW bias over the time period of the in-situ
+observations shows mostly positive bias in the
+UM11.4cnt, peaking at about 24 \unit{Wm^{-2}} near the equator (Fig.~\ref{fig:4:sw-zonal}). In the
+UM11.4exp the bias is reduced by up to 5 \unit{Wm^{-2}}, with most
+latitudes experiencing a reduction of bias. Surprisingly, the southern
+part of the SO was largely unchanged, despite the improvement in the
+representation of the Sc cloud relative to the in-situ observations.
+
+\subsection{Boundary layer types}
+\label{sec:4:bl-types}
+
+% I think an introductory sentence at the start of this paragraph highlighting why you are doing this is necessary.
+
+The BL scheme classifies a grid cell as one of six grid cell BL types
+(Sect.~\ref{sec:4:bl-scheme}). In the UM11.4cnt in the time period of the in-situ observations,
+the most frequent BL types in the SO were Type I (stable BL) and V (decoupled Sc
+over Cu), peaking at about 80 and 90\% in some regions of the SO, respectively
+(Fig.~\ref{fig:4:bdyt}a, e).
+Type I was prevalent mostly in the low-latitude SO, while Type V was
+prevalent primarily in the high-latitude SO. This difference might partially explain
+the different SW radiation bias of these two zones (Sect.~\ref{sec:4:sw-bias}). % Can you explain why? AJM
+In the UM11.4exp, the distribution of BL types has significantly changed
+globally relative to the control run (Fig.~\ref{fig:4:bdyt}g--l). The most significant change in the SO
+was the increase in the occurrence of Type V in both the low- and high-latitude SO (Fig.
+\ref{fig:4:bdyt}k), while Type I had a minor increase in the SO (Fig.
+\ref{fig:4:bdyt}g). This suggests that the increase of Type V in the low-latitude
+SO might be associated with the improved SW radiation bias in this zone.
+While Type V increased in high-latitude SO in UM11.4exp (Fig.~\ref{fig:4:bdyt}k),
+it did not substantially improve the SW radiation bias (Fig.~\ref{fig:4:sw}e, f, Fig.~\ref{fig:4:sw-zonal}).
+This may be due to the fact that while Sc clouds tend to cover a larger area
+than Cu clouds, they have lower albedo then Cu clouds, i.e. there is a
+compensating bias between cloud cover and albedo.
+
+\section{Discussion and conclusions}
+\label{sec:4:conclusions}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.7\textwidth]{chapter4/fig/sw_zonal.pdf}
+\caption[Zonal average of top of atmosphere outgoing shortwave radiation]{
+Zonal average of top of atmosphere outgoing shortwave radiation in
+the UM11.4 control (UM11.4cnt) and experimental (UM11.4exp) runs relative
+to CERES SYN during the period of TAN1802 observations 16 February--15 March 2018.
+}
+\label{fig:4:sw-zonal}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\centerline{\includegraphics[width=1.12\textwidth]{chapter4/fig/bdyt.png}}
+\caption[Boundary layer type histograms]{Boundary layer type histograms of Type I--VI \citep{lock2000} in the UM11.4cnt
+\textbf{(a--f)} and UM11.4exp relative to the UM11.4cnt \textbf{(g--l)} expressed as percentage point (pp)
+difference.
+}
+\label{fig:4:bdyt}
+\end{figure}
+
+We analysed 28 days of voyage data in the Ross Sea and identified a common
+three-layer cloud profiles composed of Cu fractus, Sc and occasional
+Ac, associated with the thermodynamic levels LCL, SLL and SLL$_s$, respectively.
+This suggests a strong role of thermodynamics in the SO BL cloud formation.
+We analysed a control run of the UM11.4 in comparison with ceilometer
+observations using a lidar simulator framework. We found Sc cloud grossly
+underrepresented in the model, indicating that the current BL and convection
+schemes are not able to simulate this type of cloud. Considering these results,
+we prepared an experimental run which increased the amount of moisture flux
+from the sea surface and increased the convective mass flux, in order to
+generate more Sc by increasing RH at the top of the BL. We showed that this
+experimental run was more successful in simulating Sc, but other
+modifications are likely needed to achieve a satisfactory correspondence with
+the observations. The experimental run showed a greater ability to couple the
+surface with the top of the BL, but the connection between the BL and convection
+scheme appears to be too weak to allow sufficient transport of air mass and
+moisture across the LCL. Therefore, the artificial vertical separation of operation of the
+BL and convection schemes to surface--LCL and LCL--z$_{par}$ regions appears
+to hinder the transport of moisture across the LCL, and to the top of the BL.
+
+We showed that the experimental run not only improves Sc cloud in the Ross Sea,
+but also improves the SW radiation balance in the SO, especially in the
+low-latitude SO north of 60$^\circ$S. In other parts of the globe the effect was
+also positive, with a decrease of zonal SW radiation bias of up to 5
+\unit{Wm^{-2}} by reducing the common positive bias of the model. The
+effect on the BL types are primarily switching from the stable BL Type I
+to the convective Type V (Sc over Cu) across the whole of the SO. % so why don't we see a bigger difference consistently?
+Currently we do not suggest that the tuning in the experimental model is
+integrated into the main model due to the modifications being relatively
+extreme. Our results, however, suggest that if the
+coupling between the BL and convection schemes across the LCL is improved,
+either more minor or no tuning would be required to obtain sufficient moisture
+transport from the surface to the top of the BL for Sc cloud formation.
+The SW radiation bias results indicate that the effect on the rest of the
+globe might be positive rather than negative, which would be otherwise
+expected if only one region (the Ross Sea) is taken into consideration in any
+tuning of the model. We also showed that a ground-based lidar simulator
+applied on high temporal resolution model output can be a useful tool for an
+analysis and improvement of BL cloud using a case study approach.
+
+% I think the discussion part of this section needs to be strengthened, it appears to me that you have highlighted a good set of conclusions. But, I am not sure your discussion points come out - I would try to find references which support your more speculative statements. I think the disconnect between layers is quite clear, but are there other papers which have highlighted this mismatch?  AJM
+
+%\codeavailability{TEXT}
+%\dataavailability{TEXT}
+%\codedataavailability{TEXT}
+%\sampleavailability{TEXT}
+%\videosupplement{TEXT}
+
+\clearpage
+
+\fontsize{10pt}{12pt}
+\sffamily
+
+\subsection*{Author contributions}
+
+Peter Kuma participated on the TAN1802 field measurements, performed the model runs, analysis and wrote the manuscript;
+Adrian McDonald organised the deployment of instruments on the TAN1802 voyage and participated on continuous discussion of the analysis
+and manuscript;
+Olaf Morgenstern participated on continuous discussion of the analysis and
+manuscript;
+Sean Hartery participated on the TAN1802 field measurements;
+Jonny Williams, Vidya Varma and Guang Zeng contributed substantially to the
+nudged UM setup;
+Mike Harvey organised the deployment of instruments on the TAN1802 voyage;
+Simon Parsons and Graeme Plank participated on the deployment of instruments on the TAN1802
+voyage. All authors reviewed the manuscript.
+
+\subsection*{Acknowledgements}
+
+We would like to acknowledge the contributions of those who participated on
+the TAN1802 voyage and deployment, especially the crew of the voyage;
+Alex Schuddeboom for reviewing the manuscript; the UK Met
+Office for providing the HadGEM3-GA7.1/UM11.4 model;
+the CERES project for providing publicly available data via the NASA Langley
+Research Center CERES ordering tool (\url{https://ceres.larc.nasa.gov});
+the
+NeSI high-performance computing facilities
+provided by the NZ eScience Infrastructure and funded jointly by NeSI's
+collaborator institutions and the Ministry of Business, Innovation \&
+Employment's Research Infrastructure programme (\url{https://www.nesi.org.nz});
+the financial support of the Deep South National Science Challenge via the Clouds and
+Aerosols project; the open source software we used to produce this analysis: Python, R,
+numpy, scipy, matplotlib,
+netCDF4, Linux and Devuan GNU/Linux.
+
+\normalfont
+\normalsize

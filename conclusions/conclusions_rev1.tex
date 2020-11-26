@@ -1,0 +1,323 @@
+\chapter{Conclusions and further work}
+
+We conducted ship-based observations on the 2-week-long voyage TAN1702 of
+RV \textit{Tangaroa} to the Campbell Plateau
+in March 2017 and the 6-week-long voyage TAN1802 of RV \textit{Tangaroa} to the Ross Sea
+in February--March 2018. These included ceilometer, lidar, radar, radiosonde,
+all-sky camera, automatic and human weather observations and aerosol measurements.
+We deployed ceilometers, radar and a sky cameras on additional voyages:
+the December 2016 voyages of HMNZS \textit{Wellington} and an 
+April--May voyage NBP1704 of RV \textit{Nathaniel B. Palmer} to the Ross Sea.
+In addition, we collated and processed observations from previous voyages
+of \textit{Aurora Australis}, TAN1502, TAN1503 and land-based ceilometer
+observations on Macquarie Island.
+We set up and performed nudged simulations
+of the Global Atmosphere version 7.1 (GA7.1) on a supercomputer of the New Zealand eScience Infrastructure (NeSI) and the National Institute of Water \& Atmospheric Research (NIWA).
+We compared the model output with our collection of ship-based observations,
+focusing on geometrical properties of clouds observed by ceilometers and their
+links to thermodynamical profiles of the atmosphere observed with radiosondes.
+We contrasted these with the MERRA-2 reanalysis. Both the nudged GA7.1 and MERRA-2
+showed significant cloud occurrence biases of 4--18\% less cloud than in
+ceilometer observations. Despite of this, both showed a bipolar shortwave (SW)
+radiation
+bias by latitude, with outgoing SW radiation underestimated in high-latitude
+SO and overestimated in low-latitude SO. This suggests that compensating biases
+of cloud occurrence vs.~cloud optical thickness are present in the models.
+This bipolar SW radiation bias was strongly correlated with near-surface air temperature,
+with relatively low air temperature regions exhibiting a negative SW radiation bias and
+relatively high temperature regions exhibiting a positive SW radiation bias. By analysing
+lifting levels, the lifting condensation level (LCL) and the level of neutral buoyancy
+of an air parcel with potential temperature equal to sea surface temperature (SST),
+we showed that cloud base in the region is strongly linked to these levels,
+and these levels were a better predictor for cloud base than the previously
+utilised lower tropospheric stability (LTS). This finding suggests that local
+thermodynamics is a strong driver of the summertime SO stratocumulus (Sc) clouds,
+a finding also supported by \cite{hartery2020b}. Interestingly, we found
+very large differences in cloud phase simulated by the nudged GA7.1 and MERRA-2.
+MERRA-2 simulated much greater amount of liquid cloud (the majority of
+the water path), while the GA7.1 simulated slightly more ice than liquid.
+Even though we did not use an observational reference for cloud phase,
+we can say that the cloud phase was most likely behind the difference in
+cloud biases between the GA7.1 and MERRA-2 (in addition to the identified cloud occurrence biases), which were much more positive
+in MERRA-2 (liquid cloud reflects more SW radiation for the same amount of water
+path). We conclude that cloud geometry (vertical distribution of cloud fraction)
+biases play at least an equally
+significant role in radiation biases as cloud phase and these two can be
+compensating biases, a fact which was not given enough recognition in previous
+studies. The source of the bipolar biases and its strong relationship with
+near-surface temperature, however, is still relatively unclear.
+
+In order to compare ceilometer and lidar observations with models,
+we developed the Automatic Lidar and Ceilometer Framework (ALCF),
+a tool which extends the Cloud Feedback Model Intercomparison Project (CFMIP) Observation Simulator Package (COSP) lidar simulator with support for a range
+of ground-based instruments and a processing pipeline which allows
+for an unbiased comparison of simulated and observed backscatter and a cloud mask.
+This tool was the subject of Chapter 3. While the COSP lidar simulator
+provided a basis for the physical simulation of laser radiation transfer
+through the atmosphere, more work needed to be done to support the ground-based
+instruments with their variety of field of view (FOV), wavelengths and
+calibration issues. By developing and documenting this tool, we enabled future
+studies utilising off-the-shelf ground-based lidars for model evaluation.
+The potential of ground-based lidars has so far been underutilised compared
+to similar active satellite observations (CALIPSO) due to the
+lack of software processing tools and the difficulty of accurate calibration
+of these instruments. The problems addressed by our work included Mie
+scattering at different laser wavelengths depending on droplet size distribution
+parameters, absolute calibration by utilising Sc clouds and molecular
+backscattering, backscatter noise removal, cloud mask/cloud base determination 
+and evaluation of noise characteristics of various common lidars. We demonstrated
+the
+usefulness of this new tool on several case studies. Several common atmospheric
+models and reanalyses are supported by this framework, which allowed us to compare
+a range of publicly-available model output with ceilometer and lidar observations
+at several stations in Aotearoa/New Zealand. We showed how this tool can be used
+for comparing vertical cloud occurrence, backscatter "curtain" plots
+and cloud fraction vs.~optical thickness. More processing algorithms can
+be incorporated in this modular tool in the future to allow for calculation of
+derived products.
+
+Lastly, we focused on evaluation of SO boundary layer cloud in the GA7.1
+and how the BL turbulence and convection parametrisations affect
+BL cloud. Previously, we found that Sc cloud below 2 km above sea level (ASL)
+and fog were predominant in the SO, but underestimated in the model. We used
+the ceilometer observations collected on TAN1802 to evaluate the model cloud
+in a case study based approach, where we compared "curtain" backscatter plots
+between the model and observations using the ALCF. This allowed us to identify
+in detail that the model is missing the extensive layers of Sc cloud found
+in observations, while overestimating cumulus (Cu) clouds occurring below the
+Sc layers. In observations, these layers were found to correspond to the LCL (Cu clouds),
+and the level of dry and moist neutral buoyancy of a parcel with potential temperature
+equal to SST lifted from the sea surface (Sc clouds). Therefore, BL
+thermodynamics was identified as being key to resolving these biases. By running
+a model experiment with an increased surface flux and mass flux, we tested
+a hypothesis that not enough moisture transport is simulated to accumulate
+moisture at the top of the BL for cloud condensation. When compared with
+observations, this experiment lead to an improved occurrence of Sc clouds,
+but due to a limiting factor of a lack of vertical moisture transport across
+the LCL from the surface layer to the zone of convective mass flux,
+we were unable to attain a full correspondence
+with observations. We identified the coupling between the turbulence and convection
+parametrisations across the LCL as the most likely bottleneck. Therefore, it seems
+that the separation of parametrisation into turbulence and convection driven
+vertical regions appears to limit the formation of Sc clouds in the BL in the
+summertime SO. As noted by \cite{lock2000}, "although this use of two discrete 
+mixing schemes is to some extent undesirable, it has been found to be essential,
+as allowing the eddy-viscosity-based scheme to act in steady
+cumulus layers can rapidly result in them erroneously
+evolving into well-mixed stratocumulus, \ldots".
+Our experimental run showed promising results in terms of
+SW radiation biases globally (evaluated on a short monthly time period in February--March 2018),
+where the zonal means were reduced by up to 5 Wm$^{-2}$. We conclude that
+further modifications to the BL schemes are needed to improve
+Sc cloud simulation in the SO. The tuning in the experimental run also needs to
+be evaluated globally over a long time period to determine if it can be used
+operationally. This approach when individual clouds can be compared between
+a nudged model and observations means that compensating biases are avoided.
+Secondary to this approach should be evaluation of cloud optical thickness,
+cloud phase and the cloud--aerosol effects, which all contribute to the
+radiation biases. In this sense, our work is complementary to that of
+\cite{revell2019}, \cite{hartery2020a} and \cite{hartery2020b}.
+
+We can summarise our contributions as follows. The relatively large SO
+cloud biases and the resulting radiation biases are still common in GCMs
+and reanalyses today \citep{gettelman2020}. Due to the relatively large
+extent of the SO, its role in the uptake of excess heat and CO$_2$
+and being a buffer zone for warming of the Antarctic ice sheets, and the Southern Hemisphere
+meridional circulation, it has a crucial role in the Earth's climate system.
+Clouds are the major factor in Earth's albedo variability. Therefore, any cloud
+biases can result in large biases in a model's large scale atmospheric
+and oceanic circulation and the cryosphere. Unless these biases are minimised
+in GCM simulations of the past and present climate, the accuracy of future climate
+simulations is limited, especially when it comes to predicting the change
+of cloud cover, the Earth's albedo, circulation and the ice sheets.
+Using ship-based observations, we narrowed down the cloud climatology
+in the SO, its main drivers and factors involved in the cloud biases. We
+identified BL parametrisations of turbulence and convection as a major deficiency
+in the model, and suggested concrete improvements. This work can translate into
+eventually improving these parametrisations. The improved understanding of the
+drivers can be applied in the development of other GCMs and reanalyses.
+Development of the ALCF as a tool for evaluation of models using ground-based
+lidar observations can streamline the process of using these type of observations
+globally, and provide a unique opportunity to evaluate BL clouds, some of
+which are not visible with spaceborne instruments. This new tool substantially
+lowers the bar for utilising these instruments, and therefore it can enable
+future studies of BL clouds.
+
+\section{Further work}
+
+Even though we analysed a large part of the ground-based SO observations
+available to us (Chapter 2), they are still underutilised. For example,
+we have not analysed the dual-polarisation lidar data collected on TAN1802
+by a MiniMPL. If properly calibrated, these could provide crucial information
+about supercooled liquid cloud. The micro rain radar (MRR-2) deployments
+have so far been underutilised. They allow for detection of precipitation,
+rain rate and vertical velocity in precipitation.
+With analysis of the raw data it is also possible to get measures of snowfall
+rate and their related vertical motion which is more variable than rainfall.
+Model evaluation of
+precipitation is needed to complement cloud evaluation in order to make
+sure the right amount of moisture is being removed from the BL by precipitation
+and the precipitation has the correct phase (liquid or ice). Similar to clouds,
+precipitation has an effect on shortwave (SW) and longwave (LW) radiation. It is therefore important
+for the radiation balance, considering its frequent occurrence in the SO.
+A dual camera setup was installed on the TAN1802 voyage in order to allow
+for stereoscopic determination of cloud base height. This imagery has not been
+utilised so far, but a co-authored study has utilised sky camera images collected
+on the \textit{Aurora Australis} voyages in comparison with
+ceilometer observations \citep{klekociuk2020}.
+Co-location with the ceilometer observations provides an
+opportunity for algorithm development and cross-validation of results.
+Likewise, cloud type and cloud fraction can be determined from sky camera
+imagery using a suitable algorithm. A pair of sky cameras could be utilised as
+a low-cost instrument for determining cloud base height, cloud fraction
+and cloud type on ships of opportunity \citep{klekociuk2020}.
+
+As we identified, ground-based observations have a large additional value
+to satellite observations when it comes to BL cloud evaluation. More
+ground-based observations in the SO could narrow the spatial and temporal gaps
+in our understanding of the region. Therefore, making ship-based atmospheric
+observations more accessible is an important task. Currently, deployment
+of instruments such as lidar and radars on ships is logistically difficult
+and expensive. Smaller and less expensive instruments could mean that they
+can be deployed more widely and installed permanently on some ships. Smaller
+lidars typically have lower power and inferior noise characteristics,
+but a wide coverage could outweigh these deficiencies. Progress in lidar
+development could also mean smaller instruments may become equally powerful.
+The commercial nature of common instruments means that some instruments
+suffer from a number of technical problems and vendors typically show
+little interest in resolving these. Open hardware and open software design of
+instruments could substantially accelerate progress and collaboration.
+Off-the-shelf software defined radio (SDR) receivers and
+transceivers\footnote{\url{https://limemicro.com}.} have recently
+become widely available. They could provide a basis for development of improved
+radars which can utilise many frequencies. Open software for processing
+instrument data could mean that implementation of standard techniques and
+algorithms for calibration, resampling, noise removal and calculation of derived
+products become more available to the scientific community. Likewise,
+public sharing of ground-based observational data and building of dataset
+collections, similar to the common practice of releasing satellite datasets,
+has a potential to accelerate atmospheric research in the SO.
+Utilising unusual platforms such as the Argo floats
+\citep{roemmich2009a,roemmich2009b}
+as platforms for atmospheric measurements could provide a vast amount of data and a relatively dense
+coverage in the SO.
+Air--sea surface fluxes appear to be implicated in the GA7.1/UM11.4 cloud biases
+(Chapter 4). Yet, the Coupled Ocean–Atmosphere Response Experiment (COARE)
+formulas are potentially not well-tuned for high latitudes and atmospheric
+reanalyses exhibit large air--sea flux biases in the SO
+\citep{cerovevcki2011}. Evaluation of model air--sea flux biases relative to
+reliable in situ flux measurements is needed to make sure they are not
+a major cause of the BL cloud biases. Other related biases are in the
+representation of marine aerosols, which act as a source of cloud condensation
+nuclei (CCN) and ice nucleating particles (INPs) \citep{hartery2020a}.
+
+A reliable comparison of models and observations using a lidar simulator
+requires accurate absolute calibration of the observed backscatter
+(Chapter 3). We have identified various deficiencies in the vendor-supplied
+calibration such as the dead time, afterpulse and overlap calibration in
+the MiniMPL. These often result in range-dependent bias of the volume
+backscattering coefficient, which may be impossible to reliably correct
+for without dedicated calibration measurements. Currently, the ALCF only
+supports height-independent calibration utilising observations of liquid
+Sc clouds and comparison with a theoretically expected
+molecular backscatter (Chapter 4). An automated approach should be developed to calculate
+dead time, afterpulse and overlap corrections as an alternative to the 
+vendor corrections, which appear to be unreliable. This could lower the
+difficulty of utilising ceilometer and lidar data by the wider scientific
+community, which is a significant barrier for a wide utilisation of ceilometers
+and lidars for model evaluation.
+Currently, the ALCF does not support calculation of cross-polarised
+backscatter. Adding support for simulation of cross-polarised backscatter
+would mean that both channels of the Sigma Space MiniMPL can be utilised
+in a comparison with a model and therefore evaluate the cloud phase.
+Likewise, aerosol and precipitation is currently not taken into account
+by the lidar simulator. This not only causes a systematic bias in comparison
+with observations, but also prevents the simulator being used for
+model aerosol and precipitation evaluation.
+
+A large amount of automatic lidar and ceilometer (ALC) data have been collected by regional and global
+networks such as Cloudnet \citep{illingworth2007},
+E-PROFILE \citep{illingworth2018}, EARLINET
+\citep{pappalardo2014}, ICENET \citep{cazorla2017} and MPLNET
+\citep{welton2006}. Most of these networks utilise ceilometers
+and lidars already supported by the ALCF such as Vaisala CL31, CL51, Lufft CHM
+15k and Sigma Space MiniMPL. These observations haven't been used
+extensively for model evaluation. There is a potential to process and compare
+these observations with models using the ALCF. Such comparison would complement
+past comparisons with satellite observations, and could rival satellite
+observations in terms of global spatial and temporal coverage. 
+
+Here, we utilised the Clouds and the Earth's Radiant Energy System (CERES) satellite observations of top of the atmosphere (TOA) radiation. Even
+though the errors of these observations may be relatively low compared to 
+current model cloud biases, systematic errors in the dataset exist due
+to unequal diurnal sampling and the need for temporal and angle
+interpolation of the raw measurements to calculate daily averages. 
+The relatively new instrument National Institute of Standards and Technology
+Advanced Radiometer (NISTAR) on the L1-stationed Deep Space Climate Observatory (DSCOVR)
+provides a unique viewpoint for Earth radiation observations, from which 
+the sunlit part of the Earth, including polar latitudes, is visible continuously.
+It would be valuable to compare model radiation fluxes with these new
+observations to rule out the effect of systematic biases of CERES on the
+model TOA radiation evaluation.
+
+An unresolved question about the origin of the bipolar SW radiation
+bias in the high- and low-latitude SO in GA7.1 remains. We know that
+the model underestimates low cloud, and at the same time, we identified
+some evidence that the optical thickness of individual clouds is overestimated.
+This may be the underlying reason for the overestimated reflected TOA SW
+radiation in the low-latitude SO.
+
+We identified that BL parametrisation of mass flux can be tuned
+to enable Sc cloud simulation in the SO (Chapter 4). However,
+a good observational reference for mass flux and the similarity relationships
+is lacking in the SO. The BL turbulence and convection
+parametrisation is based on large eddy simulations (LES) initialised
+from field experiments in the tropical and midlatitude ocean. These may be
+inappropriate for the SO. Therefore, new LES initialised from SO field
+experiments are needed to make sure these parametrisations are correct in this
+region.
+
+We have shown that nudged simulations of GA7.1 provide a very good basis
+for identifying model biases compared to ground-based observations. As opposed
+to a free-running model, it can be reasonably assumed that any biases are
+not the result of a different weather situation simulated by the model
+than in reality, and that they are largely due to errors in the subgrid-scale
+parametrisation processes not assimilated in the ERA-Interim reanalysis driving
+the model or not an input to the model nudging algorithm. As shown in Chapter 4,
+a side-by-side comparison of modelled and observed cloud is feasible, and this
+can be utilised in future studies of model clouds.
+
+In Chapter 2 we presented a dataset of ground-based observations in the SO.
+This dataset provides a unique and comprehensive information on SO atmospheric
+conditions and clouds. Work is underway to make this dataset documented and
+publicly available. To this end, derived products should be developed in order
+to make it easy for the scientific community to use this dataset. In general,
+a more concentrated effort is needed to streamline public sharing of atmospheric
+observations, especially considering the global and accelerating
+effect of climate change, which has been called
+"the defining challenge of our time" \citep{wmo2019} by the United Nations
+Secretary-General A. Guterres. It is the author's opinion that the
+seriousness and urgency of the situation is vastly underestimated even
+by the atmospheric science community, which continues to hinder international
+cooperation by not sharing data and model code, and by publishing scientific
+results in paywalled journals, and therefore putting the well-being of future
+generations in jeopardy. A question remains whether the parametrisations
+can be formulated in a more physical manner without relying on the similarity
+theory relations, which may not be universally applicable globally.
+
+In Chapter 4 we identified that increasing convective mass flux and surface
+heat flux can improve Sc cloud simulation. However, it remains
+to be proven if mass flux or surface fluxes are underestimated relative to
+a physical reference (either an observational reference or large eddy
+simulations). More model experiments need to be performed which increase
+flux between the turbulently-mixed surface mixed layer and the convective layer,
+as well as longer term climate simulation to make sure the modifications
+address the actual problem without introducing compensating biases,
+and they do not have a negative impact on the
+global radiation balance throughout the year. A new BL scheme "CoMorph"
+is currently in development at the UK Met Office. Our findings could contribute
+to the development of this new scheme, but more experiments need to be performed
+with this new scheme and comparison of this new UK Met Office scheme with the ground-based
+SO observations should be performed.
+
+\clearpage
